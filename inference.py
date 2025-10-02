@@ -55,11 +55,16 @@ Response:"""
     with torch.no_grad():
         outputs = model.generate(
             **inputs,
-            max_new_tokens=max_length,
+            max_new_tokens=min(max_length, 256),  # Limit to reasonable length
             temperature=0.7,
             do_sample=True,
+            top_p=0.9,
+            top_k=50,
+            repetition_penalty=1.1,
             pad_token_id=tokenizer.eos_token_id,
             eos_token_id=tokenizer.eos_token_id,
+            no_repeat_ngram_size=3,
+            early_stopping=True,
         )
     
     # Decode response
@@ -67,6 +72,23 @@ Response:"""
     
     # Extract only the generated part
     response = response[len(prompt):].strip()
+    
+    # Clean up the response - stop at common ending patterns
+    stop_patterns = [
+        "\n\nQuestion:", "\n\nHuman:", "\n\nUser:", 
+        "[End]", "\n\nBased on", "\n\nThis response",
+        "\n\nYou need to", "\n\nHuman Resources"
+    ]
+    
+    for pattern in stop_patterns:
+        if pattern in response:
+            response = response.split(pattern)[0].strip()
+            break
+    
+    # If response is too long, truncate at sentence boundary
+    if len(response) > 500:
+        sentences = response.split('. ')
+        response = '. '.join(sentences[:3]) + '.'
     
     return response
 
