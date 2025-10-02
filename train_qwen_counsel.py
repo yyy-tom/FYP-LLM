@@ -99,15 +99,15 @@ class CounselChatTrainer:
                 quantization_config=bnb_config,
                 device_map="auto",
                 trust_remote_code=True,
-                torch_dtype=torch.bfloat16,
+                dtype=torch.bfloat16,
             )
         else:
             # For non-quantized models, load to CPU first to avoid meta device issues
             self.model = AutoModelForCausalLM.from_pretrained(
                 model_name,
                 trust_remote_code=True,
-                torch_dtype=torch.float32,  # Use float32 for CPU
-                device_map="cpu",
+                dtype=torch.float32,  # Use float32 for CPU
+                # device_map="cpu",
             )
         
         # Prepare model for k-bit training
@@ -400,9 +400,13 @@ def main():
         file_config = load_config(args.config)
         config.update(file_config)
     
-    # Override with command line arguments
+    # Override with command line arguments (only if explicitly provided)
+    # Skip model_name if it's the default value and we loaded from config file
     for key, value in vars(args).items():
         if value is not None and key in config:
+            # Special handling for model_name - don't override if it's the default
+            if key == "model_name" and value == "Qwen/Qwen2.5-7B-Instruct" and os.path.exists(args.config):
+                continue
             config[key] = value
     
     # Create output directory
