@@ -232,6 +232,7 @@ class CounselChatTrainer:
             fp16=self.config.get("fp16", False),
             bf16=self.config.get("bf16", True),
             dataloader_pin_memory=False,
+            gradient_checkpointing=True,
             remove_unused_columns=False,
             ddp_find_unused_parameters=False,
             report_to="wandb" if self.config.get("use_wandb", False) else "none",
