@@ -20,16 +20,20 @@ def clean_text(text: str) -> str:
     
     # Remove HTML tags
     text = re.sub(r'<[^>]+>', '', str(text))
+    # Before: "Hello <div>world</div>!"
+    # After:  "Hello !"
     
     # Normalize whitespace
     text = re.sub(r'\s+', ' ', text)
     
     # Remove extra quotes and escape characters
+    # 左引號右引號 -> 引號
     text = text.replace('"', '"').replace('"', '"')
     text = text.replace(''', "'").replace(''', "'")
     text = text.replace('&#34;', '"').replace('&#39;', "'")
     
     return text.strip()
+    # Removes leading and trailing whitespace
 
 
 def create_instruction_prompt(question: str, context: str = "") -> str:

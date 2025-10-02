@@ -6,7 +6,7 @@
   "num_epochs": 2,
   "learning_rate": 5e-4,
   "use_wandb": false,
-  "use_4bit": false,
+  "use_4bit": true,
   "lora_r": 16,
   "lora_alpha": 32,
   "lora_dropout": 0.1,
