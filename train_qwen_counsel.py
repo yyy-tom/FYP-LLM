@@ -8,6 +8,7 @@ import os
 import json
 import logging
 import argparse
+import gc
 from pathlib import Path
 from typing import Dict, Any, Optional
 
@@ -102,12 +103,13 @@ class CounselChatTrainer:
                 dtype=torch.bfloat16,
             )
         else:
-            # For non-quantized models, load to CPU first to avoid meta device issues
+            # For non-quantized models, use device_map="auto" for better memory management
             self.model = AutoModelForCausalLM.from_pretrained(
                 model_name,
                 trust_remote_code=True,
-                dtype=torch.float32,  # Use float32 for CPU
-                # device_map="cpu",
+                dtype=torch.bfloat16,  # Use bfloat16 for better memory efficiency
+                device_map="auto",  # Let transformers handle device placement
+                low_cpu_mem_usage=True,  # Reduce CPU memory usage during loading
             )
         
         # Prepare model for k-bit training
@@ -135,6 +137,12 @@ class CounselChatTrainer:
         self.model.print_trainable_parameters()
         
         logger.info("Model loaded and LoRA configured")
+    
+    def cleanup_memory(self) -> None:
+        """Clean up GPU memory."""
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        gc.collect()
     
     def load_dataset(self) -> Dataset:
         """Load and prepare the dataset."""
@@ -277,6 +285,9 @@ class CounselChatTrainer:
         self.setup_tokenizer()
         self.setup_model()
         
+        # Clean up memory after model loading
+        self.cleanup_memory()
+        
         # Load dataset
         dataset = self.load_dataset()
         
@@ -365,22 +376,22 @@ def main():
     
     args = parser.parse_args()
     
-    # Create default config
+    # Create default config with memory-efficient settings
     config = {
         "model_name": args.model_name,
         "dataset_path": args.dataset_path,
         "output_dir": args.output_dir,
-        "batch_size": args.batch_size,
+        "batch_size": args.batch_size or 1,  # Default to 1 for memory efficiency
         "num_epochs": args.num_epochs,
         "learning_rate": args.learning_rate,
         "use_wandb": args.use_wandb,
         "use_4bit": True,
-        "lora_r": 16,
-        "lora_alpha": 32,
+        "lora_r": 8,  # Reduced from 16 for memory efficiency
+        "lora_alpha": 16,  # Reduced from 32 for memory efficiency
         "lora_dropout": 0.1,
-        "max_length": 2048,
-        "gradient_accumulation_steps": 4,
-        "eval_batch_size": 4,
+        "max_length": 1024,  # Reduced from 2048 for memory efficiency
+        "gradient_accumulation_steps": 8,  # Increased to maintain effective batch size
+        "eval_batch_size": 2,  # Reduced from 4 for memory efficiency
         "weight_decay": 0.01,
         "warmup_ratio": 0.1,
         "logging_steps": 10,
