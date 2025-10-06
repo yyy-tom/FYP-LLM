@@ -7,7 +7,7 @@ requires-python = ">=3.8"
 dependencies = [
     "datasets>=2.14.0",
     "transformers>=4.36.0",
-    "torch>=2.0.0",
+    "torch==2.5.1",  # Last version before manylinux_2_28 transition (Nov 2024)
     "accelerate>=0.24.0",
     "peft>=0.7.0",
     "evaluate>=0.4.0",
@@ -25,3 +25,7 @@ cuda = [
     "bitsandbytes>=0.41.0",
     "trl>=0.7.0",
 ]
+
+# Platform compatibility: PyTorch 2.5.1 is the last version before manylinux_2_28 transition
+# This ensures compatibility with manylinux_2_23_x86_64 (glibc 2.23) systems
+# Alternative: If issues persist, consider building PyTorch from source or using conda
