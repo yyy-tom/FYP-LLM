@@ -3,7 +3,7 @@ name = "fyp-llm"
 version = "0.1.0"
 description = "FYP LLM Training with Qwen2.5 and Counsel Chat Dataset"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11,<3.13"
 dependencies = [
     "datasets>=2.14.0",
     "transformers>=4.36.0",
