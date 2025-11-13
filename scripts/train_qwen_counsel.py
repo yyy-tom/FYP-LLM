@@ -89,15 +89,29 @@ class CounselChatTrainer:
         if self.config.get("use_4bit", True) and not is_awq_model:
             try:
                 from transformers import BitsAndBytesConfig
-                bnb_config = BitsAndBytesConfig(
-                    load_in_4bit=True,
-                    bnb_4bit_use_double_quant=True,
-                    bnb_4bit_quant_type="nf4",
-                    bnb_4bit_compute_dtype=torch.bfloat16
-                )
-                logger.info("Using 4-bit quantization with BitsAndBytes")
+                # Test if BitsAndBytes works before using it
+                try:
+                    import bitsandbytes as bnb
+                    # Try to create a simple operation to test CUDA compatibility
+                    if torch.cuda.is_available():
+                        test_tensor = torch.randn(10, 10).cuda()
+                        # This will fail if CUDA ops are broken
+                        _ = bnb.functional.quantize_blockwise(test_tensor)
+                except Exception as bnb_error:
+                    logger.warning(f"BitsAndBytes CUDA error detected: {bnb_error}")
+                    logger.warning("Falling back to non-quantized model loading.")
+                    logger.warning("To fix: Reinstall bitsandbytes with: uv pip install --force-reinstall bitsandbytes")
+                    bnb_config = None
+                else:
+                    bnb_config = BitsAndBytesConfig(
+                        load_in_4bit=True,
+                        bnb_4bit_use_double_quant=True,
+                        bnb_4bit_quant_type="nf4",
+                        bnb_4bit_compute_dtype=torch.bfloat16
+                    )
+                    logger.info("Using 4-bit quantization with BitsAndBytes")
             except ImportError:
-                logger.warning("BitsAndBytes not available (likely on macOS ARM64). Using standard model loading.")
+                logger.warning("BitsAndBytes not available. Using standard model loading.")
                 bnb_config = None
         elif is_awq_model:
             logger.info("Model is already AWQ quantized. Skipping BitsAndBytes quantization.")

@@ -3,11 +3,12 @@ name = "fyp-llm"
 version = "0.1.0"
 description = "FYP LLM Training with Qwen2.5 and Counsel Chat Dataset"
 readme = "README.md"
-requires-python = ">=3.11,<3.14"
+requires-python = ">=3.9,<3.10"
 dependencies = [
     "datasets>=2.14.0",
     "transformers>=4.36.0",
-    "torch>=2.0.0,<3.0.0",  # Flexible version for platform compatibility (macOS ARM64 support)
+   
+    "torch>=1.7.1+cu100",  # Commented out - install via pip for CUDA 10.0 support
     "accelerate>=0.24.0",
     "peft>=0.7.0",
     "evaluate>=0.4.0",

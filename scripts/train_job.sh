@@ -51,10 +51,15 @@ echo "UV_CACHE_DIR: $UV_CACHE_DIR"
 # module load python/3.10  # Uncomment and adjust if needed
 # source venv/bin/activate  # Uncomment if using virtual environment
 
-# Set CUDA visible devices (SLURM handles this automatically, but explicit is good)
-export PATH=$PATH:/usr/local/cuda-10.0/bin
-export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64
+# Set CUDA environment variables (needed for PyTorch to find CUDA at runtime)
+export CUDA_HOME=/usr/local/cuda-10.0
+export PATH=$CUDA_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+
+# Print CUDA information
+echo "CUDA_HOME: $CUDA_HOME"
+echo "CUDA version: $(nvcc --version 2>/dev/null | grep 'release' || echo 'nvcc not found')"
 
 # Print GPU information
 echo "GPU Information:"
