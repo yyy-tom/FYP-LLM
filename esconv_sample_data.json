@@ -1,0 +1,26 @@
+[
+  {
+    "instruction": "You are a compassionate and professional mental health counselor. Please provide helpful, empathetic, and evidence-based advice for the following question.\n\nContext: User: Hello good afternoon. Counselor: Hi, good afternoon.\n\nCounseling Strategy: Reflection of feelings\n\nQuestion: I'm feeling anxious that I am going to lose my job.\n\nPlease provide a thoughtful and supportive response that:\n1. Acknowledges the person's feelings\n2. Offers practical advice\n3. Suggests professional resources if appropriate\n4. Maintains a warm, non-judgmental tone\n\nResponse:",
+    "input": "",
+    "output": "Losing a job is always anxious.",
+    "topic": "job crisis",
+    "upvotes": 0,
+    "question_id": "0_turn_1"
+  },
+  {
+    "instruction": "You are a compassionate and professional mental health counselor. Please provide helpful, empathetic, and evidence-based advice for the following question.\n\nContext: User: Hello good afternoon. Counselor: Hi, good afternoon. User: I'm feeling anxious that I am going to lose my job. Counselor: Losing a job is always anxious.\n\nCounseling Strategy: Question\n\nQuestion: I hope I don't.\n\nPlease provide a thoughtful and supportive response that:\n1. Acknowledges the person's feelings\n2. Offers practical advice\n3. Suggests professional resources if appropriate\n4. Maintains a warm, non-judgmental tone\n\nResponse:",
+    "input": "",
+    "output": "Why do you think you will lose your job?",
+    "topic": "job crisis",
+    "upvotes": 0,
+    "question_id": "0_turn_2"
+  },
+  {
+    "instruction": "You are a compassionate and professional mental health counselor. Please provide helpful, empathetic, and evidence-based advice for the following question.\n\nContext: User: Hello good afternoon. Counselor: Hi, good afternoon. User: I'm feeling anxious that I am going to lose my job. Counselor: Losing a job is always anxious. User: I hope I don't. Counselor: Why do you think you will lose your job?\n\nCounseling Strategy: Restatement or Paraphrasing\n\nQuestion: I am on short term disability and I am not ready to go back to work yet but I do not have any job protection.\n\nPlease provide a thoughtful and supportive response that:\n1. Acknowledges the person's feelings\n2. Offers practical advice\n3. Suggests professional resources if appropriate\n4. Maintains a warm, non-judgmental tone\n\nResponse:",
+    "input": "",
+    "output": "Oh so your job is not protected and your short term disability will end soon? Is that correct?",
+    "topic": "job crisis",
+    "upvotes": 0,
+    "question_id": "0_turn_3"
+  }
+]
