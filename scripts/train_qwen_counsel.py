@@ -80,9 +80,13 @@ class CounselChatTrainer:
         model_name = self.config["model_name"]
         logger.info(f"Loading model from {model_name}")
         
+        # Check if model is already quantized (AWQ models)
+        is_awq_model = "AWQ" in model_name.upper() or "awq" in model_name.lower()
+        
         # Configure quantization for memory efficiency
+        # Skip BitsAndBytes if model is already AWQ quantized
         bnb_config = None
-        if self.config.get("use_4bit", True):
+        if self.config.get("use_4bit", True) and not is_awq_model:
             try:
                 from transformers import BitsAndBytesConfig
                 bnb_config = BitsAndBytesConfig(
@@ -95,6 +99,8 @@ class CounselChatTrainer:
             except ImportError:
                 logger.warning("BitsAndBytes not available (likely on macOS ARM64). Using standard model loading.")
                 bnb_config = None
+        elif is_awq_model:
+            logger.info("Model is already AWQ quantized. Skipping BitsAndBytes quantization.")
         
         # Get cache directory from environment
         cache_dir = os.environ.get("TRANSFORMERS_CACHE", None)
@@ -121,12 +127,15 @@ class CounselChatTrainer:
                 cache_dir=cache_dir,  # Use quota path for model cache
             )
         
-        # Prepare model for k-bit training
+        # Prepare model for k-bit training (only for BitsAndBytes, not AWQ)
         if bnb_config:
             try:
                 self.model = prepare_model_for_kbit_training(self.model)
             except ImportError:
                 logger.warning("prepare_model_for_kbit_training not available. Skipping.")
+        elif is_awq_model:
+            # AWQ models don't need prepare_model_for_kbit_training
+            logger.info("AWQ model loaded. Skipping k-bit training preparation.")
         
         # Configure LoRA
         lora_config = LoraConfig(
