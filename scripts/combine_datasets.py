@@ -4,6 +4,7 @@ Script to combine multiple processed datasets into one.
 """
 
 import argparse
+import os
 from datasets import load_from_disk, concatenate_datasets, DatasetDict
 from pathlib import Path
 
@@ -14,20 +15,35 @@ def combine_datasets(input_dirs, output_dir):
     
     datasets = []
     for input_dir in input_dirs:
+        # Check if path exists
+        if not os.path.exists(input_dir):
+            print(f"Warning: {input_dir} not found, skipping...")
+            continue
+        
         print(f"\nLoading: {input_dir}")
-        dataset = load_from_disk(input_dir)
-        print(f"  Train: {len(dataset['train'])}, Val: {len(dataset['validation'])}")
-        datasets.append(dataset)
+        try:
+            dataset = load_from_disk(input_dir)
+            train_size = len(dataset['train'])
+            val_size = len(dataset['validation'])
+            print(f"  Train: {train_size:,}, Val: {val_size:,}")
+            datasets.append(dataset)
+        except Exception as e:
+            print(f"  Error loading {input_dir}: {e}")
+            continue
+    
+    if not datasets:
+        print("No datasets loaded. Exiting.")
+        return
     
     # Combine training sets
     print("\nCombining training sets...")
     combined_train = concatenate_datasets([ds["train"] for ds in datasets])
-    print(f"Combined training samples: {len(combined_train)}")
+    print(f"Combined training samples: {len(combined_train):,}")
     
     # Combine validation sets
     print("Combining validation sets...")
     combined_val = concatenate_datasets([ds["validation"] for ds in datasets])
-    print(f"Combined validation samples: {len(combined_val)}")
+    print(f"Combined validation samples: {len(combined_val):,}")
     
     # Create combined dataset
     combined = DatasetDict({
@@ -41,8 +57,8 @@ def combine_datasets(input_dirs, output_dir):
     combined.save_to_disk(output_dir)
     
     print(f"\nCombined dataset saved successfully!")
-    print(f"Total training samples: {len(combined_train)}")
-    print(f"Total validation samples: {len(combined_val)}")
+    print(f"Total training samples: {len(combined_train):,}")
+    print(f"Total validation samples: {len(combined_val):,}")
 
 
 def main():

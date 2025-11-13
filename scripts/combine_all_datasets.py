@@ -22,6 +22,11 @@ import argparse
 from datasets import load_from_disk, concatenate_datasets, DatasetDict
 from pathlib import Path
 import os
+import sys
+
+# Get the project root directory (parent of scripts/)
+SCRIPT_DIR = Path(__file__).parent.absolute()
+PROJECT_ROOT = SCRIPT_DIR.parent
 
 
 def combine_all_datasets(dataset_dirs, output_dir, exclude_chinese=False):
@@ -37,6 +42,10 @@ def combine_all_datasets(dataset_dirs, output_dir, exclude_chinese=False):
     chinese_datasets = ['psydial_processed']
     
     for dataset_dir in dataset_dirs:
+        # Resolve relative paths relative to project root
+        if not os.path.isabs(dataset_dir):
+            dataset_dir = os.path.join(PROJECT_ROOT, dataset_dir)
+        
         if not os.path.exists(dataset_dir):
             print(f"Warning: {dataset_dir} not found, skipping...")
             continue
@@ -52,7 +61,7 @@ def combine_all_datasets(dataset_dirs, output_dir, exclude_chinese=False):
             
             # Check if dataset has required splits
             if 'train' not in dataset:
-                print(f"  Error: {dataset_dir} does not have a 'train' split, skipping...")
+                print(f"  ✗ Error: {dataset_dir} does not have a 'train' split, skipping...")
                 continue
             
             train_size = len(dataset['train'])
@@ -68,12 +77,29 @@ def combine_all_datasets(dataset_dirs, output_dir, exclude_chinese=False):
                 else:
                     print(f"  ⚠ Train: {train_size:,}, Val: empty (will be excluded from validation combination)")
             
+            # Normalize question_id to string type for all datasets
+            # This ensures compatibility when concatenating
+            if 'question_id' in dataset['train'].features:
+                from datasets import Features, Value
+                # Always cast question_id to string for consistency
+                def cast_question_id(example):
+                    example['question_id'] = str(example.get('question_id', ''))
+                    return example
+                dataset = dataset.map(cast_question_id, desc=f"Normalizing question_id for {os.path.basename(dataset_dir)}")
+                # Update features to reflect string type
+                new_features = dataset['train'].features.copy()
+                new_features['question_id'] = Value('string')
+                dataset = dataset.cast(new_features)
+            
             datasets.append(dataset)
             dataset_names.append(os.path.basename(dataset_dir))
+        except FileNotFoundError as e:
+            print(f"  ✗ Error: Dataset directory incomplete or corrupted: {os.path.basename(dataset_dir)}")
+            print(f"    (This dataset will be skipped)")
+            continue
         except Exception as e:
             print(f"  ✗ Error loading {dataset_dir}: {e}")
-            import traceback
-            traceback.print_exc()
+            print(f"    (This dataset will be skipped)")
             continue
     
     if not datasets:
@@ -117,7 +143,10 @@ def combine_all_datasets(dataset_dirs, output_dir, exclude_chinese=False):
         "validation": combined_val
     })
     
-    # Save combined dataset
+    # Save combined dataset (resolve output path relative to project root)
+    if not os.path.isabs(output_dir):
+        output_dir = os.path.join(PROJECT_ROOT, output_dir)
+    
     print(f"\n{'='*60}")
     print(f"Saving combined dataset to {output_dir}...")
     print(f"{'='*60}")
@@ -180,17 +209,21 @@ Examples:
         # If user provides datasets, check if they're already in datasets/ or add prefix
         dataset_dirs = []
         for ds in args.datasets:
-            if os.path.exists(ds):
+            # Try absolute path first
+            if os.path.isabs(ds) and os.path.exists(ds):
                 dataset_dirs.append(ds)
-            elif os.path.exists(f"datasets/{ds}"):
+            # Try relative to project root
+            elif os.path.exists(os.path.join(PROJECT_ROOT, ds)):
+                dataset_dirs.append(ds)
+            # Try with datasets/ prefix
+            elif os.path.exists(os.path.join(PROJECT_ROOT, "datasets", ds)):
                 dataset_dirs.append(f"datasets/{ds}")
             else:
                 print(f"Warning: Dataset not found: {ds}")
                 dataset_dirs.append(ds)  # Try anyway, will fail gracefully
     else:
-        # Default dataset directories (all in datasets/ directory)
+        # Default dataset directories (all in datasets/ directory relative to project root)
         # Note: Using kaggle_mental_health_nguyen_processed_combined (already combined)
-        # cactus_processed is optional (may be incomplete due to disk space)
         dataset_dirs = [
             "datasets/counsel_chat_processed",
             "datasets/mentalchat16k_processed",
@@ -198,7 +231,7 @@ Examples:
             "datasets/esconv_processed",
             "datasets/amod_processed",
             "datasets/psydial_processed",  # Chinese dataset - included by default
-             "datasets/cactus_processed",  # Optional: Very large dataset, uncomment if needed
+            "datasets/cactus_processed",  # Optional: Very large dataset
         ]
     
     combine_all_datasets(
