@@ -38,7 +38,7 @@ echo "Number of GPUs: $(python -c 'import torch; print(torch.cuda.device_count()
 
 # Run training
 echo "Starting training..."
-python train_qwen_counsel.py --config config.json
+python scripts/train_qwen_counsel.py --config configs/config.json
 
 # Print completion time
 echo "End Time: $(date)"

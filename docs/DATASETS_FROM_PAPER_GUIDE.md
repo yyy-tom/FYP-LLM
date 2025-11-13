@@ -1,14 +1,13 @@
-af# Datasets from Clinical Mental Health AI Systems Paper
+# Datasets from Clinical Mental Health AI Systems Paper
 
 This guide documents the datasets cloned from the comprehensive review paper: "A Comprehensive Review of Datasets for Clinical Mental Health AI Systems" (arXiv:2508.09809v2).
 
 ## Cloned Datasets
 
 ### 1. ESConv (Empathetic Conversations)
-
 - **Source**: https://huggingface.co/datasets/thu-coai/esconv
 - **Description**: Empathetic conversations dataset with counseling strategies
-- **Size**:
+- **Size**: 
   - Training: 8,388 samples
   - Validation: 933 samples
   - Total: 9,321 samples
@@ -16,13 +15,11 @@ This guide documents the datasets cloned from the comprehensive review paper: "A
 - **Processed location**: `esconv_processed/`
 
 **Process with:**
-
 ```bash
 uv run prepare_esconv_dataset.py
 ```
 
 ### 2. Amod Mental Health Counseling Conversations
-
 - **Source**: https://huggingface.co/datasets/Amod/mental_health_counseling_conversations
 - **Description**: Mental health counseling conversation pairs
 - **Size**:
@@ -33,7 +30,6 @@ uv run prepare_esconv_dataset.py
 - **Processed location**: `amod_processed/`
 
 **Process with:**
-
 ```bash
 uv run prepare_amod_dataset.py
 ```
@@ -43,26 +39,21 @@ uv run prepare_amod_dataset.py
 You now have access to the following mental health counseling datasets:
 
 1. **Counsel Chat** (existing)
-
    - Location: `counsel_chat_processed/`
 
 2. **MentalChat16K**
-
    - Location: `mentalchat16k_processed/`
    - Size: 59,095 training + 6,567 validation
 
 3. **Kaggle nguyenletruongthien**
-
    - Location: `kaggle_mental_health_nguyen_processed_combined/`
    - Size: 72,013 training + 8,002 validation
 
 4. **PsyDial** (Chinese)
-
    - Location: `psydial_processed/`
    - Size: 59,095 training + 6,567 validation
 
 5. **ESConv** (NEW)
-
    - Location: `esconv_processed/`
    - Size: 8,388 training + 933 validation
 
@@ -102,19 +93,16 @@ combined.save_to_disk("all_mental_health_combined")
 ## Total Dataset Statistics
 
 **English-only datasets:**
-
 - Total training samples: ~150,000+
 - Total validation samples: ~18,000+
 
 **Including Chinese (PsyDial):**
-
 - Total training samples: ~210,000+
 - Total validation samples: ~25,000+
 
 ## Usage
 
 ### Train on Individual Dataset
-
 ```bash
 # Update config.json
 {
@@ -127,7 +115,6 @@ uv run train_qwen_counsel.py --config config.json
 ```
 
 ### Train on Combined Dataset
-
 ```bash
 # First combine datasets (see Python code above)
 # Then update config.json
@@ -152,3 +139,4 @@ uv run train_qwen_counsel.py --config config.json
 - Paper: https://arxiv.org/html/2508.09809v2
 - ESConv: https://huggingface.co/datasets/thu-coai/esconv
 - Amod: https://huggingface.co/datasets/Amod/mental_health_counseling_conversations
+

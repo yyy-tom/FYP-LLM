@@ -336,7 +336,7 @@ def main():
     parser.add_argument(
         "--config", 
         type=str, 
-        default="config.json",
+        default="configs/config.json",
         help="Path to configuration file"
     )
     parser.add_argument(

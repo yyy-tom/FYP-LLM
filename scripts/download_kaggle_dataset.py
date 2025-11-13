@@ -157,7 +157,7 @@ def main():
         print(f"\nNext steps:")
         print(f"1. Inspect the downloaded files in {args.output_dir}")
         print(f"2. Run prepare_kaggle_dataset.py to process the data")
-        print(f"   python prepare_kaggle_dataset.py --input_dir {args.output_dir}")
+        print(f"   python scripts/prepare_kaggle_dataset.py --input_dir {args.output_dir}")
     else:
         sys.exit(1)
 

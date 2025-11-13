@@ -155,7 +155,7 @@ def test_config():
     """Test configuration file."""
     print("\nTesting configuration...")
     
-    config_path = "config.json"
+    config_path = "configs/config.json"
     if not os.path.exists(config_path):
         print(f"✗ Config file not found: {config_path}")
         return False
@@ -228,9 +228,9 @@ def main():
     if passed == len(results):
         print("\n🎉 All tests passed! Your setup is ready for training.")
         print("\nNext steps:")
-        print("1. Run: python prepare_counsel_dataset.py --max_samples 100")
-        print("2. Run: python train_qwen_counsel.py")
-        print("3. Run: python inference.py --interactive")
+        print("1. Run: python scripts/prepare_counsel_dataset.py --max_samples 100")
+        print("2. Run: python scripts/train_qwen_counsel.py")
+        print("3. Run: python scripts/inference.py --interactive")
     else:
         print(f"\n❌ {len(results) - passed} tests failed. Please fix the issues before training.")
     

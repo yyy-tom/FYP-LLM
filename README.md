@@ -23,34 +23,52 @@ uv sync --extra cuda
 ### 2. Test Setup
 
 ```bash
-uv run python test_setup.py
+uv run python scripts/test_setup.py
 ```
 
 ### 3. Prepare Dataset (Small Test)
 
 ```bash
-uv run python prepare_counsel_dataset.py --max_samples 100
+uv run python scripts/prepare_counsel_dataset.py --max_samples 100
 ```
 
 ### 4. Train Model
 
 ```bash
-uv run python train_qwen_counsel.py
+uv run python scripts/train_qwen_counsel.py
 ```
 
 ### 5. Test Inference
 
 ```bash
-uv run python inference.py --interactive
+uv run python scripts/inference.py --interactive
+```
+
+## Project Structure
+
+```
+FYP-LLM/
+├── configs/              # Configuration files
+│   └── config.json       # Main training configuration
+├── datasets/             # All dataset directories (raw & processed)
+├── docs/                 # Documentation and guides
+├── models/               # Trained model outputs
+├── samples/              # Sample data files for inspection
+├── scripts/              # Python and shell scripts
+│   ├── prepare_*.py     # Dataset preparation scripts
+│   ├── train_qwen_counsel.py  # Main training script
+│   ├── inference.py     # Inference script
+│   └── *.sh             # Training shell scripts
+└── README.md            # This file
 ```
 
 ## Files Overview
 
-- `config.json` - Training configuration (using Qwen2.5-0.5B for testing)
-- `prepare_counsel_dataset.py` - Dataset preparation script
-- `train_qwen_counsel.py` - Main training script with LoRA
-- `inference.py` - Inference script for testing the trained model
-- `test_setup.py` - Setup verification script
+- `configs/config.json` - Training configuration (using Qwen2.5-0.5B for testing)
+- `scripts/prepare_counsel_dataset.py` - Dataset preparation script
+- `scripts/train_qwen_counsel.py` - Main training script with LoRA
+- `scripts/inference.py` - Inference script for testing the trained model
+- `scripts/test_setup.py` - Setup verification script
 
 ## Configuration
 
@@ -70,4 +88,4 @@ From the [Qwen2.5 collection](https://huggingface.co/collections/Qwen/qwen25-66e
 - 0.5B (current) - Fastest, least memory
 - 1.5B, 3B, 7B, 14B, 32B, 72B - Larger models for better quality
 
-To use a larger model, update `model_name` in `config.json`.
+To use a larger model, update `model_name` in `configs/config.json`.

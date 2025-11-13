@@ -15,7 +15,7 @@ fi
 tmux new-session -d -s "$SESSION_NAME"
 
 # Send training command to tmux session
-tmux send-keys -t "$SESSION_NAME" "python train_qwen_counsel.py --config config.json" C-m
+tmux send-keys -t "$SESSION_NAME" "python scripts/train_qwen_counsel.py --config configs/config.json" C-m
 
 echo "Training started in tmux session '$SESSION_NAME'"
 echo "To attach: tmux attach -t $SESSION_NAME"

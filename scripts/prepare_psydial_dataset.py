@@ -260,7 +260,7 @@ def process_psydial_data(
     print(f"Validation samples: {len(val_dataset)}")
     
     # Save a sample for inspection
-    sample_path = Path(output_path).parent / "psydial_sample_data.json"
+    sample_path = Path("samples") / "psydial_sample_data.json"
     with open(sample_path, 'w', encoding='utf-8') as f:
         json.dump(train_examples[:3], f, indent=2, ensure_ascii=False)
     

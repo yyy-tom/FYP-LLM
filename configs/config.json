@@ -1,7 +1,7 @@
 {
   "model_name": "Qwen/Qwen2.5-7B-Instruct-AWQ",
-  "dataset_path": "counsel_chat_processed",
-  "output_dir": "qwen2.5-counsel-chat-finetuned",
+  "dataset_path": "datasets/counsel_chat_processed",
+  "output_dir": "models/qwen2.5-counsel-chat-finetuned",
   "batch_size": 4,
   "num_epochs": 3,
   "learning_rate": 2e-4,
