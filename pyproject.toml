@@ -3,11 +3,11 @@ name = "fyp-llm"
 version = "0.1.0"
 description = "FYP LLM Training with Qwen2.5 and Counsel Chat Dataset"
 readme = "README.md"
-requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11,<3.14"
 dependencies = [
     "datasets>=2.14.0",
     "transformers>=4.36.0",
-    "torch==2.5.1",  # Last version before manylinux_2_28 transition (Nov 2024)
+    "torch>=2.0.0,<3.0.0",  # Flexible version for platform compatibility (macOS ARM64 support)
     "accelerate>=0.24.0",
     "peft>=0.7.0",
     "evaluate>=0.4.0",
@@ -17,6 +17,7 @@ dependencies = [
     "tqdm>=4.65.0",
     "wandb>=0.15.0",
     "tensorboard>=2.14.0",
+    "kaggle>=1.5.0",
 ]
 
 [project.optional-dependencies]
@@ -26,6 +27,6 @@ cuda = [
     "trl>=0.7.0",
 ]
 
-# Platform compatibility: PyTorch 2.5.1 is the last version before manylinux_2_28 transition
-# This ensures compatibility with manylinux_2_23_x86_64 (glibc 2.23) systems
-# Alternative: If issues persist, consider building PyTorch from source or using conda
+# Platform compatibility: PyTorch version constraint allows uv to select a compatible version
+# for the current platform (macOS ARM64, Linux x86_64, etc.)
+# For Linux systems requiring manylinux_2_23 compatibility, consider using a specific version
