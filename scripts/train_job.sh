@@ -9,8 +9,26 @@
 #SBATCH --output=logs/train_%j.out
 #SBATCH --error=logs/train_%j.err
 
+# Set base directory to avoid disk quota issues
+BASE_DIR="/research/d7/fyp25/yyyu2"
+cd "$BASE_DIR/FYP-LLM" || exit 1
+
 # Create logs directory if it doesn't exist
 mkdir -p logs
+
+# Set HuggingFace cache directories to use quota path (CRITICAL for avoiding quota errors)
+export HF_HOME="$BASE_DIR/.cache/huggingface"
+export TRANSFORMERS_CACHE="$BASE_DIR/.cache/huggingface/transformers"
+export HF_DATASETS_CACHE="$BASE_DIR/.cache/huggingface/datasets"
+export HF_HUB_CACHE="$BASE_DIR/.cache/huggingface/hub"
+export XET_CACHE="$BASE_DIR/.cache/huggingface/xet"
+
+# Create cache directories
+mkdir -p "$HF_HOME"
+mkdir -p "$TRANSFORMERS_CACHE"
+mkdir -p "$HF_DATASETS_CACHE"
+mkdir -p "$HF_HUB_CACHE"
+mkdir -p "$XET_CACHE"
 
 # Print job information
 echo "Job ID: $SLURM_JOB_ID"
@@ -18,12 +36,19 @@ echo "Job Name: $SLURM_JOB_NAME"
 echo "Node: $SLURM_NODELIST"
 echo "Start Time: $(date)"
 echo "Working Directory: $(pwd)"
+echo "HF_HOME: $HF_HOME"
+echo "TRANSFORMERS_CACHE: $TRANSFORMERS_CACHE"
+echo "HF_DATASETS_CACHE: $HF_DATASETS_CACHE"
+echo "HF_HUB_CACHE: $HF_HUB_CACHE"
+echo "XET_CACHE: $XET_CACHE"
 
 # Load environment (adjust if needed)
 # module load python/3.10  # Uncomment and adjust if needed
 # source venv/bin/activate  # Uncomment if using virtual environment
 
 # Set CUDA visible devices (SLURM handles this automatically, but explicit is good)
+export PATH=$PATH:/usr/local/cuda-10.0/bin
+export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 
 # Print GPU information

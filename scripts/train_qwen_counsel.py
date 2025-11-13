@@ -59,10 +59,14 @@ class CounselChatTrainer:
         model_name = self.config["model_name"]
         logger.info(f"Loading tokenizer from {model_name}")
         
+        # Get cache directory from environment
+        cache_dir = os.environ.get("TRANSFORMERS_CACHE", None)
+        
         self.tokenizer = AutoTokenizer.from_pretrained(
             model_name,
             trust_remote_code=True,
-            padding_side="right"
+            padding_side="right",
+            cache_dir=cache_dir,  # Use quota path for tokenizer cache
         )
         
         # Add padding token if it doesn't exist
@@ -92,6 +96,9 @@ class CounselChatTrainer:
                 logger.warning("BitsAndBytes not available (likely on macOS ARM64). Using standard model loading.")
                 bnb_config = None
         
+        # Get cache directory from environment
+        cache_dir = os.environ.get("TRANSFORMERS_CACHE", None)
+        
         # Load model
         if bnb_config:
             # Use device_map="auto" for quantized models
@@ -101,6 +108,7 @@ class CounselChatTrainer:
                 device_map="auto",
                 trust_remote_code=True,
                 dtype=torch.bfloat16,
+                cache_dir=cache_dir,  # Use quota path for model cache
             )
         else:
             # For non-quantized models, use device_map="auto" for better memory management
@@ -110,6 +118,7 @@ class CounselChatTrainer:
                 dtype=torch.bfloat16,  # Use bfloat16 for better memory efficiency
                 device_map="auto",  # Let transformers handle device placement
                 low_cpu_mem_usage=True,  # Reduce CPU memory usage during loading
+                cache_dir=cache_dir,  # Use quota path for model cache
             )
         
         # Prepare model for k-bit training
@@ -332,6 +341,38 @@ def load_config(config_path: str) -> Dict[str, Any]:
 
 
 def main():
+    # Set HuggingFace cache directories to avoid disk quota issues
+    # Use environment variables if set, otherwise default to /research/d7/fyp25/yyyu2
+    base_dir = os.environ.get("HF_BASE_DIR", "/research/d7/fyp25/yyyu2")
+    
+    # Set cache directories if not already set by environment
+    if "HF_HOME" not in os.environ:
+        os.environ["HF_HOME"] = f"{base_dir}/.cache/huggingface"
+    if "TRANSFORMERS_CACHE" not in os.environ:
+        os.environ["TRANSFORMERS_CACHE"] = f"{base_dir}/.cache/huggingface/transformers"
+    if "HF_DATASETS_CACHE" not in os.environ:
+        os.environ["HF_DATASETS_CACHE"] = f"{base_dir}/.cache/huggingface/datasets"
+    if "HF_HUB_CACHE" not in os.environ:
+        os.environ["HF_HUB_CACHE"] = f"{base_dir}/.cache/huggingface/hub"
+    if "XET_CACHE" not in os.environ:
+        os.environ["XET_CACHE"] = f"{base_dir}/.cache/huggingface/xet"
+    
+    # Create cache directories
+    for cache_dir in [
+        os.environ["HF_HOME"],
+        os.environ["TRANSFORMERS_CACHE"],
+        os.environ["HF_DATASETS_CACHE"],
+        os.environ["HF_HUB_CACHE"],
+        os.environ["XET_CACHE"],
+    ]:
+        Path(cache_dir).mkdir(parents=True, exist_ok=True)
+    
+    logger.info(f"HF_HOME: {os.environ['HF_HOME']}")
+    logger.info(f"TRANSFORMERS_CACHE: {os.environ['TRANSFORMERS_CACHE']}")
+    logger.info(f"HF_DATASETS_CACHE: {os.environ['HF_DATASETS_CACHE']}")
+    logger.info(f"HF_HUB_CACHE: {os.environ['HF_HUB_CACHE']}")
+    logger.info(f"XET_CACHE: {os.environ['XET_CACHE']}")
+    
     parser = argparse.ArgumentParser(description="Train Qwen2.5 on Counsel Chat dataset")
     parser.add_argument(
         "--config", 
