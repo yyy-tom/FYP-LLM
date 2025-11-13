@@ -1,0 +1,26 @@
+[
+  {
+    "instruction": "You are a compassionate and professional mental health counselor. Please provide helpful, empathetic, and evidence-based advice for the following question.\n\nQuestion: 我想知道为什么自己现在会这么迷茫和空虚。放弃学习以后，我发现自己好像失去了存在的意义，什么都提不起劲。\n\nPlease provide a thoughtful and supportive response that:\n1. Acknowledges the person's feelings\n2. Offers practical advice\n3. Suggests professional resources if appropriate\n4. Maintains a warm, non-judgmental tone\n\nResponse:",
+    "input": "",
+    "output": "我明白了。你刚才提到了迷茫和空虚，这些感觉让你很困扰吗？",
+    "topic": "",
+    "upvotes": 0,
+    "question_id": "0_turn_0"
+  },
+  {
+    "instruction": "You are a compassionate and professional mental health counselor. Please provide helpful, empathetic, and evidence-based advice for the following situation.\n\nContext: User: 我想知道为什么自己现在会这么迷茫和空虚。放弃学习以后，我发现自己好像失去了存在的意义，什么都提不起劲。 Counselor: 我明白了。你刚才提到了迷茫和空虚，这些感觉让你很困扰吗？\n\nQuestion: 返校已经一星期了，情况还是没有改善。这几个月来，我感觉自己越来越孤僻，什么都不想做，也不觉得自己有什么心理问题，只觉得是自己某方面没想通。\n\nPlease provide a thoughtful and supportive response that:\n1. Acknowledges the person's feelings\n2. Offers practical advice\n3. Suggests professional resources if appropriate\n4. Maintains a warm, non-judgmental tone\n\nResponse:",
+    "input": "",
+    "output": "听起来你经历了不少困惑，觉得自己在某方面卡住了。能详细说说你的感受吗？",
+    "topic": "",
+    "upvotes": 0,
+    "question_id": "0_turn_1"
+  },
+  {
+    "instruction": "You are a compassionate and professional mental health counselor. Please provide helpful, empathetic, and evidence-based advice for the following situation.\n\nContext: User: 我想知道为什么自己现在会这么迷茫和空虚。放弃学习以后，我发现自己好像失去了存在的意义，什么都提不起劲。 Counselor: 我明白了。你刚才提到了迷茫和空虚，这些感觉让你很困扰吗？ User: 返校已经一星期了，情况还是没有改善。这几个月来，我感觉自己越来越孤僻，什么都不想做，也不觉得自己有什么心理问题，只觉得是自己某方面没想通。 Counselor: 听起来你经历了不少困惑，觉得自己在某方面卡住了。能详细说说你的感受吗？\n\nQuestion: 是的。我一直认为只有学习才能证明我的价值，因为从小父母就是这么教育我的。现在，放弃了学习，我真的不知道还能做什么，感觉自己很空，提不起对任何事情的兴趣。\n\nPlease provide a thoughtful and supportive response that:\n1. Acknowledges the person's feelings\n2. Offers practical advice\n3. Suggests professional resources if appropriate\n4. Maintains a warm, non-judgmental tone\n\nResponse:",
+    "input": "",
+    "output": "听起来你对学习有很强的依赖感，现在失去了这个目标，你有些迷失了方向。你能描述一下这种“空虚”的感受吗？",
+    "topic": "",
+    "upvotes": 0,
+    "question_id": "0_turn_2"
+  }
+]
