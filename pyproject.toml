@@ -25,6 +25,7 @@ dependencies = [
 cuda = [
     "bitsandbytes>=0.41.0",
     "trl>=0.7.0",
+    "autoawq>=0.2.3",  # Required for AWQ quantized models (0.2.3+ for transformers 4.36+ compatibility)
 ]
 
 # Platform compatibility: PyTorch version constraint allows uv to select a compatible version

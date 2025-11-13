@@ -23,12 +23,16 @@ export HF_DATASETS_CACHE="$BASE_DIR/.cache/huggingface/datasets"
 export HF_HUB_CACHE="$BASE_DIR/.cache/huggingface/hub"
 export XET_CACHE="$BASE_DIR/.cache/huggingface/xet"
 
+# Set uv cache directory to use quota path (CRITICAL for avoiding quota errors with uv)
+export UV_CACHE_DIR="$BASE_DIR/.cache/uv"
+
 # Create cache directories
 mkdir -p "$HF_HOME"
 mkdir -p "$TRANSFORMERS_CACHE"
 mkdir -p "$HF_DATASETS_CACHE"
 mkdir -p "$HF_HUB_CACHE"
 mkdir -p "$XET_CACHE"
+mkdir -p "$UV_CACHE_DIR"
 
 # Print job information
 echo "Job ID: $SLURM_JOB_ID"
@@ -41,6 +45,7 @@ echo "TRANSFORMERS_CACHE: $TRANSFORMERS_CACHE"
 echo "HF_DATASETS_CACHE: $HF_DATASETS_CACHE"
 echo "HF_HUB_CACHE: $HF_HUB_CACHE"
 echo "XET_CACHE: $XET_CACHE"
+echo "UV_CACHE_DIR: $UV_CACHE_DIR"
 
 # Load environment (adjust if needed)
 # module load python/3.10  # Uncomment and adjust if needed
@@ -63,7 +68,7 @@ echo "Number of GPUs: $(python -c 'import torch; print(torch.cuda.device_count()
 
 # Run training
 echo "Starting training..."
-python scripts/train_qwen_counsel.py --config configs/config.json
+uv run scripts/train_qwen_counsel.py --config configs/config.json
 
 # Print completion time
 echo "End Time: $(date)"
