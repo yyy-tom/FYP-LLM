@@ -2,3 +2,6 @@
 __pycache__
 datasets/cactus_processed/
 counsel-chat/
+*.arrow
+datasets/all_mental_health_combined/
+qwen2.5-counsel-chat-finetuned/
