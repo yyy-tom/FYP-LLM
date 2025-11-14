@@ -188,7 +188,32 @@ class CounselChatTrainer:
     def load_dataset(self) -> Dataset:
         """Load and prepare the dataset."""
         dataset_path = self.config["dataset_path"]
+        
+        # Resolve relative paths relative to project root
+        if not os.path.isabs(dataset_path):
+            # Get the project root (parent of scripts directory)
+            script_dir = Path(__file__).parent
+            project_root = script_dir.parent
+            resolved_path = project_root / dataset_path
+            
+            # If path doesn't exist, try with datasets/ prefix
+            if not resolved_path.exists():
+                # Try adding datasets/ prefix if not already present
+                if not dataset_path.startswith("datasets/"):
+                    alternative_path = project_root / "datasets" / dataset_path
+                    if alternative_path.exists():
+                        resolved_path = alternative_path
+                        logger.info(f"Dataset not found at {dataset_path}, found at {resolved_path}")
+            
+            dataset_path = str(resolved_path)
+        
         logger.info(f"Loading dataset from {dataset_path}")
+        
+        if not os.path.exists(dataset_path):
+            raise FileNotFoundError(
+                f"Dataset directory not found: {dataset_path}\n"
+                f"Please ensure the dataset exists at the specified path."
+            )
         
         dataset = load_from_disk(dataset_path)
         logger.info(f"Dataset loaded. Train: {len(dataset['train'])}, Val: {len(dataset['validation'])}")
@@ -421,7 +446,7 @@ def main():
     parser.add_argument(
         "--dataset_path",
         type=str,
-        default="counsel_chat_processed",
+        default="datasets/all_mental_health_combined",
         help="Path to processed dataset"
     )
     parser.add_argument(

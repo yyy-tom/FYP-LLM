@@ -22,11 +22,11 @@ def combine_datasets(input_dirs, output_dir):
         
         print(f"\nLoading: {input_dir}")
         try:
-            dataset = load_from_disk(input_dir)
+        dataset = load_from_disk(input_dir)
             train_size = len(dataset['train'])
             val_size = len(dataset['validation'])
             print(f"  Train: {train_size:,}, Val: {val_size:,}")
-            datasets.append(dataset)
+        datasets.append(dataset)
         except Exception as e:
             print(f"  Error loading {input_dir}: {e}")
             continue
