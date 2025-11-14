@@ -83,38 +83,34 @@ class CounselChatTrainer:
         # Check if model is already quantized (AWQ models)
         is_awq_model = "AWQ" in model_name.upper() or "awq" in model_name.lower()
         
+        # Check CUDA availability
+        cuda_available = torch.cuda.is_available()
+        if not cuda_available:
+            logger.warning("="*60)
+            logger.warning("CUDA not available. Training on CPU only (will be much slower).")
+            logger.warning("BitsAndBytes quantization requires CUDA. Disabling quantization.")
+            logger.warning("="*60)
+        
         # Configure quantization for memory efficiency
-        # Skip BitsAndBytes if model is already AWQ quantized
+        # Skip BitsAndBytes if model is already AWQ quantized or if CUDA is not available
         bnb_config = None
-        if self.config.get("use_4bit", True) and not is_awq_model:
+        if self.config.get("use_4bit", True) and not is_awq_model and cuda_available:
             try:
                 from transformers import BitsAndBytesConfig
-                # Test if BitsAndBytes works before using it
-                try:
-                    import bitsandbytes as bnb
-                    # Try to create a simple operation to test CUDA compatibility
-                    if torch.cuda.is_available():
-                        test_tensor = torch.randn(10, 10).cuda()
-                        # This will fail if CUDA ops are broken
-                        _ = bnb.functional.quantize_blockwise(test_tensor)
-                except Exception as bnb_error:
-                    logger.warning(f"BitsAndBytes CUDA error detected: {bnb_error}")
-                    logger.warning("Falling back to non-quantized model loading.")
-                    logger.warning("To fix: Reinstall bitsandbytes with: uv pip install --force-reinstall bitsandbytes")
-                    bnb_config = None
-                else:
-                    bnb_config = BitsAndBytesConfig(
-                        load_in_4bit=True,
-                        bnb_4bit_use_double_quant=True,
-                        bnb_4bit_quant_type="nf4",
-                        bnb_4bit_compute_dtype=torch.bfloat16
-                    )
-                    logger.info("Using 4-bit quantization with BitsAndBytes")
+                bnb_config = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_use_double_quant=True,
+                    bnb_4bit_quant_type="nf4",
+                    bnb_4bit_compute_dtype=torch.bfloat16
+                )
+                logger.info("Using 4-bit quantization with BitsAndBytes")
             except ImportError:
                 logger.warning("BitsAndBytes not available. Using standard model loading.")
                 bnb_config = None
         elif is_awq_model:
             logger.info("Model is already AWQ quantized. Skipping BitsAndBytes quantization.")
+        elif not cuda_available and self.config.get("use_4bit", True):
+            logger.info("Quantization disabled (requires CUDA). Using full precision model.")
         
         # Get cache directory from environment
         cache_dir = os.environ.get("TRANSFORMERS_CACHE", None)
@@ -131,15 +127,28 @@ class CounselChatTrainer:
                 cache_dir=cache_dir,  # Use quota path for model cache
             )
         else:
-            # For non-quantized models, use device_map="auto" for better memory management
-            self.model = AutoModelForCausalLM.from_pretrained(
-                model_name,
-                trust_remote_code=True,
-                dtype=torch.bfloat16,  # Use bfloat16 for better memory efficiency
-                device_map="auto",  # Let transformers handle device placement
-                low_cpu_mem_usage=True,  # Reduce CPU memory usage during loading
-                cache_dir=cache_dir,  # Use quota path for model cache
-            )
+            # For non-quantized models
+            if cuda_available:
+                # GPU training: use bfloat16 and device_map="auto"
+                self.model = AutoModelForCausalLM.from_pretrained(
+                    model_name,
+                    trust_remote_code=True,
+                    dtype=torch.bfloat16,  # Use bfloat16 for better memory efficiency
+                    device_map="auto",  # Let transformers handle device placement
+                    low_cpu_mem_usage=True,  # Reduce CPU memory usage during loading
+                    cache_dir=cache_dir,
+                )
+            else:
+                # CPU training: use float32 (bfloat16 not well supported on CPU)
+                logger.info("Loading model for CPU training (using float32)")
+                self.model = AutoModelForCausalLM.from_pretrained(
+                    model_name,
+                    trust_remote_code=True,
+                    torch_dtype=torch.float32,  # Use float32 for CPU
+                    device_map="cpu",  # Explicitly use CPU
+                    low_cpu_mem_usage=True,
+                    cache_dir=cache_dir,
+                )
         
         # Prepare model for k-bit training (only for BitsAndBytes, not AWQ)
         if bnb_config:

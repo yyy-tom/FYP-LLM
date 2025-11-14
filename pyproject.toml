@@ -3,23 +3,23 @@ name = "fyp-llm"
 version = "0.1.0"
 description = "FYP LLM Training with Qwen2.5 and Counsel Chat Dataset"
 readme = "README.md"
-requires-python = ">=3.9,<3.10"
+requires-python = ">=3.9,<3.13"
 dependencies = [
-    "datasets>=2.14.0",
-    "transformers>=4.36.0",
-    # torch is installed separately via pip with CUDA support - see scripts/install_pytorch_cuda10.sh
-    # Cannot use +cu100 suffix in pyproject.toml (not valid PEP 508), must install via:
-    # uv pip install torch==1.7.1+cu100 torchvision==0.8.2+cu100 torchaudio==0.7.2 --index-url https://download.pytorch.org/whl/cu100
-    "accelerate>=0.24.0",
-    "peft>=0.7.0",
+    "datasets>=2.20.0",
+    "transformers>=4.45.0",  # Latest version, required for Qwen2.5 models
+    # torch is installed separately via pip (CPU or GPU version)
+    # For CPU-only training: uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+    # For GPU training: uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+    "accelerate>=1.0.0",
+    "peft>=0.12.0",
     "evaluate>=0.4.0",
-    "scikit-learn>=1.3.0",
-    "pandas>=2.0.0",
-    "numpy>=1.24.0",
-    "tqdm>=4.65.0",
-    "wandb>=0.15.0",
-    "tensorboard>=2.14.0",
-    "kaggle>=1.5.0",
+    "scikit-learn>=1.5.0",
+    "pandas>=2.2.0",
+    "numpy>=1.26.0",
+    "tqdm>=4.66.0",
+    "wandb>=0.17.0",
+    "tensorboard>=2.17.0",
+    "kaggle>=1.6.0",
 ]
 
 [project.optional-dependencies]
