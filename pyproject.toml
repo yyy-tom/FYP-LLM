@@ -7,8 +7,9 @@ requires-python = ">=3.9,<3.10"
 dependencies = [
     "datasets>=2.14.0",
     "transformers>=4.36.0",
-   
-    "torch>=1.7.1+cu100",  # Commented out - install via pip for CUDA 10.0 support
+    # torch is installed separately via pip with CUDA support - see scripts/install_pytorch_cuda10.sh
+    # Cannot use +cu100 suffix in pyproject.toml (not valid PEP 508), must install via:
+    # uv pip install torch==1.7.1+cu100 torchvision==0.8.2+cu100 torchaudio==0.7.2 --index-url https://download.pytorch.org/whl/cu100
     "accelerate>=0.24.0",
     "peft>=0.7.0",
     "evaluate>=0.4.0",
