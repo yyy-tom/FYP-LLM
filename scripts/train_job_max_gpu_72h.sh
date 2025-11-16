@@ -1,15 +1,15 @@
 #!/bin/bash
-#SBATCH --job-name=qwen_train_max
-#SBATCH --partition=gpu_72h
+#SBATCH --job-name=yyy_model_train_max
+#SBATCH --partition=batch_72h
 #SBATCH --qos=gpu
 #SBATCH --account=gpu
-#SBATCH --gres=gpu:8
-#SBATCH --cpus-per-task=80
+#SBATCH --gres=gpu:titanrtx:2
+#SBATCH --cpus-per-task=42
 #SBATCH --time=72:00:00
 #SBATCH --output=logs/train_max_%j.out
 #SBATCH --error=logs/train_max_%j.err
 #SBATCH --ntasks=1
-#SBATCH --nodes=1
+#SBATCH --nodelist=gpu55
 
 # Set base directory to avoid disk quota issues
 BASE_DIR="/research/d7/fyp25/yyyu2"
@@ -79,10 +79,10 @@ nvidia-smi
 echo "=========================================="
 echo "Environment Information:"
 echo "=========================================="
-echo "Python version: $(python --version)"
-echo "PyTorch version: $(python -c 'import torch; print(torch.__version__)' 2>/dev/null || echo 'PyTorch not installed')"
-echo "CUDA available: $(python -c 'import torch; print(torch.cuda.is_available())' 2>/dev/null || echo 'N/A')"
-echo "Number of GPUs: $(python -c 'import torch; print(torch.cuda.device_count())' 2>/dev/null || echo 'N/A')"
+echo "Python version: $(uv run python --version)"
+echo "PyTorch version: $(uv run python -c 'import torch; print(torch.__version__)' 2>/dev/null || echo 'PyTorch not installed')"
+echo "CUDA available: $(uv run python -c 'import torch; print(torch.cuda.is_available())' 2>/dev/null || echo 'N/A')"
+echo "Number of GPUs: $(uv run python -c 'import torch; print(torch.cuda.device_count())' 2>/dev/null || echo 'N/A')"
 echo "CPU count: $SLURM_CPUS_PER_TASK"
 echo "=========================================="
 
@@ -90,7 +90,8 @@ echo "=========================================="
 echo "Starting training with maximum resources..."
 echo "Config: configs/config.json"
 echo "=========================================="
-uv run python scripts/train_qwen_counsel.py --config configs/config.json
+uv run python scripts/train_qwen_counsel.py  --config configs/config_14b_optimized --model_name Qwen/Qwen2.5-14B-Instruct --dataset_path ../datasets/all_mental_health_combined
+
 
 # Print completion time
 echo "=========================================="
