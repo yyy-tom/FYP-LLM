@@ -1,0 +1,325 @@
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+The following values were not passed to `accelerate launch` and had defaults used instead:
+		More than one GPU was found, enabling multi-GPU training.
+		If this was unintended please pass in `--num_processes=1`.
+	`--num_machines` was set to a value of `1`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2025-11-20 16:59:07,850 - __main__ - INFO - Logging configured for main process (rank 0, local_rank 0)
+2025-11-20 16:59:07,857 - __main__ - INFO - HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+2025-11-20 16:59:07,857 - __main__ - INFO - TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+2025-11-20 16:59:07,861 - __main__ - INFO - Starting multi-GPU training setup...
+2025-11-20 16:59:07,861 - __main__ - INFO - World size: 8, Rank: 0, Local rank: 0
+2025-11-20 16:59:09,973 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-7B-Instruct
+2025-11-20 16:59:10,913 - __main__ - INFO - Tokenizer loaded. Vocab size: 151665
+2025-11-20 16:59:10,914 - __main__ - INFO - Loading model from Qwen/Qwen2.5-7B-Instruct
+2025-11-20 16:59:11,082 - __main__ - INFO - Number of GPUs available: 8
+2025-11-20 16:59:11,107 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-20 16:59:11,107 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-20 16:59:11,107 - __main__ - INFO - GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-20 16:59:11,107 - __main__ - INFO - GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-20 16:59:11,107 - __main__ - INFO - GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-20 16:59:11,107 - __main__ - INFO - GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-20 16:59:11,107 - __main__ - INFO - GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-20 16:59:11,107 - __main__ - INFO - GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-20 16:59:11,107 - __main__ - INFO - Total VRAM across all GPUs: 84.55 GB
+2025-11-20 16:59:14,263 - __main__ - INFO - Using 4-bit quantization with BitsAndBytes
+2025-11-20 16:59:14,263 - __main__ - INFO - Loading model with 4-bit quantization...
+loading configuration file config.json from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/config.json
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151645,
+  "hidden_act": "silu",
+  "hidden_size": 3584,
+  "initializer_range": 0.02,
+  "intermediate_size": 18944,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 32768,
+  "max_window_layers": 28,
+  "model_type": "qwen2",
+  "num_attention_heads": 28,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 4,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": null,
+  "tie_word_embeddings": false,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_sliding_window": false,
+  "vocab_size": 152064
+}
+
+loading weights file model.safetensors from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/model.safetensors.index.json
+Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151645
+}
+
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:26<01:20, 26.77s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:26<01:20, 26.83s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:26<01:20, 26.81s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:26<01:20, 26.77s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:26<01:20, 26.90s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:26<01:20, 26.77s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:26<01:20, 26.79s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:26<01:20, 26.89s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:47<00:46, 23.19s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:47<00:46, 23.21s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:47<00:46, 23.20s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:47<00:46, 23.18s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:47<00:46, 23.19s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:47<00:46, 23.18s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:47<00:46, 23.23s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:47<00:46, 23.23s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:08<00:22, 22.10s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:08<00:22, 22.11s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:08<00:22, 22.13s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:08<00:22, 22.12s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:08<00:22, 22.11s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:08<00:22, 22.10s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:08<00:22, 22.14s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:08<00:22, 22.13s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 20.54s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 21.61s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 20.55s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 21.61s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 20.54s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 20.56s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 21.61s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 20.54s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 21.63s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 21.60s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 20.56s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 20.55s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 21.63s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 21.62s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 20.54s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:26<00:00, 21.60s/it]
+loading configuration file generation_config.json from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/generation_config.json
+Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.05,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+Could not locate the custom_generate/generate.py inside Qwen/Qwen2.5-7B-Instruct.
+2025-11-20 17:00:43,513 - __main__ - INFO - Model loaded with 4-bit quantization on device cuda:0
+2025-11-20 17:00:43,997 - __main__ - INFO - Model prepared for k-bit training
+2025-11-20 17:00:43,997 - __main__ - INFO - Disabled use_cache for BitsAndBytes quantized model
+2025-11-20 17:00:44,427 - __main__ - INFO - Enabling gradient checkpointing for memory savings.
+2025-11-20 17:00:44,437 - __main__ - INFO - Trainable parameters: 2,523,136 / 4,355,495,424 (0.06%)
+2025-11-20 17:00:44,437 - __main__ - INFO - Model loaded and LoRA configured
+2025-11-20 17:00:44,738 - __main__ - INFO - GPU 0 memory after model load: 7.21 GB allocated, 7.65 GB reserved, 10.57 GB total
+2025-11-20 17:00:44,739 - __main__ - INFO - Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+2025-11-20 17:00:49,149 - __main__ - INFO - Dataset loaded. Train: 561962, Val: 62443
+2025-11-20 17:00:49,150 - __main__ - INFO - Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+2025-11-20 17:00:54,478 - __main__ - INFO - Pre-tokenized dataset loaded successfully!
+PyTorch: setting up devices
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:549: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:549: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:549: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:549: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:549: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:549: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:549: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:549: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+Using auto half precision backend
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+2025-11-20 17:00:54,684 - __main__ - INFO - Verified gradient checkpointing remains enabled after Trainer initialization
+2025-11-20 17:00:54,684 - __main__ - INFO - Starting training...
+2025-11-20 17:00:54,685 - __main__ - INFO - Training on 8 GPU(s)
+2025-11-20 17:00:54,691 - __main__ - INFO - Training steps per epoch: 70246
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+2025-11-20 17:00:54,697 - __main__ - INFO - Total training steps: 210738
+2025-11-20 17:00:54,698 - __main__ - INFO - Found existing checkpoint: models/qwen2.5-7b-counsel-chat-8gpu/checkpoint-500
+2025-11-20 17:00:54,698 - __main__ - INFO - Resuming training from checkpoint...
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+Loading model from models/qwen2.5-7b-counsel-chat-8gpu/checkpoint-500.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+2025-11-20 17:00:58,101 - __main__ - ERROR - Training failed with error: CUDA out of memory. Tried to allocate 2.04 GiB. GPU 0 has a total capacity of 10.57 GiB of which 1.33 GiB is free. Process 3382194 has 154.00 MiB memory in use. Process 3382196 has 154.00 MiB memory in use. Process 3382195 has 154.00 MiB memory in use. Process 3382192 has 154.00 MiB memory in use. Process 3382190 has 154.00 MiB memory in use. Process 3382191 has 154.00 MiB memory in use. Including non-PyTorch memory, this process has 8.18 GiB memory in use. Process 3382193 has 154.00 MiB memory in use. Of the allocated memory 7.47 GiB is allocated by PyTorch, and 467.79 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-11-20 17:00:58,101 - __main__ - INFO - Attempting to save emergency checkpoint to models/qwen2.5-7b-counsel-chat-8gpu/emergency_checkpoint
+Saving model checkpoint to models/qwen2.5-7b-counsel-chat-8gpu/emergency_checkpoint
+loading configuration file config.json from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/config.json
+Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151645,
+  "hidden_act": "silu",
+  "hidden_size": 3584,
+  "initializer_range": 0.02,
+  "intermediate_size": 18944,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 32768,
+  "max_window_layers": 28,
+  "model_type": "qwen2",
+  "num_attention_heads": 28,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 4,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": null,
+  "tie_word_embeddings": false,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_sliding_window": false,
+  "vocab_size": 152064
+}
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 843, in <module>
+[rank0]:     main()
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 839, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 684, in train
+[rank0]:     self.trainer.train(resume_from_checkpoint=resume_from_checkpoint)
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2325, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2480, in _inner_training_loop
+[rank0]:     model, self.optimizer = self.accelerator.prepare(self.model, self.optimizer)
+[rank0]:                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1555, in prepare
+[rank0]:     result = tuple(
+[rank0]:              ^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1556, in <genexpr>
+[rank0]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank0]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1398, in _prepare_one
+[rank0]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1817, in prepare_model
+[rank0]:     model = torch.nn.parallel.DistributedDataParallel(
+[rank0]:             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 847, in __init__
+[rank0]:     _sync_module_states(
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/utils.py", line 310, in _sync_module_states
+[rank0]:     _sync_params_and_buffers(process_group, module_states, broadcast_bucket_size, src)
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/utils.py", line 321, in _sync_params_and_buffers
+[rank0]:     dist._broadcast_coalesced(
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.04 GiB. GPU 0 has a total capacity of 10.57 GiB of which 1.33 GiB is free. Process 3382194 has 154.00 MiB memory in use. Process 3382196 has 154.00 MiB memory in use. Process 3382195 has 154.00 MiB memory in use. Process 3382192 has 154.00 MiB memory in use. Process 3382190 has 154.00 MiB memory in use. Process 3382191 has 154.00 MiB memory in use. Including non-PyTorch memory, this process has 8.18 GiB memory in use. Process 3382193 has 154.00 MiB memory in use. Of the allocated memory 7.47 GiB is allocated by PyTorch, and 467.79 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]:[W1120 17:01:00.344116817 ProcessGroupNCCL.cpp:1538] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W1120 17:01:01.833000 3382100 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3382190 closing signal SIGTERM
+W1120 17:01:01.837000 3382100 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3382191 closing signal SIGTERM
+W1120 17:01:01.845000 3382100 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3382192 closing signal SIGTERM
+W1120 17:01:01.846000 3382100 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3382193 closing signal SIGTERM
+W1120 17:01:01.847000 3382100 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3382194 closing signal SIGTERM
+W1120 17:01:01.875000 3382100 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3382195 closing signal SIGTERM
+W1120 17:01:01.891000 3382100 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 3382196 closing signal SIGTERM
+E1120 17:01:03.428000 3382100 torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 1) local_rank: 0 (pid: 3382189) of binary: /research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/python
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/accelerate", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/accelerate_cli.py", line 50, in main
+    args.func(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 1226, in launch_command
+    multi_gpu_launcher(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 853, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 143, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 277, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+scripts/train_qwen_counsel_multi_gpu.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-11-20_17:01:01
+  host      : gpu39.cse.cuhk.edu.hk
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 3382189)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

@@ -1,0 +1,150 @@
+==========================================
+Qwen2.5-7B Multi-GPU Training (8 RTX 2080 Ti)
+==========================================
+Job ID: 518602
+Job Name: 7b_8gpu_train
+Partition: gpu_72h
+Node: gpu38
+CPUs: 30
+GPUs: 8 (RTX 2080 Ti)
+Time Limit: 2 hours
+Start Time: Wed Nov 19 08:56:12 PM HKT 2025
+Working Directory: /research/d7/fyp25/yyyu2/FYP-LLM
+==========================================
+CUDA_HOME: (not set - relying on PyTorch bundled runtimes)
+CUDA version: nvcc not found on PATH
+==========================================
+GPU Information:
+==========================================
+Wed Nov 19 20:56:12 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:1B:00.0 Off |                  N/A |
+| 51%   47C    P8             15W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:1D:00.0 Off |                  N/A |
+| 52%   47C    P8             40W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:1E:00.0 Off |                  N/A |
+| 47%   45C    P8             31W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:3D:00.0 Off |                  N/A |
+| 45%   43C    P8             33W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   4  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:3E:00.0 Off |                  N/A |
+| 49%   45C    P8             43W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   5  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:3F:00.0 Off |                  N/A |
+| 50%   47C    P8             21W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   6  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:40:00.0 Off |                  N/A |
+| 27%   39C    P8             22W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   7  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:41:00.0 Off |                  N/A |
+| 50%   46C    P8             35W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+==========================================
+Environment Information:
+==========================================
+Python version: Python 3.12.12
+PyTorch version: 2.8.0+cu128
+CUDA available: True
+Number of GPUs: 8
+CPU count: 30
+==========================================
+Checking for bitsandbytes...
+bitsandbytes is already installed.
+Checking for accelerate...
+accelerate is already installed.
+==========================================
+Starting multi-GPU training with accelerate...
+Config: configs/config_7b_8gpu.json
+==========================================
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+{'loss': 2.4703, 'grad_norm': 0.7408033609390259, 'learning_rate': 1.0242792109256449e-06, 'epoch': 0.0}
+{'loss': 2.4598, 'grad_norm': 0.7762625217437744, 'learning_rate': 2.16236722306525e-06, 'epoch': 0.0}
+{'loss': 2.4726, 'grad_norm': 0.7862634062767029, 'learning_rate': 3.3004552352048557e-06, 'epoch': 0.01}
+{'loss': 2.4601, 'grad_norm': 0.8141821622848511, 'learning_rate': 4.438543247344461e-06, 'epoch': 0.01}
+{'loss': 2.4259, 'grad_norm': 0.8865377306938171, 'learning_rate': 5.576631259484067e-06, 'epoch': 0.01}
+{'loss': 2.4137, 'grad_norm': 0.9128471612930298, 'learning_rate': 6.714719271623672e-06, 'epoch': 0.01}
+{'loss': 2.3589, 'grad_norm': 0.9029458165168762, 'learning_rate': 7.852807283763277e-06, 'epoch': 0.02}
+{'loss': 2.2943, 'grad_norm': 0.8978495001792908, 'learning_rate': 8.990895295902883e-06, 'epoch': 0.02}
+{'loss': 2.2501, 'grad_norm': 0.8403450846672058, 'learning_rate': 1.0128983308042487e-05, 'epoch': 0.02}
+{'loss': 2.1772, 'grad_norm': 0.777252197265625, 'learning_rate': 1.1267071320182093e-05, 'epoch': 0.02}
+{'eval_loss': 2.206418991088867, 'eval_runtime': 3154.0165, 'eval_samples_per_second': 19.798, 'eval_steps_per_second': 2.475, 'epoch': 0.02}
+{'loss': 2.1118, 'grad_norm': 0.7223317623138428, 'learning_rate': 1.2405159332321699e-05, 'epoch': 0.03}
+{'loss': 2.0167, 'grad_norm': 0.6635800004005432, 'learning_rate': 1.3543247344461303e-05, 'epoch': 0.03}
+{'loss': 1.9665, 'grad_norm': 0.712846577167511, 'learning_rate': 1.468133535660091e-05, 'epoch': 0.03}
+{'loss': 1.886, 'grad_norm': 0.6401062607765198, 'learning_rate': 1.5819423368740512e-05, 'epoch': 0.03}
+{'loss': 1.8001, 'grad_norm': 0.5931368470191956, 'learning_rate': 1.695751138088012e-05, 'epoch': 0.03}
+{'loss': 1.7184, 'grad_norm': 0.5529568791389465, 'learning_rate': 1.8095599393019727e-05, 'epoch': 0.04}
+{'loss': 1.647, 'grad_norm': 0.5673916339874268, 'learning_rate': 1.923368740515933e-05, 'epoch': 0.04}
+{'loss': 1.5765, 'grad_norm': 0.6080886125564575, 'learning_rate': 2.0371775417298935e-05, 'epoch': 0.04}
+{'loss': 1.4633, 'grad_norm': 0.6211625337600708, 'learning_rate': 2.1509863429438543e-05, 'epoch': 0.04}
+{'loss': 1.3521, 'grad_norm': 0.4907059073448181, 'learning_rate': 2.2647951441578147e-05, 'epoch': 0.05}
+{'eval_loss': 1.3540693521499634, 'eval_runtime': 3140.737, 'eval_samples_per_second': 19.882, 'eval_steps_per_second': 2.485, 'epoch': 0.05}
+{'loss': 1.3049, 'grad_norm': 0.3658728003501892, 'learning_rate': 2.378603945371775e-05, 'epoch': 0.05}
+{'loss': 1.2618, 'grad_norm': 0.31214654445648193, 'learning_rate': 2.4924127465857358e-05, 'epoch': 0.05}
+{'loss': 1.2134, 'grad_norm': 0.23864993453025818, 'learning_rate': 2.6062215477996962e-05, 'epoch': 0.05}
+{'loss': 1.2017, 'grad_norm': 0.24425244331359863, 'learning_rate': 2.7200303490136566e-05, 'epoch': 0.05}
+{'loss': 1.171, 'grad_norm': 0.2039554864168167, 'learning_rate': 2.8338391502276174e-05, 'epoch': 0.06}
+{'loss': 1.1656, 'grad_norm': 0.19007597863674164, 'learning_rate': 2.947647951441578e-05, 'epoch': 0.06}
+{'loss': 1.149, 'grad_norm': 0.19503529369831085, 'learning_rate': 3.061456752655538e-05, 'epoch': 0.06}
+{'loss': 1.1383, 'grad_norm': 0.2339891642332077, 'learning_rate': 3.1752655538694986e-05, 'epoch': 0.06}
+{'loss': 1.1223, 'grad_norm': 0.18416880071163177, 'learning_rate': 3.28907435508346e-05, 'epoch': 0.07}
+{'loss': 1.1083, 'grad_norm': 0.1967000812292099, 'learning_rate': 3.40288315629742e-05, 'epoch': 0.07}
+{'eval_loss': 1.12246835231781, 'eval_runtime': 3127.8703, 'eval_samples_per_second': 19.963, 'eval_steps_per_second': 2.496, 'epoch': 0.07}
+{'loss': 1.1044, 'grad_norm': 0.2439187914133072, 'learning_rate': 3.5166919575113805e-05, 'epoch': 0.07}
+{'loss': 1.0906, 'grad_norm': 0.201966792345047, 'learning_rate': 3.6305007587253416e-05, 'epoch': 0.07}
+{'loss': 1.0834, 'grad_norm': 0.19132468104362488, 'learning_rate': 3.744309559939302e-05, 'epoch': 0.08}
+{'loss': 1.0787, 'grad_norm': 0.13963216543197632, 'learning_rate': 3.8581183611532624e-05, 'epoch': 0.08}
+{'loss': 1.0739, 'grad_norm': 0.1459357589483261, 'learning_rate': 3.971927162367223e-05, 'epoch': 0.08}
+{'loss': 1.0789, 'grad_norm': 0.1434052586555481, 'learning_rate': 4.085735963581183e-05, 'epoch': 0.08}
+{'loss': 1.0682, 'grad_norm': 0.14988549053668976, 'learning_rate': 4.199544764795144e-05, 'epoch': 0.08}
+{'loss': 1.0633, 'grad_norm': 0.14801453053951263, 'learning_rate': 4.3133535660091047e-05, 'epoch': 0.09}
+{'loss': 1.046, 'grad_norm': 0.19528645277023315, 'learning_rate': 4.427162367223065e-05, 'epoch': 0.09}
+{'loss': 1.0648, 'grad_norm': 0.2023058831691742, 'learning_rate': 4.5409711684370255e-05, 'epoch': 0.09}
+{'eval_loss': 1.0744194984436035, 'eval_runtime': 3104.3771, 'eval_samples_per_second': 20.115, 'eval_steps_per_second': 2.515, 'epoch': 0.09}
+{'loss': 1.0487, 'grad_norm': 0.2018628567457199, 'learning_rate': 4.654779969650986e-05, 'epoch': 0.09}
+{'loss': 1.0497, 'grad_norm': 0.20307807624340057, 'learning_rate': 4.768588770864946e-05, 'epoch': 0.1}
+{'loss': 1.0397, 'grad_norm': 0.14761285483837128, 'learning_rate': 4.8823975720789073e-05, 'epoch': 0.1}
+{'loss': 1.0417, 'grad_norm': 0.2222745269536972, 'learning_rate': 4.996206373292868e-05, 'epoch': 0.1}
+{'loss': 1.0458, 'grad_norm': 0.21077585220336914, 'learning_rate': 5.110015174506828e-05, 'epoch': 0.1}
+{'loss': 1.0347, 'grad_norm': 0.2235080748796463, 'learning_rate': 5.2238239757207886e-05, 'epoch': 0.1}
+{'loss': 1.0392, 'grad_norm': 0.1806132197380066, 'learning_rate': 5.337632776934749e-05, 'epoch': 0.11}
+{'loss': 1.0307, 'grad_norm': 0.19845429062843323, 'learning_rate': 5.4514415781487094e-05, 'epoch': 0.11}
+{'loss': 1.0271, 'grad_norm': 0.21899719536304474, 'learning_rate': 5.56525037936267e-05, 'epoch': 0.11}
+{'loss': 1.0234, 'grad_norm': 0.1867063194513321, 'learning_rate': 5.679059180576631e-05, 'epoch': 0.11}
+{'eval_loss': 1.0438247919082642, 'eval_runtime': 3121.6693, 'eval_samples_per_second': 20.003, 'eval_steps_per_second': 2.501, 'epoch': 0.11}
+==========================================
+End Time: Thu Nov 20 04:05:12 AM HKT 2025
+Training completed!
+==========================================

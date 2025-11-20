@@ -1,0 +1,222 @@
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+The following values were not passed to `accelerate launch` and had defaults used instead:
+		More than one GPU was found, enabling multi-GPU training.
+		If this was unintended please pass in `--num_processes=1`.
+	`--num_machines` was set to a value of `1`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2025-11-19 18:59:54,445 - __main__ - INFO - Logging configured for main process (rank 0, local_rank 0)
+2025-11-19 18:59:54,453 - __main__ - INFO - HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+2025-11-19 18:59:54,453 - __main__ - INFO - TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+2025-11-19 18:59:54,472 - __main__ - INFO - Starting multi-GPU training setup...
+2025-11-19 18:59:54,473 - __main__ - INFO - World size: 8, Rank: 0, Local rank: 0
+2025-11-19 18:59:56,193 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-7B-Instruct
+2025-11-19 18:59:57,574 - __main__ - INFO - Tokenizer loaded. Vocab size: 151665
+2025-11-19 18:59:57,574 - __main__ - INFO - Loading model from Qwen/Qwen2.5-7B-Instruct
+2025-11-19 18:59:57,797 - __main__ - INFO - Number of GPUs available: 8
+2025-11-19 18:59:57,821 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 18:59:57,822 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 18:59:57,822 - __main__ - INFO - GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 18:59:57,822 - __main__ - INFO - GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 18:59:57,822 - __main__ - INFO - GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 18:59:57,822 - __main__ - INFO - GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 18:59:57,822 - __main__ - INFO - GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 18:59:57,822 - __main__ - INFO - GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 18:59:57,822 - __main__ - INFO - Total VRAM across all GPUs: 84.55 GB
+2025-11-19 19:00:01,300 - __main__ - INFO - Using 4-bit quantization with BitsAndBytes
+2025-11-19 19:00:01,300 - __main__ - INFO - Loading model with 4-bit quantization...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+loading configuration file config.json from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/config.json
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151645,
+  "hidden_act": "silu",
+  "hidden_size": 3584,
+  "initializer_range": 0.02,
+  "intermediate_size": 18944,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 32768,
+  "max_window_layers": 28,
+  "model_type": "qwen2",
+  "num_attention_heads": 28,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 4,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": null,
+  "tie_word_embeddings": false,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_sliding_window": false,
+  "vocab_size": 152064
+}
+
+loading weights file model.safetensors from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/model.safetensors.index.json
+Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151645
+}
+
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:31<01:33, 31.06s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:31<01:34, 31.63s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:31<01:33, 31.10s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:30<01:32, 30.95s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:31<01:33, 31.06s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:31<01:33, 31.05s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:31<01:33, 31.20s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:30<01:32, 30.74s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:54<00:53, 26.58s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:54<00:53, 26.62s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:54<00:53, 26.68s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:54<00:53, 26.62s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:54<00:52, 26.49s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:54<00:53, 26.65s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:54<00:53, 26.65s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:55<00:53, 26.88s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:16<00:24, 24.31s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:16<00:24, 24.34s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:16<00:24, 24.35s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:16<00:24, 24.47s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:16<00:24, 24.35s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:16<00:24, 24.37s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:16<00:24, 24.34s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:15<00:24, 24.28s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 20.78s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 22.98s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 20.71s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 22.84s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 20.71s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 22.84s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 20.71s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 20.66s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 22.84s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 22.76s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 20.72s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 22.85s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 20.73s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 22.87s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 20.70s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:31<00:00, 22.81s/it]
+loading configuration file generation_config.json from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/generation_config.json
+Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.05,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+Could not locate the custom_generate/generate.py inside Qwen/Qwen2.5-7B-Instruct.
+2025-11-19 19:01:34,745 - __main__ - INFO - Model loaded with 4-bit quantization on device cuda:0
+2025-11-19 19:01:35,093 - __main__ - INFO - Model prepared for k-bit training
+2025-11-19 19:01:35,094 - __main__ - INFO - Disabled use_cache for BitsAndBytes quantized model
+2025-11-19 19:01:35,619 - __main__ - INFO - Enabling gradient checkpointing for memory savings.
+2025-11-19 19:01:35,631 - __main__ - INFO - Trainable parameters: 2,523,136 / 4,355,495,424 (0.06%)
+2025-11-19 19:01:35,631 - __main__ - INFO - Model loaded and LoRA configured
+2025-11-19 19:01:36,011 - __main__ - INFO - GPU 0 memory after model load: 7.21 GB allocated, 7.65 GB reserved, 10.57 GB total
+2025-11-19 19:01:36,013 - __main__ - INFO - Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+2025-11-19 19:01:41,430 - __main__ - INFO - Dataset loaded. Train: 561962, Val: 62443
+2025-11-19 19:01:41,430 - __main__ - INFO - Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+2025-11-19 19:01:48,369 - __main__ - INFO - Pre-tokenized dataset loaded successfully!
+PyTorch: setting up devices
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+Using auto half precision backend
+2025-11-19 19:01:48,655 - __main__ - INFO - Verified gradient checkpointing remains enabled after Trainer initialization
+2025-11-19 19:01:48,655 - __main__ - INFO - Starting training...
+2025-11-19 19:01:48,655 - __main__ - INFO - Training on 8 GPU(s)
+2025-11-19 19:01:48,661 - __main__ - INFO - Training steps per epoch: 70246
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+2025-11-19 19:01:48,667 - __main__ - INFO - Total training steps: 210738
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+***** Running training *****
+  Num examples = 561,962
+  Num Epochs = 3
+  Instantaneous batch size per device = 1
+  Total train batch size (w. parallel, distributed & accumulation) = 128
+  Gradient Accumulation steps = 16
+  Total optimization steps = 13,173
+  Number of trainable parameters = 2,523,136
+  0%|          | 0/13173 [00:00<?, ?it/s]  0%|          | 1/13173 [00:16<61:34:02, 16.83s/it]  0%|          | 2/13173 [00:33<61:51:06, 16.91s/it]  0%|          | 3/13173 [00:50<60:58:09, 16.67s/it]  0%|          | 4/13173 [01:07<62:27:22, 17.07s/it]  0%|          | 5/13173 [01:25<62:41:13, 17.14s/it]  0%|          | 6/13173 [01:42<63:23:11, 17.33s/it]  0%|          | 7/13173 [02:02<65:45:26, 17.98s/it]  0%|          | 8/13173 [02:22<68:53:00, 18.84s/it]  0%|          | 9/13173 [02:42<69:25:13, 18.98s/it]  0%|          | 10/13173 [03:01<69:41:32, 19.06s/it]                                                       0%|          | 10/13173 [03:01<69:41:32, 19.06s/it]  0%|          | 11/13173 [03:22<71:42:20, 19.61s/it]  0%|          | 12/13173 [03:41<71:21:13, 19.52s/it]  0%|          | 13/13173 [03:59<69:55:55, 19.13s/it]  0%|          | 14/13173 [04:19<70:11:14, 19.20s/it]  0%|          | 15/13173 [04:38<70:00:16, 19.15s/it]  0%|          | 16/13173 [04:57<69:58:40, 19.15s/it]  0%|          | 17/13173 [05:16<69:33:44, 19.04s/it]  0%|          | 18/13173 [05:34<69:12:58, 18.94s/it]  0%|          | 19/13173 [05:53<68:54:20, 18.86s/it]  0%|          | 20/13173 [06:12<69:09:04, 18.93s/it]                                                       0%|          | 20/13173 [06:12<69:09:04, 18.93s/it]  0%|          | 21/13173 [06:31<69:34:45, 19.05s/it]  0%|          | 22/13173 [06:50<68:56:34, 18.87s/it]  0%|          | 23/13173 [07:08<68:33:14, 18.77s/it]  0%|          | 24/13173 [07:28<69:29:34, 19.03s/it]  0%|          | 25/13173 [07:47<69:14:14, 18.96s/it]  0%|          | 26/13173 [08:06<69:02:35, 18.91s/it]  0%|          | 27/13173 [08:25<69:07:13, 18.93s/it]  0%|          | 28/13173 [08:42<67:36:38, 18.52s/it]  0%|          | 29/13173 [09:02<68:44:24, 18.83s/it]  0%|          | 30/13173 [09:20<68:27:17, 18.75s/it]                                                       0%|          | 30/13173 [09:20<68:27:17, 18.75s/it]  0%|          | 31/13173 [09:39<68:37:47, 18.80s/it]  0%|          | 32/13173 [09:59<69:34:26, 19.06s/it]  0%|          | 33/13173 [10:18<69:27:21, 19.03s/it]  0%|          | 34/13173 [10:38<70:45:58, 19.39s/it]  0%|          | 35/13173 [10:56<69:17:27, 18.99s/it]  0%|          | 36/13173 [11:15<69:41:49, 19.10s/it]  0%|          | 37/13173 [11:34<69:31:09, 19.05s/it]  0%|          | 38/13173 [11:54<70:08:49, 19.23s/it]  0%|          | 39/13173 [12:13<70:27:07, 19.31s/it]  0%|          | 40/13173 [12:33<70:51:25, 19.42s/it]                                                       0%|          | 40/13173 [12:33<70:51:25, 19.42s/it]  0%|          | 41/13173 [12:52<70:17:44, 19.27s/it]  0%|          | 42/13173 [13:11<69:41:10, 19.11s/it]  0%|          | 43/13173 [13:30<70:02:23, 19.20s/it]  0%|          | 44/13173 [13:49<69:31:34, 19.06s/it]  0%|          | 45/13173 [14:08<69:41:18, 19.11s/it]  0%|          | 46/13173 [14:27<69:50:45, 19.15s/it]  0%|          | 47/13173 [14:46<69:36:27, 19.09s/it]  0%|          | 48/13173 [15:05<69:23:42, 19.03s/it]  0%|          | 49/13173 [15:25<69:54:14, 19.18s/it]  0%|          | 50/13173 [15:44<69:25:02, 19.04s/it]                                                       0%|          | 50/13173 [15:44<69:25:02, 19.04s/it]  0%|          | 51/13173 [16:02<68:44:33, 18.86s/it]  0%|          | 52/13173 [16:21<68:26:15, 18.78s/it]  0%|          | 53/13173 [16:40<69:01:08, 18.94s/it]  0%|          | 54/13173 [17:00<70:07:05, 19.24s/it]  0%|          | 55/13173 [17:19<70:12:59, 19.27s/it]  0%|          | 56/13173 [17:38<69:36:52, 19.11s/it]  0%|          | 57/13173 [17:58<70:32:17, 19.36s/it]  0%|          | 58/13173 [18:16<69:07:52, 18.98s/it]  0%|          | 59/13173 [18:33<67:34:57, 18.55s/it]  0%|          | 60/13173 [18:52<67:39:45, 18.58s/it]                                                       0%|          | 60/13173 [18:52<67:39:45, 18.58s/it]  0%|          | 61/13173 [19:11<67:48:33, 18.62s/it]  0%|          | 62/13173 [19:29<67:50:57, 18.63s/it]  0%|          | 63/13173 [19:48<68:04:05, 18.69s/it]  0%|          | 64/13173 [20:08<69:21:24, 19.05s/it]  0%|          | 65/13173 [20:28<69:45:06, 19.16s/it]  1%|          | 66/13173 [20:47<69:38:32, 19.13s/it]  1%|          | 67/13173 [21:06<69:33:33, 19.11s/it]  1%|          | 68/13173 [21:25<69:16:53, 19.03s/it]  1%|          | 69/13173 [21:43<69:04:40, 18.98s/it]  1%|          | 70/13173 [22:04<70:34:46, 19.39s/it]                                                       1%|          | 70/13173 [22:04<70:34:46, 19.39s/it]  1%|          | 71/13173 [22:23<70:51:29, 19.47s/it]  1%|          | 72/13173 [22:42<70:01:43, 19.24s/it]  1%|          | 73/13173 [23:01<69:48:05, 19.18s/it]  1%|          | 74/13173 [23:21<70:24:41, 19.35s/it]  1%|          | 75/13173 [23:40<69:59:51, 19.24s/it]  1%|          | 76/13173 [23:59<69:30:04, 19.10s/it]  1%|          | 77/13173 [24:17<68:47:03, 18.91s/it]  1%|          | 78/13173 [24:37<69:57:35, 19.23s/it]  1%|          | 79/13173 [24:57<70:12:53, 19.30s/it]  1%|          | 80/13173 [25:17<71:11:49, 19.58s/it]                                                       1%|          | 80/13173 [25:17<71:11:49, 19.58s/it]  1%|          | 81/13173 [25:36<70:23:50, 19.36s/it]  1%|          | 82/13173 [25:54<68:45:07, 18.91s/it]  1%|          | 83/13173 [26:13<69:49:04, 19.20s/it]  1%|          | 84/13173 [26:32<68:38:17, 18.88s/it]  1%|          | 85/13173 [26:51<69:12:42, 19.04s/it]  1%|          | 86/13173 [27:10<69:14:07, 19.05s/it]  1%|          | 87/13173 [27:30<70:14:23, 19.32s/it]  1%|          | 88/13173 [27:49<69:56:03, 19.24s/it]  1%|          | 89/13173 [28:09<70:18:08, 19.34s/it]  1%|          | 90/13173 [28:28<70:52:04, 19.50s/it]                                                       1%|          | 90/13173 [28:28<70:52:04, 19.50s/it]  1%|          | 91/13173 [28:47<70:13:14, 19.32s/it]  1%|          | 92/13173 [29:06<69:32:06, 19.14s/it]  1%|          | 93/13173 [29:26<70:16:50, 19.34s/it]  1%|          | 94/13173 [29:45<69:54:12, 19.24s/it]  1%|          | 95/13173 [30:04<69:22:58, 19.10s/it]  1%|          | 96/13173 [30:23<69:28:09, 19.12s/it]  1%|          | 97/13173 [30:42<69:35:13, 19.16s/it]  1%|          | 98/13173 [31:01<69:48:41, 19.22s/it]  1%|          | 99/13173 [31:20<68:47:45, 18.94s/it]  1%|          | 100/13173 [31:39<69:10:40, 19.05s/it]                                                        1%|          | 100/13173 [31:39<69:10:40, 19.05s/it]
+***** Running Evaluation *****
+  Num examples = 62443
+  Batch size = 1
+Traceback (most recent call last):
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/queues.py", line 264, in _feed
+    obj = _ForkingPickler.dumps(obj)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/reduction.py", line 51, in dumps
+    cls(buf, protocol).dump(obj)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/multiprocessing/reductions.py", line 619, in reduce_storage
+    df = multiprocessing.reduction.DupFd(fd)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/reduction.py", line 198, in DupFd
+    return resource_sharer.DupFd(fd)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/resource_sharer.py", line 53, in __init__
+    self._id = _resource_sharer.register(send, close)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/resource_sharer.py", line 76, in register
+    self._start()
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/resource_sharer.py", line 130, in _start
+    t.start()
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/threading.py", line 994, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+
+  0%|          | 0/7806 [00:00<?, ?it/s][A
+  0%|          | 2/7806 [00:00<36:47,  3.53it/s][Aslurmstepd: error: *** JOB 518589 ON gpu38 CANCELLED AT 2025-11-19T19:53:42 ***

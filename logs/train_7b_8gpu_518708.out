@@ -1,0 +1,87 @@
+==========================================
+Qwen2.5-7B Multi-GPU Training (8 RTX 2080 Ti)
+==========================================
+Job ID: 518708
+Job Name: 7b_8gpu_train
+Partition: gpu_72h
+Node: gpu38
+CPUs: 30
+GPUs: 8 (RTX 2080 Ti)
+Time Limit: 2 hours
+Start Time: Thu Nov 20 04:55:49 PM HKT 2025
+Working Directory: /research/d7/fyp25/yyyu2/FYP-LLM
+==========================================
+CUDA_HOME: (not set - relying on PyTorch bundled runtimes)
+CUDA version: nvcc not found on PATH
+==========================================
+GPU Information:
+==========================================
+Thu Nov 20 16:55:49 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:1A:00.0 Off |                  N/A |
+| 27%   24C    P8             20W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:1B:00.0 Off |                  N/A |
+| 27%   27C    P8              7W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:1C:00.0 Off |                  N/A |
+| 27%   26C    P8             22W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:1D:00.0 Off |                  N/A |
+| 27%   33C    P8             33W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   4  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:1E:00.0 Off |                  N/A |
+| 27%   32C    P8             27W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   5  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:3D:00.0 Off |                  N/A |
+| 27%   30C    P8             27W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   6  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:3E:00.0 Off |                  N/A |
+| 27%   32C    P8             36W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   7  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:3F:00.0 Off |                  N/A |
+| 27%   31C    P8             20W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+==========================================
+Environment Information:
+==========================================
+Python version: Python 3.12.12
+PyTorch version: 2.8.0+cu128
+CUDA available: False
+Number of GPUs: 8
+CPU count: 30
+==========================================
+Checking for bitsandbytes...
+bitsandbytes is already installed.
+Checking for accelerate...
+accelerate is already installed.
+==========================================
+Starting multi-GPU training with accelerate...
+Config: configs/config_7b_8gpu.json
+==========================================
+==========================================
+End Time: Thu Nov 20 04:57:04 PM HKT 2025
+Training completed!
+==========================================

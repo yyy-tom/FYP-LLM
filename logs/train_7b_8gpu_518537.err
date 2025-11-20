@@ -1,0 +1,326 @@
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+The following values were not passed to `accelerate launch` and had defaults used instead:
+		More than one GPU was found, enabling multi-GPU training.
+		If this was unintended please pass in `--num_processes=1`.
+	`--num_machines` was set to a value of `1`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2025-11-19 08:35:45,436 - __main__ - INFO - Logging configured for main process (rank 0, local_rank 0)
+2025-11-19 08:35:45,440 - __main__ - INFO - HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+2025-11-19 08:35:45,440 - __main__ - INFO - TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+2025-11-19 08:35:45,445 - __main__ - INFO - Starting multi-GPU training setup...
+2025-11-19 08:35:45,445 - __main__ - INFO - World size: 8, Rank: 0, Local rank: 0
+2025-11-19 08:35:47,163 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-7B-Instruct
+2025-11-19 08:35:48,230 - __main__ - INFO - Tokenizer loaded. Vocab size: 151665
+2025-11-19 08:35:48,230 - __main__ - INFO - Loading model from Qwen/Qwen2.5-7B-Instruct
+2025-11-19 08:35:48,495 - __main__ - INFO - Number of GPUs available: 8
+2025-11-19 08:35:48,524 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 08:35:48,524 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 08:35:48,524 - __main__ - INFO - GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 08:35:48,524 - __main__ - INFO - GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 08:35:48,524 - __main__ - INFO - GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 08:35:48,524 - __main__ - INFO - GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 08:35:48,524 - __main__ - INFO - GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 08:35:48,524 - __main__ - INFO - GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-19 08:35:48,524 - __main__ - INFO - Total VRAM across all GPUs: 84.55 GB
+2025-11-19 08:35:52,200 - __main__ - INFO - Using 4-bit quantization with BitsAndBytes
+2025-11-19 08:35:52,200 - __main__ - INFO - Loading model with 4-bit quantization...
+loading configuration file config.json from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/config.json
+`torch_dtype` is deprecated! Use `dtype` instead!
+Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151645,
+  "hidden_act": "silu",
+  "hidden_size": 3584,
+  "initializer_range": 0.02,
+  "intermediate_size": 18944,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 32768,
+  "max_window_layers": 28,
+  "model_type": "qwen2",
+  "num_attention_heads": 28,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 4,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": null,
+  "tie_word_embeddings": false,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_sliding_window": false,
+  "vocab_size": 152064
+}
+
+loading weights file model.safetensors from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/model.safetensors.index.json
+Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151645
+}
+
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:13<00:40, 13.49s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:13<00:39, 13.03s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:13<00:39, 13.02s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:11<00:35, 11.92s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:12<00:38, 12.96s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:13<00:40, 13.55s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:13<00:39, 13.08s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:12<00:38, 12.99s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:28<00:28, 14.19s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:27<00:27, 14.00s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:27<00:27, 13.96s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:28<00:28, 14.17s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:26<00:27, 13.53s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:27<00:27, 13.98s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:27<00:27, 13.95s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:27<00:27, 13.98s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:42<00:14, 14.36s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:41<00:14, 14.10s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:42<00:14, 14.34s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:42<00:14, 14.45s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:42<00:14, 14.46s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:42<00:14, 14.33s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:42<00:14, 14.35s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:42<00:14, 14.34s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:54<00:00, 13.52s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:54<00:00, 13.53s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:54<00:00, 13.68s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [00:54<00:00, 13.67s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [00:53<00:00, 13.38s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:54<00:00, 13.54s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:55<00:00, 13.59s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:53<00:00, 13.41s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [00:54<00:00, 13.70s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [00:55<00:00, 13.80s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [00:55<00:00, 13.60s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:54<00:00, 13.53s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:55<00:00, 13.81s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [00:54<00:00, 13.68s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [00:54<00:00, 13.52s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:54<00:00, 13.67s/it]
+loading configuration file generation_config.json from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/generation_config.json
+Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.05,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+Could not locate the custom_generate/generate.py inside Qwen/Qwen2.5-7B-Instruct.
+2025-11-19 08:36:49,106 - __main__ - INFO - Model loaded with 4-bit quantization on device cuda:0
+2025-11-19 08:36:49,431 - __main__ - INFO - Model prepared for k-bit training
+2025-11-19 08:36:49,431 - __main__ - INFO - Disabled use_cache for BitsAndBytes quantized model
+2025-11-19 08:36:49,977 - __main__ - INFO - Enabling gradient checkpointing for memory savings.
+2025-11-19 08:36:49,993 - __main__ - INFO - Trainable parameters: 2,523,136 / 4,355,495,424 (0.06%)
+2025-11-19 08:36:49,993 - __main__ - INFO - Model loaded and LoRA configured
+2025-11-19 08:36:50,347 - __main__ - INFO - GPU 0 memory after model load: 7.21 GB allocated, 7.65 GB reserved, 10.57 GB total
+2025-11-19 08:36:50,348 - __main__ - INFO - Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+2025-11-19 08:36:53,944 - __main__ - INFO - Dataset loaded. Train: 561962, Val: 62443
+2025-11-19 08:36:53,944 - __main__ - INFO - Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+2025-11-19 08:36:57,739 - __main__ - INFO - Pre-tokenized dataset loaded successfully!
+PyTorch: setting up devices
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:525: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+Using auto half precision backend
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+2025-11-19 08:36:58,054 - __main__ - INFO - Verified gradient checkpointing remains enabled after Trainer initialization
+2025-11-19 08:36:58,054 - __main__ - INFO - Starting training...
+2025-11-19 08:36:58,054 - __main__ - INFO - Training on 8 GPU(s)
+2025-11-19 08:36:58,062 - __main__ - INFO - Training steps per epoch: 70246
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+2025-11-19 08:36:58,071 - __main__ - INFO - Total training steps: 210738
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+***** Running training *****
+  Num examples = 561,962
+  Num Epochs = 3
+  Instantaneous batch size per device = 1
+  Total train batch size (w. parallel, distributed & accumulation) = 128
+  Gradient Accumulation steps = 16
+  Total optimization steps = 13,173
+  Number of trainable parameters = 2,523,136
+  0%|          | 0/13173 [00:00<?, ?it/s]  0%|          | 1/13173 [00:16<60:54:58, 16.65s/it]  0%|          | 2/13173 [00:33<61:48:14, 16.89s/it]  0%|          | 3/13173 [00:50<61:25:34, 16.79s/it]  0%|          | 4/13173 [01:09<64:34:45, 17.65s/it]  0%|          | 5/13173 [01:27<65:38:32, 17.95s/it]  0%|          | 6/13173 [01:47<68:12:43, 18.65s/it]  0%|          | 7/13173 [02:07<69:58:41, 19.13s/it]  0%|          | 8/13173 [02:29<72:17:29, 19.77s/it]  0%|          | 9/13173 [02:48<72:15:49, 19.76s/it]  0%|          | 10/13173 [03:08<72:24:41, 19.80s/it]                                                       0%|          | 10/13173 [03:08<72:24:41, 19.80s/it]  0%|          | 11/13173 [03:30<74:36:32, 20.41s/it]  0%|          | 12/13173 [03:50<74:24:12, 20.35s/it]  0%|          | 13/13173 [04:09<72:43:44, 19.90s/it]  0%|          | 14/13173 [04:29<72:52:20, 19.94s/it]  0%|          | 15/13173 [04:49<72:26:30, 19.82s/it]  0%|          | 16/13173 [05:08<72:12:55, 19.76s/it]  0%|          | 17/13173 [05:28<71:42:20, 19.62s/it]  0%|          | 18/13173 [05:47<71:31:02, 19.57s/it]  0%|          | 19/13173 [06:06<70:33:37, 19.31s/it]  0%|          | 20/13173 [06:26<71:07:29, 19.47s/it]                                                       0%|          | 20/13173 [06:26<71:07:29, 19.47s/it]  0%|          | 21/13173 [06:46<72:03:46, 19.73s/it]  0%|          | 22/13173 [07:05<71:24:57, 19.55s/it]  0%|          | 23/13173 [07:25<71:26:36, 19.56s/it]  0%|          | 24/13173 [07:45<72:10:34, 19.76s/it]  0%|          | 25/13173 [08:04<71:53:13, 19.68s/it]  0%|          | 26/13173 [08:24<72:01:33, 19.72s/it]  0%|          | 27/13173 [08:44<72:23:54, 19.83s/it]  0%|          | 28/13173 [09:03<71:11:07, 19.50s/it]  0%|          | 29/13173 [09:23<71:36:01, 19.61s/it]  0%|          | 30/13173 [09:43<72:07:41, 19.76s/it]                                                       0%|          | 30/13173 [09:43<72:07:41, 19.76s/it]  0%|          | 31/13173 [10:03<72:43:54, 19.92s/it]  0%|          | 32/13173 [10:24<73:14:53, 20.07s/it]  0%|          | 33/13173 [10:43<72:53:26, 19.97s/it]  0%|          | 34/13173 [11:05<74:12:33, 20.33s/it]  0%|          | 35/13173 [11:24<73:41:06, 20.19s/it]  0%|          | 36/13173 [11:45<74:10:01, 20.32s/it]  0%|          | 37/13173 [12:04<73:05:59, 20.03s/it]  0%|          | 38/13173 [12:26<74:46:21, 20.49s/it]  0%|          | 39/13173 [12:46<74:27:54, 20.41s/it]  0%|          | 40/13173 [13:06<74:12:55, 20.34s/it]                                                       0%|          | 40/13173 [13:06<74:12:55, 20.34s/it]  0%|          | 41/13173 [13:26<73:22:50, 20.12s/it]  0%|          | 42/13173 [13:46<73:23:07, 20.12s/it]  0%|          | 43/13173 [14:06<73:04:13, 20.03s/it]  0%|          | 44/13173 [14:26<72:56:15, 20.00s/it]  0%|          | 45/13173 [14:46<73:28:44, 20.15s/it]  0%|          | 46/13173 [15:07<74:15:55, 20.37s/it]  0%|          | 47/13173 [15:27<73:13:55, 20.08s/it]  0%|          | 48/13173 [15:47<73:31:11, 20.17s/it]  0%|          | 49/13173 [16:07<73:39:59, 20.21s/it]  0%|          | 50/13173 [16:28<74:00:53, 20.30s/it]                                                       0%|          | 50/13173 [16:28<74:00:53, 20.30s/it]  0%|          | 51/13173 [16:47<73:01:13, 20.03s/it]  0%|          | 52/13173 [17:07<72:28:21, 19.88s/it]  0%|          | 53/13173 [17:28<73:43:24, 20.23s/it]  0%|          | 54/13173 [17:49<74:58:35, 20.57s/it]  0%|          | 55/13173 [18:09<73:53:04, 20.28s/it]  0%|          | 56/13173 [18:29<74:00:31, 20.31s/it]  0%|          | 57/13173 [18:50<74:14:00, 20.38s/it]  0%|          | 58/13173 [19:08<72:20:48, 19.86s/it]  0%|          | 59/13173 [19:28<71:46:18, 19.70s/it]  0%|          | 60/13173 [19:47<70:58:10, 19.48s/it]                                                       0%|          | 60/13173 [19:47<70:58:10, 19.48s/it]  0%|          | 61/13173 [20:06<71:00:03, 19.49s/it]  0%|          | 62/13173 [20:26<71:53:01, 19.74s/it]  0%|          | 63/13173 [20:47<72:21:07, 19.87s/it]  0%|          | 64/13173 [21:08<74:17:08, 20.40s/it]  0%|          | 65/13173 [21:29<74:51:40, 20.56s/it]  1%|          | 66/13173 [21:50<74:47:47, 20.54s/it]  1%|          | 67/13173 [22:10<74:41:43, 20.52s/it]  1%|          | 68/13173 [22:31<74:29:30, 20.46s/it]  1%|          | 69/13173 [22:50<73:45:28, 20.26s/it]  1%|          | 70/13173 [23:11<74:29:44, 20.47s/it]                                                       1%|          | 70/13173 [23:11<74:29:44, 20.47s/it]  1%|          | 71/13173 [23:32<74:22:27, 20.44s/it]  1%|          | 72/13173 [23:52<73:57:00, 20.32s/it]  1%|          | 73/13173 [24:12<74:25:20, 20.45s/it]  1%|          | 74/13173 [24:33<74:36:40, 20.51s/it]  1%|          | 75/13173 [24:54<74:53:01, 20.58s/it]  1%|          | 76/13173 [25:14<74:29:33, 20.48s/it]  1%|          | 77/13173 [25:34<73:47:39, 20.29s/it]  1%|          | 78/13173 [25:55<75:11:53, 20.67s/it]  1%|          | 79/13173 [26:16<75:29:33, 20.76s/it]  1%|          | 80/13173 [26:38<76:42:29, 21.09s/it]                                                       1%|          | 80/13173 [26:38<76:42:29, 21.09s/it]  1%|          | 81/13173 [26:58<74:54:20, 20.60s/it]  1%|          | 82/13173 [27:17<73:39:10, 20.25s/it]  1%|          | 83/13173 [27:38<73:51:44, 20.31s/it]  1%|          | 84/13173 [27:57<72:43:01, 20.00s/it]  1%|          | 85/13173 [28:18<73:44:25, 20.28s/it]  1%|          | 86/13173 [28:38<73:02:41, 20.09s/it]  1%|          | 87/13173 [28:58<73:26:14, 20.20s/it]  1%|          | 88/13173 [29:18<73:23:44, 20.19s/it]  1%|          | 89/13173 [29:39<73:58:39, 20.35s/it]  1%|          | 90/13173 [29:59<74:02:15, 20.37s/it]                                                       1%|          | 90/13173 [29:59<74:02:15, 20.37s/it]  1%|          | 91/13173 [30:20<74:35:15, 20.53s/it]  1%|          | 92/13173 [30:40<73:22:32, 20.19s/it]  1%|          | 93/13173 [31:01<75:04:59, 20.67s/it]  1%|          | 94/13173 [31:22<75:01:12, 20.65s/it]  1%|          | 95/13173 [31:42<74:42:51, 20.57s/it]  1%|          | 96/13173 [32:03<74:52:33, 20.61s/it]  1%|          | 97/13173 [32:24<74:57:28, 20.64s/it]  1%|          | 98/13173 [32:44<74:36:52, 20.54s/it]  1%|          | 99/13173 [33:03<73:20:55, 20.20s/it]  1%|          | 100/13173 [33:24<73:22:20, 20.21s/it]                                                        1%|          | 100/13173 [33:24<73:22:20, 20.21s/it]
+***** Running Evaluation *****
+  Num examples = 62443
+  Batch size = 1
+Traceback (most recent call last):
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/queues.py", line 264, in _feed
+    obj = _ForkingPickler.dumps(obj)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/reduction.py", line 51, in dumps
+    cls(buf, protocol).dump(obj)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/multiprocessing/reductions.py", line 619, in reduce_storage
+    df = multiprocessing.reduction.DupFd(fd)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/reduction.py", line 198, in DupFd
+    return resource_sharer.DupFd(fd)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/resource_sharer.py", line 53, in __init__
+    self._id = _resource_sharer.register(send, close)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/resource_sharer.py", line 76, in register
+    self._start()
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/multiprocessing/resource_sharer.py", line 130, in _start
+    t.start()
+  File "/uac/y22/yyyu2/.local/share/uv/python/cpython-3.12.12-linux-x86_64-gnu/lib/python3.12/threading.py", line 994, in start
+    _start_new_thread(self._bootstrap, ())
+RuntimeError: can't start new thread
+
+  0%|          | 0/7806 [00:00<?, ?it/s][A
+  0%|          | 2/7806 [00:00<36:17,  3.58it/s][A[rank0]:[E1119 09:40:27.924379514 ProcessGroupNCCL.cpp:685] [Rank 0] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=443, OpType=_ALLGATHER_BASE, NumelIn=1, NumelOut=8, Timeout(ms)=1800000) ran for 1800008 milliseconds before timing out.
+[rank5]:[E1119 09:40:27.926063893 ProcessGroupNCCL.cpp:685] [Rank 5] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=443, OpType=_ALLGATHER_BASE, NumelIn=1, NumelOut=8, Timeout(ms)=1800000) ran for 1800010 milliseconds before timing out.
+[rank0]:[E1119 09:40:27.929868397 ProcessGroupNCCL.cpp:2252] [PG ID 0 PG GUID 0(default_pg) Rank 0]  failure detected by watchdog at work sequence id: 443 PG status: last enqueued work: 443, last completed work: 442
+[rank0]:[E1119 09:40:27.929924643 ProcessGroupNCCL.cpp:732] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank5]:[E1119 09:40:27.929894067 ProcessGroupNCCL.cpp:2252] [PG ID 0 PG GUID 0(default_pg) Rank 5]  failure detected by watchdog at work sequence id: 443 PG status: last enqueued work: 443, last completed work: 442
+[rank5]:[E1119 09:40:27.929946117 ProcessGroupNCCL.cpp:732] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank0]:[E1119 09:40:27.929981088 ProcessGroupNCCL.cpp:2584] [PG ID 0 PG GUID 0(default_pg) Rank 0] First PG on this rank to signal dumping.
+[rank5]:[E1119 09:40:27.930016740 ProcessGroupNCCL.cpp:2584] [PG ID 0 PG GUID 0(default_pg) Rank 5] First PG on this rank to signal dumping.
+[rank2]:[E1119 09:40:27.941095465 ProcessGroupNCCL.cpp:685] [Rank 2] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=443, OpType=_ALLGATHER_BASE, NumelIn=1, NumelOut=8, Timeout(ms)=1800000) ran for 1800025 milliseconds before timing out.
+[rank2]:[E1119 09:40:27.941307318 ProcessGroupNCCL.cpp:2252] [PG ID 0 PG GUID 0(default_pg) Rank 2]  failure detected by watchdog at work sequence id: 443 PG status: last enqueued work: 443, last completed work: 442
+[rank2]:[E1119 09:40:27.941351775 ProcessGroupNCCL.cpp:732] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank2]:[E1119 09:40:27.941460790 ProcessGroupNCCL.cpp:2584] [PG ID 0 PG GUID 0(default_pg) Rank 2] First PG on this rank to signal dumping.
+[rank1]:[E1119 09:40:28.955945173 ProcessGroupNCCL.cpp:685] [Rank 1] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=443, OpType=_ALLGATHER_BASE, NumelIn=1, NumelOut=8, Timeout(ms)=1800000) ran for 1800039 milliseconds before timing out.
+[rank1]:[E1119 09:40:28.956328492 ProcessGroupNCCL.cpp:2252] [PG ID 0 PG GUID 0(default_pg) Rank 1]  failure detected by watchdog at work sequence id: 443 PG status: last enqueued work: 443, last completed work: 442
+[rank1]:[E1119 09:40:28.956392352 ProcessGroupNCCL.cpp:732] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank1]:[E1119 09:40:28.956549349 ProcessGroupNCCL.cpp:2584] [PG ID 0 PG GUID 0(default_pg) Rank 1] First PG on this rank to signal dumping.
+[rank7]:[E1119 09:40:28.006927603 ProcessGroupNCCL.cpp:685] [Rank 7] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=443, OpType=_ALLGATHER_BASE, NumelIn=1, NumelOut=8, Timeout(ms)=1800000) ran for 1800090 milliseconds before timing out.
+[rank7]:[E1119 09:40:28.007244621 ProcessGroupNCCL.cpp:2252] [PG ID 0 PG GUID 0(default_pg) Rank 7]  failure detected by watchdog at work sequence id: 443 PG status: last enqueued work: 443, last completed work: 442
+[rank7]:[E1119 09:40:28.007293666 ProcessGroupNCCL.cpp:732] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank7]:[E1119 09:40:28.007403552 ProcessGroupNCCL.cpp:2584] [PG ID 0 PG GUID 0(default_pg) Rank 7] First PG on this rank to signal dumping.
+[rank4]:[E1119 09:40:28.008901239 ProcessGroupNCCL.cpp:685] [Rank 4] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=443, OpType=_ALLGATHER_BASE, NumelIn=1, NumelOut=8, Timeout(ms)=1800000) ran for 1800092 milliseconds before timing out.
+[rank4]:[E1119 09:40:28.009154642 ProcessGroupNCCL.cpp:2252] [PG ID 0 PG GUID 0(default_pg) Rank 4]  failure detected by watchdog at work sequence id: 443 PG status: last enqueued work: 443, last completed work: 442
+[rank4]:[E1119 09:40:28.009209958 ProcessGroupNCCL.cpp:732] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank4]:[E1119 09:40:28.009306139 ProcessGroupNCCL.cpp:2584] [PG ID 0 PG GUID 0(default_pg) Rank 4] First PG on this rank to signal dumping.
+[rank3]:[E1119 09:40:28.010343927 ProcessGroupNCCL.cpp:685] [Rank 3] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=443, OpType=_ALLGATHER_BASE, NumelIn=1, NumelOut=8, Timeout(ms)=1800000) ran for 1800094 milliseconds before timing out.
+[rank3]:[E1119 09:40:28.010535563 ProcessGroupNCCL.cpp:2252] [PG ID 0 PG GUID 0(default_pg) Rank 3]  failure detected by watchdog at work sequence id: 443 PG status: last enqueued work: 443, last completed work: 442
+[rank3]:[E1119 09:40:28.010563601 ProcessGroupNCCL.cpp:732] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank3]:[E1119 09:40:28.010614079 ProcessGroupNCCL.cpp:2584] [PG ID 0 PG GUID 0(default_pg) Rank 3] First PG on this rank to signal dumping.
+[rank6]:[E1119 09:40:28.648426376 ProcessGroupNCCL.cpp:1806] [PG ID 0 PG GUID 0(default_pg) Rank 6] Observed flight recorder dump signal from another rank via TCPStore.
+[rank6]:[E1119 09:40:28.648629088 ProcessGroupNCCL.cpp:1870] [PG ID 0 PG GUID 0(default_pg) Rank 6] Received a dump signal due to a collective timeout from  rank 3 and we will try our best to dump the debug info. Last enqueued NCCL work: 442, last completed NCCL work: 442.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+terminate called after throwing an instance of 'std::system_error'
+  what():  Resource temporarily unavailable
+[rank4]:[E1119 09:40:28.669454716 ProcessGroupNCCL.cpp:1870] [PG ID 0 PG GUID 0(default_pg) Rank 4] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: 443, last completed NCCL work: 442.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+terminate called after throwing an instance of 'std::system_error'
+  what():  Resource temporarily unavailable
+[rank1]:[E1119 09:40:28.698314628 ProcessGroupNCCL.cpp:1870] [PG ID 0 PG GUID 0(default_pg) Rank 1] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: 443, last completed NCCL work: 442.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank5]:[E1119 09:40:28.698454073 ProcessGroupNCCL.cpp:1870] [PG ID 0 PG GUID 0(default_pg) Rank 5] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: 443, last completed NCCL work: 442.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank2]:[E1119 09:40:28.698501709 ProcessGroupNCCL.cpp:1870] [PG ID 0 PG GUID 0(default_pg) Rank 2] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: 443, last completed NCCL work: 442.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+terminate called after throwing an instance of 'std::system_error'
+  what():  Resource temporarily unavailable
+[rank7]:[E1119 09:40:28.698644728 ProcessGroupNCCL.cpp:1870] [PG ID 0 PG GUID 0(default_pg) Rank 7] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: 443, last completed NCCL work: 442.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+terminate called after throwing an instance of 'std::system_errorterminate called after throwing an instance of ''
+std::system_error'
+  what():  Resource temporarily unavailable
+  what():  Resource temporarily unavailable
+terminate called after throwing an instance of 'std::system_error'
+  what():  Resource temporarily unavailable
+[rank0]:[E1119 09:40:28.744248807 ProcessGroupNCCL.cpp:1870] [PG ID 0 PG GUID 0(default_pg) Rank 0] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: 443, last completed NCCL work: 442.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank3]:[E1119 09:40:28.744284806 ProcessGroupNCCL.cpp:1870] [PG ID 0 PG GUID 0(default_pg) Rank 3] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: 443, last completed NCCL work: 442.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+terminate called after throwing an instance of 'std::system_error'
+  what():  Resource temporarily unavailable
+terminate called after throwing an instance of 'std::system_error'
+  what():  Resource temporarily unavailable
+W1119 09:40:29.012000 460563 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 460652 closing signal SIGTERM
+W1119 09:40:29.019000 460563 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 460654 closing signal SIGTERM
+W1119 09:40:29.029000 460563 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 460655 closing signal SIGTERM
+W1119 09:40:29.052000 460563 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 460657 closing signal SIGTERM
+W1119 09:40:29.054000 460563 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 460659 closing signal SIGTERM
+E1119 09:40:30.004000 460563 torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: -6) local_rank: 1 (pid: 460653) of binary: /research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/python
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/accelerate", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/accelerate_cli.py", line 50, in main
+    args.func(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 1226, in launch_command
+    multi_gpu_launcher(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 853, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 143, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 277, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+=======================================================
+scripts/train_qwen_counsel_multi_gpu.py FAILED
+-------------------------------------------------------
+Failures:
+[1]:
+  time      : 2025-11-19_09:40:29
+  host      : gpu38
+  rank      : 4 (local_rank: 4)
+  exitcode  : -6 (pid: 460656)
+  error_file: <N/A>
+  traceback : Signal 6 (SIGABRT) received by PID 460656
+[2]:
+  time      : 2025-11-19_09:40:29
+  host      : gpu38
+  rank      : 6 (local_rank: 6)
+  exitcode  : -6 (pid: 460658)
+  error_file: <N/A>
+  traceback : Signal 6 (SIGABRT) received by PID 460658
+-------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-11-19_09:40:29
+  host      : gpu38
+  rank      : 1 (local_rank: 1)
+  exitcode  : -6 (pid: 460653)
+  error_file: <N/A>
+  traceback : Signal 6 (SIGABRT) received by PID 460653
+=======================================================

@@ -1,0 +1,95 @@
+==========================================
+Qwen2.5-7B Multi-GPU Training (8 RTX 2080 Ti)
+==========================================
+Job ID: 518715
+Job Name: 7b_8gpu_train
+Partition: gpu_72h
+Node: gpu39
+CPUs: 30
+GPUs: 8 (RTX 2080 Ti)
+Time Limit: 2 hours
+Start Time: Thu Nov 20 05:14:14 PM HKT 2025
+Working Directory: /research/d7/fyp25/yyyu2/FYP-LLM
+==========================================
+CUDA_HOME: (not set - relying on PyTorch bundled runtimes)
+CUDA version: nvcc not found on PATH
+==========================================
+GPU Information:
+==========================================
+Thu Nov 20 17:14:14 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:52:00.0 Off |                  N/A |
+| 27%   24C    P8             18W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:53:00.0 Off |                  N/A |
+| 27%   23C    P8             11W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:56:00.0 Off |                  N/A |
+| 27%   25C    P8              1W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:57:00.0 Off |                  N/A |
+| 27%   24C    P8             21W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   4  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:CE:00.0 Off |                  N/A |
+| 27%   25C    P8             20W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   5  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:D1:00.0 Off |                  N/A |
+| 27%   27C    P8             10W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   6  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:D2:00.0 Off |                  N/A |
+| 27%   23C    P8              2W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   7  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:D5:00.0 Off |                  N/A |
+| 27%   26C    P8             20W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+==========================================
+Environment Information:
+==========================================
+Python version: Python 3.12.12
+PyTorch version: 2.8.0+cu128
+CUDA available: True
+Number of GPUs: 8
+CPU count: 30
+==========================================
+Checking for bitsandbytes...
+bitsandbytes is already installed.
+Checking for accelerate...
+accelerate is already installed.
+==========================================
+Starting multi-GPU training with accelerate...
+Config: configs/config_7b_8gpu.json
+==========================================
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+{'loss': 2.4703, 'grad_norm': 0.6976239085197449, 'learning_rate': 1.5358361774744026e-06, 'epoch': 0.0}
+{'loss': 2.4587, 'grad_norm': 0.7381218075752258, 'learning_rate': 3.242320819112628e-06, 'epoch': 0.0}
+{'loss': 2.4671, 'grad_norm': 0.7640281915664673, 'learning_rate': 4.948805460750853e-06, 'epoch': 0.01}
+{'loss': 2.4458, 'grad_norm': 0.8177816867828369, 'learning_rate': 6.655290102389078e-06, 'epoch': 0.01}

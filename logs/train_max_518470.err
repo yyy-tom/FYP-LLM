@@ -1,0 +1,82 @@
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+INFO:__main__:HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+INFO:__main__:TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+INFO:__main__:HF_DATASETS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/datasets
+INFO:__main__:HF_HUB_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/hub
+INFO:__main__:XET_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/xet
+INFO:__main__:Starting training setup...
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Tokenizer loaded. Vocab size: 151665
+INFO:__main__:Loading model from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Number of GPUs available: 8
+INFO:__main__:GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:Total VRAM across all GPUs: 84.55 GB
+INFO:__main__:Using 4-bit quantization with BitsAndBytes
+INFO:__main__:Loading model with 4-bit quantization...
+`torch_dtype` is deprecated! Use `dtype` instead!
+INFO:accelerate.utils.modeling:Based on the current allocation process, no modules could be assigned to the following devices due to insufficient memory:
+  - 0: 1946419200.0 bytes required
+These minimum requirements are specific to this allocation attempt and may vary. Consider increasing the available memory for these devices to at least the specified minimum, or adjusting the model config.
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:13<01:34, 13.57s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:27<01:21, 13.55s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:41<01:09, 13.99s/it]Loading checkpoint shards:  50%|█████     | 4/8 [00:55<00:55, 13.92s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [01:07<00:40, 13.34s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [01:20<00:26, 13.12s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [01:33<00:13, 13.20s/it]Loading checkpoint shards: 100%|██████████| 8/8 [01:39<00:00, 10.67s/it]Loading checkpoint shards: 100%|██████████| 8/8 [01:39<00:00, 12.38s/it]
+INFO:__main__:Model loaded with 4-bit quantization
+INFO:__main__:Model device map: {'model.embed_tokens': 1, 'model.layers.0': 1, 'model.layers.1': 1, 'model.layers.2': 1, 'model.layers.3': 1, 'model.layers.4': 1, 'model.layers.5': 2, 'model.layers.6': 2, 'model.layers.7': 2, 'model.layers.8': 2, 'model.layers.9': 2, 'model.layers.10': 2, 'model.layers.11': 2, 'model.layers.12': 2, 'model.layers.13': 3, 'model.layers.14': 3, 'model.layers.15': 3, 'model.layers.16': 3, 'model.layers.17': 3, 'model.layers.18': 3, 'model.layers.19': 3, 'model.layers.20': 3, 'model.layers.21': 4, 'model.layers.22': 4, 'model.layers.23': 4, 'model.layers.24': 4, 'model.layers.25': 4, 'model.layers.26': 4, 'model.layers.27': 4, 'model.layers.28': 4, 'model.layers.29': 5, 'model.layers.30': 5, 'model.layers.31': 5, 'model.layers.32': 5, 'model.layers.33': 5, 'model.layers.34': 5, 'model.layers.35': 5, 'model.layers.36': 5, 'model.layers.37': 6, 'model.layers.38': 6, 'model.layers.39': 6, 'model.layers.40': 6, 'model.layers.41': 6, 'model.layers.42': 6, 'model.layers.43': 6, 'model.layers.44': 6, 'model.layers.45': 7, 'model.layers.46': 7, 'model.layers.47': 7, 'model.norm': 7, 'model.rotary_emb': 7, 'lm_head': 7}
+INFO:__main__:GPU memory usage after model loading:
+INFO:__main__:GPU 0: 0.00 GB allocated, 0.00 GB reserved, 10.57 GB total
+INFO:__main__:GPU 1: 2.11 GB allocated, 2.19 GB reserved, 10.57 GB total
+INFO:__main__:GPU 2: 1.06 GB allocated, 1.14 GB reserved, 10.57 GB total
+INFO:__main__:GPU 3: 1.06 GB allocated, 1.08 GB reserved, 10.57 GB total
+INFO:__main__:GPU 4: 1.06 GB allocated, 1.08 GB reserved, 10.57 GB total
+INFO:__main__:GPU 5: 1.06 GB allocated, 1.16 GB reserved, 10.57 GB total
+INFO:__main__:GPU 6: 1.06 GB allocated, 1.10 GB reserved, 10.57 GB total
+INFO:__main__:GPU 7: 1.85 GB allocated, 1.90 GB reserved, 10.57 GB total
+INFO:__main__:Model prepared for k-bit training
+INFO:__main__:Trainable parameters: 51,609,600 / 8,215,614,464 (0.63%)
+INFO:__main__:Model loaded and LoRA configured
+INFO:__main__:Model uses device_map. Configuring for single-process training (DDP disabled).
+INFO:__main__:Using accelerate config file: /research/d7/fyp25/yyyu2/FYP-LLM/accelerate_config.yaml
+INFO:__main__:Dataset not found at ../datasets/all_mental_health_combined, found at /research/d7/fyp25/yyyu2/FYP-LLM/datasets/../datasets/all_mental_health_combined
+INFO:__main__:Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/../datasets/all_mental_health_combined
+INFO:__main__:Dataset loaded. Train: 561962, Val: 62443
+INFO:__main__:Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/../datasets/all_mental_health_combined_tokenized...
+INFO:__main__:Pre-tokenized dataset loaded successfully!
+INFO:__main__:Model uses device_map. Disabling DDP to avoid conflicts with device_map='auto'.
+INFO:__main__:Using accelerate config file: /research/d7/fyp25/yyyu2/FYP-LLM/accelerate_config.yaml
+INFO:__main__:Model uses device_map. Disabled DDP and configured for single-process training.
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel.py:553: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+INFO:__main__:Starting training...
+INFO:__main__:Training on 8 GPU(s)
+INFO:__main__:Model is distributed across GPUs using device_map
+INFO:__main__:Using single-process training (DDP disabled for device_map compatibility)
+INFO:__main__:Training steps per epoch: 140491
+INFO:__main__:Total training steps: 421473
+INFO:__main__:Training will begin shortly...
+INFO:__main__:Note: First step may take longer due to initialization...
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+ERROR:__main__:Training failed with error: You can't train a model that has been loaded with `device_map='auto'` in any distributed mode. Please rerun your script specifying `--num_processes=1` or by launching with `python {{myscript.py}}`.
+ERROR:__main__:This might be due to device_map/DDP conflicts. Check GPU memory and configuration.
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel.py", line 794, in <module>
+[rank0]:     main()
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel.py", line 790, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel.py", line 624, in train
+[rank0]:     self.trainer.train()
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2325, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2480, in _inner_training_loop
+[rank0]:     model, self.optimizer = self.accelerator.prepare(self.model, self.optimizer)
+[rank0]:                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1472, in prepare
+[rank0]:     raise ValueError(
+[rank0]: ValueError: You can't train a model that has been loaded with `device_map='auto'` in any distributed mode. Please rerun your script specifying `--num_processes=1` or by launching with `python {{myscript.py}}`.
+[rank0]:[W1119 03:33:19.322812684 ProcessGroupNCCL.cpp:1538] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
