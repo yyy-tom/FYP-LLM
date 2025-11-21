@@ -631,7 +631,81 @@ class MultiGPUTrainer:
                 "`CUDA_VISIBLE_DEVICES` to a single GPU."
             )
         
-        # Setup components
+        # PRIORITY: Check for existing checkpoints FIRST and update config to match
+        # This must happen BEFORE model initialization
+        resume_from_checkpoint = None
+        output_dir = self.config["output_dir"]
+        
+        if os.path.exists(output_dir):
+            checkpoints = [d for d in os.listdir(output_dir) if d.startswith("checkpoint-") and not d.endswith(".backup")]
+            if checkpoints:
+                # Get the latest checkpoint by step number (skip non-numeric suffixes)
+                checkpoint_steps = []
+                for cp in checkpoints:
+                    try:
+                        step = int(cp.split("-")[1])
+                        checkpoint_steps.append(step)
+                    except (ValueError, IndexError):
+                        continue
+                
+                if checkpoint_steps:
+                    latest_checkpoint = f"checkpoint-{max(checkpoint_steps)}"
+                    checkpoint_path = os.path.join(output_dir, latest_checkpoint)
+                    
+                    # PRIORITY: Load checkpoint config and update current config to match
+                    # This ensures we can always resume from checkpoint
+                    checkpoint_config_path = os.path.join(checkpoint_path, "training_config.json")
+                    if os.path.exists(checkpoint_config_path):
+                        try:
+                            import json
+                            with open(checkpoint_config_path, 'r') as f:
+                                checkpoint_config = json.load(f)
+                            
+                            # Update config to match checkpoint for successful resumption
+                            current_lora_r = self.config.get("lora_r", 16)
+                            checkpoint_lora_r = checkpoint_config.get("lora_r", current_lora_r)
+                            current_lora_alpha = self.config.get("lora_alpha", 32)
+                            checkpoint_lora_alpha = checkpoint_config.get("lora_alpha", current_lora_alpha)
+                            current_max_length = self.config.get("max_length", 512)
+                            checkpoint_max_length = checkpoint_config.get("max_length", current_max_length)
+                            
+                            config_updated = False
+                            if current_lora_r != checkpoint_lora_r:
+                                logger.warning(
+                                    f"LoRA rank mismatch: current={current_lora_r}, checkpoint={checkpoint_lora_r}. "
+                                    f"Updating config to match checkpoint for resumption."
+                                )
+                                self.config["lora_r"] = checkpoint_lora_r
+                                config_updated = True
+                            
+                            if current_lora_alpha != checkpoint_lora_alpha:
+                                logger.warning(
+                                    f"LoRA alpha mismatch: current={current_lora_alpha}, checkpoint={checkpoint_lora_alpha}. "
+                                    f"Updating config to match checkpoint for resumption."
+                                )
+                                self.config["lora_alpha"] = checkpoint_lora_alpha
+                                config_updated = True
+                            
+                            if current_max_length != checkpoint_max_length:
+                                logger.info(
+                                    f"Max length differs: current={current_max_length}, checkpoint={checkpoint_max_length}. "
+                                    f"Updating config to match checkpoint for resumption."
+                                )
+                                self.config["max_length"] = checkpoint_max_length
+                                config_updated = True
+                            
+                            if config_updated:
+                                logger.info("Config updated to match checkpoint. Will initialize model with correct config.")
+                                
+                        except Exception as e:
+                            logger.warning(f"Could not read checkpoint config: {e}. Proceeding with current config.")
+                    
+                    # Always attempt to resume if checkpoint exists (prioritize resumption)
+                    resume_from_checkpoint = checkpoint_path
+                    logger.info(f"Found existing checkpoint: {resume_from_checkpoint}")
+                    logger.info("PRIORITY: Will resume training from checkpoint...")
+        
+        # Setup components (now with config matching checkpoint if available)
         self.setup_tokenizer()
         self.setup_model()
         
@@ -645,6 +719,9 @@ class MultiGPUTrainer:
             reserved = torch.cuda.memory_reserved(local_rank) / 1024**3
             total = torch.cuda.get_device_properties(local_rank).total_memory / 1024**3
             logger.info(f"GPU {local_rank} memory after model load: {allocated:.2f} GB allocated, {reserved:.2f} GB reserved, {total:.2f} GB total")
+            free_memory = total - reserved
+            if resume_from_checkpoint and free_memory < 2.0:
+                logger.warning(f"Low free memory ({free_memory:.2f} GB). Resumption may fail with OOM, but attempting anyway.")
         
         # Load dataset
         dataset = self.load_dataset()
@@ -667,68 +744,8 @@ class MultiGPUTrainer:
         logger.info(f"Training steps per epoch: {len(self.trainer.get_train_dataloader())}")
         logger.info(f"Total training steps: {self.trainer.args.max_steps if self.trainer.args.max_steps > 0 else len(self.trainer.get_train_dataloader()) * self.trainer.args.num_train_epochs}")
         
-        # Check for existing checkpoints to resume from
-        resume_from_checkpoint = None
-        output_dir = self.config["output_dir"]
-        
-        # Check available memory before deciding to resume
-        should_resume = True
-        if torch.cuda.is_available():
-            local_rank = int(os.environ.get("LOCAL_RANK", 0))
-            allocated = torch.cuda.memory_allocated(local_rank) / 1024**3
-            reserved = torch.cuda.memory_reserved(local_rank) / 1024**3
-            total = torch.cuda.get_device_properties(local_rank).total_memory / 1024**3
-            free_memory = total - reserved
-            
-            # If less than 3GB free, skip checkpoint resumption to avoid OOM
-            if free_memory < 3.0:
-                logger.warning(f"Low free memory ({free_memory:.2f} GB). Skipping checkpoint resumption to avoid OOM.")
-                should_resume = False
-        
-        if should_resume and os.path.exists(output_dir):
-            checkpoints = [d for d in os.listdir(output_dir) if d.startswith("checkpoint-") and not d.endswith(".backup")]
-            if checkpoints:
-                # Get the latest checkpoint by step number (skip non-numeric suffixes)
-                checkpoint_steps = []
-                for cp in checkpoints:
-                    try:
-                        step = int(cp.split("-")[1])
-                        checkpoint_steps.append(step)
-                    except (ValueError, IndexError):
-                        continue
-                
-                if checkpoint_steps:
-                    latest_checkpoint = f"checkpoint-{max(checkpoint_steps)}"
-                    checkpoint_path = os.path.join(output_dir, latest_checkpoint)
-                    
-                    # Check if checkpoint config matches current config (especially LoRA rank)
-                    checkpoint_config_path = os.path.join(checkpoint_path, "training_config.json")
-                    if os.path.exists(checkpoint_config_path):
-                        try:
-                            import json
-                            with open(checkpoint_config_path, 'r') as f:
-                                checkpoint_config = json.load(f)
-                            
-                            current_lora_r = self.config.get("lora_r", 16)
-                            checkpoint_lora_r = checkpoint_config.get("lora_r", current_lora_r)
-                            
-                            if current_lora_r != checkpoint_lora_r:
-                                logger.warning(
-                                    f"LoRA rank mismatch detected! "
-                                    f"Checkpoint has lora_r={checkpoint_lora_r}, but current config has lora_r={current_lora_r}. "
-                                    f"Skipping checkpoint resumption to avoid shape mismatch errors. "
-                                    f"To resume, either: "
-                                    f"1) Use the same lora_r as the checkpoint ({checkpoint_lora_r}), or "
-                                    f"2) Start training from scratch by removing/renaming the checkpoint directory."
-                                )
-                                should_resume = False
-                        except Exception as e:
-                            logger.warning(f"Could not read checkpoint config: {e}. Proceeding with caution.")
-                    
-                    if should_resume:
-                        resume_from_checkpoint = checkpoint_path
-                        logger.info(f"Found existing checkpoint: {resume_from_checkpoint}")
-                        logger.info("Resuming training from checkpoint...")
+        if resume_from_checkpoint:
+            logger.info(f"PRIORITY: Resuming from checkpoint: {resume_from_checkpoint}")
         
         # Clear GPU cache aggressively before training to reduce OOM risk during DDP initialization
         if torch.cuda.is_available():
