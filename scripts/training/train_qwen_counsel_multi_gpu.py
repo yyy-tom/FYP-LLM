@@ -139,21 +139,10 @@ class MultiGPUTrainer:
             
         logger.info(f"Tokenizer loaded. Vocab size: {len(self.tokenizer)}")
     
-    def setup_model(self, checkpoint_path: str = None) -> None:
-        """Initialize the model with quantization and LoRA for multi-GPU training.
-        
-        Args:
-            checkpoint_path: If provided, load model from checkpoint instead of base model.
-                            This avoids double-loading when resuming from checkpoint.
-        """
+    def setup_model(self) -> None:
+        """Initialize the model with quantization and LoRA for multi-GPU training."""
         model_name = self.config["model_name"]
-        
-        # If resuming from checkpoint, load directly from checkpoint to avoid double-loading
-        if checkpoint_path and os.path.exists(checkpoint_path):
-            logger.info(f"Loading model from checkpoint: {checkpoint_path}")
-            logger.info("Skipping base model load to avoid double-loading and save memory")
-        else:
-            logger.info(f"Loading model from {model_name}")
+        logger.info(f"Loading model from {model_name}")
         
         # Clean up memory before loading model
         self.cleanup_memory()
@@ -222,115 +211,75 @@ class MultiGPUTrainer:
         # IMPORTANT: For multi-GPU training with DDP (not FSDP), we need to handle device placement carefully
         # BitsAndBytes quantized models are incompatible with FSDP due to integer tensors
         # We'll use DDP which works with quantized models
-        local_rank = int(os.environ.get("LOCAL_RANK", 0))
-        torch.cuda.set_device(local_rank)
-        device = torch.device(f"cuda:{local_rank}")
-        
-        # If loading from checkpoint, load directly with PEFT to avoid double-loading
-        if checkpoint_path and os.path.exists(checkpoint_path):
-            logger.info("Loading model directly from checkpoint (avoids double-loading)...")
-            if bnb_config:
-                # Load base model with quantization first
-                base_model = AutoModelForCausalLM.from_pretrained(
-                    model_name,
-                    quantization_config=bnb_config,
-                    device_map={"": f"cuda:{local_rank}"},
-                    trust_remote_code=True,
-                    torch_dtype=torch.bfloat16,
-                    low_cpu_mem_usage=True,
-                    cache_dir=cache_dir,
-                )
-                # Prepare for k-bit training
-                base_model = prepare_model_for_kbit_training(base_model)
-                # Load PEFT adapters from checkpoint
-                self.model = PeftModel.from_pretrained(base_model, checkpoint_path)
-                logger.info(f"Model loaded from checkpoint with 4-bit quantization on device {device}")
-            else:
-                # Non-quantized path (not recommended)
-                base_model = AutoModelForCausalLM.from_pretrained(
-                    model_name,
-                    trust_remote_code=True,
-                    torch_dtype=torch.bfloat16,
-                    low_cpu_mem_usage=True,
-                    device_map=None,
-                    cache_dir=cache_dir,
-                )
-                base_model = base_model.to(device)
-                self.model = PeftModel.from_pretrained(base_model, checkpoint_path)
-                logger.info(f"Model loaded from checkpoint on device {device}")
+        if bnb_config:
+            logger.info("Loading model with 4-bit quantization...")
+            # For DDP with quantized models, set CUDA device before loading
+            # Each process will load the model on its assigned GPU
+            local_rank = int(os.environ.get("LOCAL_RANK", 0))
+            torch.cuda.set_device(local_rank)
+            device = torch.device(f"cuda:{local_rank}")
             
-            # Disable use_cache
+            # For BitsAndBytes with DDP, use device_map to specify the device
+            # Each process loads the model on its assigned GPU
+            self.model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                quantization_config=bnb_config,
+                device_map={"": f"cuda:{local_rank}"},  # Load on the current process's device
+                trust_remote_code=True,
+                torch_dtype=torch.bfloat16,
+                low_cpu_mem_usage=True,
+                cache_dir=cache_dir,
+            )
+            logger.info(f"Model loaded with 4-bit quantization on device {device}")
+            
+            # Prepare model for k-bit training
+            try:
+                self.model = prepare_model_for_kbit_training(self.model)
+                logger.info("Model prepared for k-bit training")
+            except Exception as e:
+                logger.warning(f"Error preparing model for k-bit training: {e}. Continuing anyway.")
+            
+            # CRITICAL FIX: Explicitly disable use_cache for BitsAndBytes quantized models
+            # This prevents CUDA illegal memory access errors with gradient checkpointing
             if hasattr(self.model, 'config'):
                 self.model.config.use_cache = False
             if hasattr(self.model, 'generation_config'):
                 self.model.generation_config.use_cache = False
             logger.info("Disabled use_cache for BitsAndBytes quantized model")
-            self.model.print_trainable_parameters()
         else:
-            # Normal path: load base model and apply LoRA
-            if bnb_config:
-                logger.info("Loading model with 4-bit quantization...")
-                # For DDP with quantized models, set CUDA device before loading
-                # Each process will load the model on its assigned GPU
-                
-                # For BitsAndBytes with DDP, use device_map to specify the device
-                # Each process loads the model on its assigned GPU
-                self.model = AutoModelForCausalLM.from_pretrained(
-                    model_name,
-                    quantization_config=bnb_config,
-                    device_map={"": f"cuda:{local_rank}"},  # Load on the current process's device
-                    trust_remote_code=True,
-                    torch_dtype=torch.bfloat16,
-                    low_cpu_mem_usage=True,
-                    cache_dir=cache_dir,
-                )
-                logger.info(f"Model loaded with 4-bit quantization on device {device}")
-                
-                # Prepare model for k-bit training
-                try:
-                    self.model = prepare_model_for_kbit_training(self.model)
-                    logger.info("Model prepared for k-bit training")
-                except Exception as e:
-                    logger.warning(f"Error preparing model for k-bit training: {e}. Continuing anyway.")
-                
-                # CRITICAL FIX: Explicitly disable use_cache for BitsAndBytes quantized models
-                # This prevents CUDA illegal memory access errors with gradient checkpointing
-                if hasattr(self.model, 'config'):
-                    self.model.config.use_cache = False
-                if hasattr(self.model, 'generation_config'):
-                    self.model.generation_config.use_cache = False
-                logger.info("Disabled use_cache for BitsAndBytes quantized model")
-            else:
-                # For non-quantized models (not recommended for 14B on RTX 2080 Ti)
-                logger.warning("Loading model without quantization - this may cause OOM on RTX 2080 Ti!")
-                
-                self.model = AutoModelForCausalLM.from_pretrained(
-                    model_name,
-                    trust_remote_code=True,
-                    torch_dtype=torch.bfloat16,
-                    low_cpu_mem_usage=True,
-                    device_map=None,  # Let DDP handle device placement
-                    cache_dir=cache_dir,
-                )
-                # Move model to the correct device
-                self.model = self.model.to(device)
+            # For non-quantized models (not recommended for 14B on RTX 2080 Ti)
+            logger.warning("Loading model without quantization - this may cause OOM on RTX 2080 Ti!")
+            local_rank = int(os.environ.get("LOCAL_RANK", 0))
+            torch.cuda.set_device(local_rank)
+            device = torch.device(f"cuda:{local_rank}")
             
-            # Configure LoRA
-            lora_config = LoraConfig(
-                task_type=TaskType.CAUSAL_LM,
-                r=self.config.get("lora_r", 16),
-                lora_alpha=self.config.get("lora_alpha", 32),
-                lora_dropout=self.config.get("lora_dropout", 0.1),
-                target_modules=self.config.get("lora_target_modules", [
-                    "q_proj", "k_proj", "v_proj", "o_proj",
-                    "gate_proj", "up_proj", "down_proj"
-                ]),
-                bias="none",
+            self.model = AutoModelForCausalLM.from_pretrained(
+                model_name,
+                trust_remote_code=True,
+                torch_dtype=torch.bfloat16,
+                low_cpu_mem_usage=True,
+                device_map=None,  # Let DDP handle device placement
+                cache_dir=cache_dir,
             )
-            
-            # Apply LoRA
-            self.model = get_peft_model(self.model, lora_config)
-            self.model.print_trainable_parameters()
+            # Move model to the correct device
+            self.model = self.model.to(device)
+        
+        # Configure LoRA
+        lora_config = LoraConfig(
+            task_type=TaskType.CAUSAL_LM,
+            r=self.config.get("lora_r", 16),
+            lora_alpha=self.config.get("lora_alpha", 32),
+            lora_dropout=self.config.get("lora_dropout", 0.1),
+            target_modules=self.config.get("lora_target_modules", [
+                "q_proj", "k_proj", "v_proj", "o_proj",
+                "gate_proj", "up_proj", "down_proj"
+            ]),
+            bias="none",
+        )
+        
+        # Apply LoRA
+        self.model = get_peft_model(self.model, lora_config)
+        self.model.print_trainable_parameters()
         
         gradient_checkpointing = self.config.get("gradient_checkpointing", True)
 
@@ -758,8 +707,7 @@ class MultiGPUTrainer:
         
         # Setup components (now with config matching checkpoint if available)
         self.setup_tokenizer()
-        # If resuming from checkpoint, load model directly from checkpoint to avoid double-loading
-        self.setup_model(checkpoint_path=resume_from_checkpoint if resume_from_checkpoint else None)
+        self.setup_model()
         
         # Clean up memory after model loading
         self.cleanup_memory()
@@ -807,19 +755,6 @@ class MultiGPUTrainer:
         
         if resume_from_checkpoint:
             logger.info(f"PRIORITY: Resuming from checkpoint: {resume_from_checkpoint}")
-            # CRITICAL: Delete model references before trainer.train() to avoid double-loading
-            # Trainer will reload from checkpoint, so we free memory first
-            logger.info("Deleting pre-loaded model to free memory - Trainer will reload from checkpoint...")
-            # Delete both references to ensure memory is freed
-            if hasattr(self.trainer, 'model') and self.trainer.model is not None:
-                del self.trainer.model
-            if hasattr(self, 'model') and self.model is not None:
-                del self.model
-            for i in range(10):
-                torch.cuda.empty_cache()
-                gc.collect()
-            torch.cuda.synchronize()
-            logger.info("Model deleted. Trainer will load fresh from checkpoint.")
         
         # Clear GPU cache aggressively before training to reduce OOM risk during DDP initialization
         if torch.cuda.is_available():
