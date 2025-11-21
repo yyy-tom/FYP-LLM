@@ -221,7 +221,7 @@ screen -S training
 #### Step 3: Run training inside tmux/screen
 
 ```bash
-python scripts/train_qwen_counsel.py --config configs/config.json
+python scripts/training/train_qwen_counsel.py --config configs/config.json
 ```
 
 #### Step 4: Detach and disconnect

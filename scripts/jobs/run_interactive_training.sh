@@ -45,7 +45,7 @@ srun -p gpu_8h --qos gpu --account gpu --gres=gpu:8 --cpus-per-task=8 --pty bash
         tmux attach -t '$SESSION_NAME'
     else
         # Create new session and run training
-        tmux new-session -s '$SESSION_NAME' -d 'python scripts/train_qwen_counsel.py --config configs/config.json; exec bash'
+        tmux new-session -s '$SESSION_NAME' -d 'python scripts/training/train_qwen_counsel.py --config configs/config.json; exec bash'
         tmux attach -t '$SESSION_NAME'
     fi
 "

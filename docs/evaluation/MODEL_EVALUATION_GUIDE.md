@@ -849,7 +849,7 @@ python scripts/evaluate_model.py \
     --output evaluation_results_7b.json
 
 # Compare 7B vs 14B
-python scripts/compare_models.py \
+python scripts/inference/compare_models.py \
     --model_7b models/qwen2.5-7b-counsel-chat \
     --model_14b models/qwen2.5-14b-counsel-chat \
     --test_dataset datasets/all_mental_health_combined

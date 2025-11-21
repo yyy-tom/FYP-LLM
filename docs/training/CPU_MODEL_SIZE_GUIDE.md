@@ -93,22 +93,22 @@ python3 -c "import psutil; print(f'Total RAM: {psutil.virtual_memory().total / (
 
 ### 7B Model (if you have 40-50 GB+ RAM):
 ```bash
-uv run python scripts/train_qwen_counsel.py --config configs/config_7b_cpu.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config_7b_cpu.json
 ```
 
 ### 3B Model (if you have 18-25 GB+ RAM):
 ```bash
-uv run python scripts/train_qwen_counsel.py --config configs/config_3b_cpu.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config_3b_cpu.json
 ```
 
 ### 1.5B Model (if you have 7-10 GB+ RAM):
 ```bash
-uv run python scripts/train_qwen_counsel.py --config configs/config_7b_optimized.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config_7b_optimized.json
 ```
 
 ### 0.5B Model (if you have 2.5-4 GB+ RAM):
 ```bash
-uv run python scripts/train_qwen_counsel.py --config configs/config.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config.json
 ```
 
 ## Why I Initially Used 0.5B Models

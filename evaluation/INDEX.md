@@ -10,8 +10,7 @@ evaluation/
 ├── INDEX.md                     # This file - complete index
 ├── docs/                        # Documentation
 │   ├── EVALUATION_QUICKREF.md            # One-page quick reference
-│   ├── EVALUATION_EMPATHETIC_GUIDE.md    # Detailed step-by-step guide
-│   └── MODEL_EVALUATION_GUIDE.md         # Comprehensive evaluation theory
+│   └── EVALUATION_EMPATHETIC_GUIDE.md    # Detailed step-by-step guide
 └── scripts/                     # Evaluation scripts
     ├── download_eval_dataset.py          # Download EmpatheticDialogues
     ├── evaluate_on_empathetic.py         # Evaluate single model (EmpatheticDialogues)
@@ -28,11 +27,11 @@ evaluation/
 1. **Start here**: [`README.md`](README.md) - Complete overview with examples
 2. **Quick reference**: [`docs/EVALUATION_QUICKREF.md`](docs/EVALUATION_QUICKREF.md) - One-page cheat sheet
 3. **Detailed guide**: [`docs/EVALUATION_EMPATHETIC_GUIDE.md`](docs/EVALUATION_EMPATHETIC_GUIDE.md) - Step-by-step instructions
-4. **Comprehensive theory**: [`docs/MODEL_EVALUATION_GUIDE.md`](docs/MODEL_EVALUATION_GUIDE.md) - All evaluation methods
+4. **Comprehensive theory**: [`../docs/evaluation/MODEL_EVALUATION_GUIDE.md`](../docs/evaluation/MODEL_EVALUATION_GUIDE.md) - All evaluation methods
 
 ### 📚 Additional Resources
 
-- **Training datasets**: `../DATASETS_FROM_PAPER_GUIDE.md` (in project root)
+- **Training datasets**: `../docs/datasets/DATASETS_FROM_PAPER_GUIDE.md`
 
 ## 🛠️ Scripts Guide
 

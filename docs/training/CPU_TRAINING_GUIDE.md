@@ -53,7 +53,7 @@ Update your `configs/config.json`:
 ### Step 4: Train on CPU
 
 ```bash
-uv run python scripts/train_qwen_counsel.py --config configs/config.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config.json
 ```
 
 ## CPU Training Considerations
@@ -146,7 +146,7 @@ python3 -c "import torch; print('CUDA:', torch.cuda.is_available())"
 # 3. Update config.json (use smaller model, disable quantization)
 
 # 4. Train
-uv run python scripts/train_qwen_counsel.py --config configs/config.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config.json
 ```
 
 ## Summary

@@ -48,7 +48,7 @@ source ~/.bashrc  # or source ~/.zshrc
 
 ```bash
 # Source the script to set environment variables
-source scripts/setup_uv_cache.sh
+source scripts/setup/setup_uv_cache.sh
 
 # Then run uv commands
 uv sync
@@ -122,7 +122,7 @@ If you still get quota errors:
 
 1. **Make sure you export the variables in the same shell session:**
    ```bash
-   source scripts/setup_uv_cache.sh
+   source scripts/setup/setup_uv_cache.sh
    # Then immediately run uv commands in the same shell
    ```
 

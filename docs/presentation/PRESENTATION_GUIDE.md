@@ -514,8 +514,8 @@ However, this is for research purposes and should complement, not replace, profe
 ## Additional Resources
 
 ### For More Details:
-- `scripts/combine_all_datasets.py` - Dataset combination script
-- `scripts/prepare_*_dataset.py` - Individual dataset preparation scripts
+- `scripts/data/combine_all_datasets.py` - Dataset combination script
+- `scripts/data/prepare_*_dataset.py` - Individual dataset preparation scripts
 - `samples/` directory - Raw sample data files
 - `datasets/` directory - Processed datasets
 

@@ -12,7 +12,7 @@ if screen -list | grep -q "$SESSION_NAME"; then
 fi
 
 # Create new screen session and run training
-screen -dmS "$SESSION_NAME" bash -c "python scripts/train_qwen_counsel.py --config configs/config.json; exec bash"
+screen -dmS "$SESSION_NAME" bash -c "python scripts/training/train_qwen_counsel.py --config configs/config.json; exec bash"
 
 echo "Training started in screen session '$SESSION_NAME'"
 echo "To attach: screen -r $SESSION_NAME"

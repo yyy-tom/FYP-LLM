@@ -24,8 +24,8 @@ uv pip install torch==1.7.1+cu100 torchvision==0.8.2+cu100 torchaudio==0.7.2 \
 ### Or Use the Helper Script
 
 ```bash
-chmod +x scripts/install_pytorch_cuda10.sh
-./scripts/install_pytorch_cuda10.sh
+chmod +x scripts/setup/install_pytorch_cuda10.sh
+./scripts/setup/install_pytorch_cuda10.sh
 ```
 
 ## Why `uv add` Doesn't Work

@@ -90,7 +90,7 @@ echo "=========================================="
 echo "Starting training with maximum resources..."
 echo "Config: configs/config.json"
 echo "=========================================="
-uv run python scripts/train_qwen_counsel.py --config configs/config.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config.json
 
 # Print completion time
 echo "=========================================="

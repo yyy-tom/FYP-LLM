@@ -121,7 +121,7 @@ Based on the `sinfo` output and GPU specifications:
 #SBATCH --error=logs/train_%j.err
 
 cd /path/to/FYP-LLM
-uv run python scripts/train_qwen_counsel.py --config configs/config_7b_cpu.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config_7b_cpu.json
 ```
 
 ### Example 2: Titan RTX (gpu54-59) - 7B Model (BEST FOR 80 CPUs)
@@ -139,7 +139,7 @@ uv run python scripts/train_qwen_counsel.py --config configs/config_7b_cpu.json
 #SBATCH --error=logs/train_%j.err
 
 cd /path/to/FYP-LLM
-uv run python scripts/train_qwen_counsel.py --config configs/config_7b_cpu.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config_7b_cpu.json
 ```
 
 ### Example 3: RTX 2080 (gpu40-51) - 3B Model
@@ -157,7 +157,7 @@ uv run python scripts/train_qwen_counsel.py --config configs/config_7b_cpu.json
 #SBATCH --error=logs/train_%j.err
 
 cd /path/to/FYP-LLM
-uv run python scripts/train_qwen_counsel.py --config configs/config_3b_cpu.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config_3b_cpu.json
 ```
 
 ## Quick Decision Guide

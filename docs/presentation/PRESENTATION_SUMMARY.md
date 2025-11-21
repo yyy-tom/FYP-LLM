@@ -294,7 +294,7 @@ A: Optimal choice because:
 3. ✅ 8 PNG files - Your presentation slides
 
 ### Reference:
-- `scripts/combine_all_datasets.py` - Dataset combination code
+- `scripts/data/combine_all_datasets.py` - Dataset combination code
 - `samples/` directory - Sample data files
 - `datasets/` directory - Processed datasets
 

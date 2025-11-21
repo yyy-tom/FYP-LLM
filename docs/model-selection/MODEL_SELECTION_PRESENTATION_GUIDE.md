@@ -447,7 +447,7 @@
 
 ```bash
 cd /research/d7/fyp25/yyyu2/FYP-LLM
-python scripts/generate_model_selection_visuals.py
+python scripts/visualization/generate_model_selection_visuals.py
 ```
 
 All images saved to `present_png/` directory.

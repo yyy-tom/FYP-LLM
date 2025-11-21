@@ -62,19 +62,19 @@ uv sync
 ### Recommended Config (80 Cores)
 
 ```bash
-uv run python scripts/train_qwen_counsel.py --config configs/config_cpu_80cores.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config_cpu_80cores.json
 ```
 
 ### Default Config
 
 ```bash
-uv run python scripts/train_qwen_counsel.py --config configs/config.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config.json
 ```
 
 ### Memory-Efficient Config
 
 ```bash
-uv run python scripts/train_qwen_counsel.py --config configs/config_memory_efficient.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config_memory_efficient.json
 ```
 
 ## Model Recommendations
@@ -127,7 +127,7 @@ If using SLURM, you can request 80 CPUs:
 #SBATCH --time=48:00:00
 
 cd /path/to/FYP-LLM
-uv run python scripts/train_qwen_counsel.py --config configs/config_cpu_80cores.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config_cpu_80cores.json
 ```
 
 ## Summary

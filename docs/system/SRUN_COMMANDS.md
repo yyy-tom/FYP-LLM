@@ -98,7 +98,7 @@ cd /research/d7/fyp25/yyyu2/FYP-LLM
 uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 # Train
-uv run python scripts/train_qwen_counsel.py --config configs/config_7b_cpu.json
+uv run python scripts/training/train_qwen_counsel.py --config configs/config_7b_cpu.json
 ```
 
 ## Troubleshooting

@@ -4,16 +4,16 @@ Script to combine all processed mental health datasets into one large training d
 
 Usage:
     # Combine all datasets (English + Chinese)
-    python scripts/combine_all_datasets.py
+    python scripts/data/combine_all_datasets.py
     
     # Combine only English datasets (exclude Chinese)
-    python scripts/combine_all_datasets.py --exclude_chinese
+    python scripts/data/combine_all_datasets.py --exclude_chinese
     
     # Combine specific datasets
-    python scripts/combine_all_datasets.py --datasets datasets/counsel_chat_processed datasets/esconv_processed
+    python scripts/data/combine_all_datasets.py --datasets datasets/counsel_chat_processed datasets/esconv_processed
     
     # Custom output directory
-    python scripts/combine_all_datasets.py --output_dir datasets/my_combined_dataset
+    python scripts/data/combine_all_datasets.py --output_dir datasets/my_combined_dataset
 
 Note: Run this script from the project root directory.
 """
