@@ -479,7 +479,7 @@ class MultiGPUTrainer:
             "run_name": self.config.get("run_name", "qwen2.5-14b-counsel-chat-8gpu"),
             "seed": self.config.get("seed", 42),
             "ddp_find_unused_parameters": self.config.get("ddp_find_unused_parameters", False),
-            "ddp_bucket_cap_mb": 10,  # Reduce DDP bucket size to save memory during sync (lower = less memory but slower)
+            "ddp_bucket_cap_mb": 5,  # Reduce DDP bucket size to save memory during sync (lower = less memory but slower)
         }
         
         # Note: FSDP is incompatible with BitsAndBytes quantized models
@@ -712,6 +712,14 @@ class MultiGPUTrainer:
         # Clean up memory after model loading
         self.cleanup_memory()
         
+        # If resuming from checkpoint, clear memory more aggressively since Trainer will reload the model
+        if resume_from_checkpoint and torch.cuda.is_available():
+            logger.info("Resuming from checkpoint - clearing memory aggressively before Trainer reloads model...")
+            for i in range(5):
+                torch.cuda.empty_cache()
+                gc.collect()
+            torch.cuda.synchronize()
+        
         # Log memory usage after model loading
         if torch.cuda.is_available():
             local_rank = int(os.environ.get("LOCAL_RANK", 0))
@@ -749,11 +757,36 @@ class MultiGPUTrainer:
         
         # Clear GPU cache aggressively before training to reduce OOM risk during DDP initialization
         if torch.cuda.is_available():
+            local_rank = int(os.environ.get("LOCAL_RANK", 0))
+            
             # Multiple cache clears to ensure maximum memory is freed
-            for i in range(3):
+            for i in range(10):
                 torch.cuda.empty_cache()
                 gc.collect()
+            
+            # Force synchronization to ensure all operations are complete
+            torch.cuda.synchronize()
+            
+            # Try to reduce reserved memory by resetting peak stats (if available)
+            try:
+                torch.cuda.reset_peak_memory_stats(local_rank)
+            except:
+                pass
+            
+            # Final aggressive clear
+            torch.cuda.empty_cache()
+            gc.collect()
+            
+            # Log memory status before training
+            allocated = torch.cuda.memory_allocated(local_rank) / 1024**3
+            reserved = torch.cuda.memory_reserved(local_rank) / 1024**3
+            total = torch.cuda.get_device_properties(local_rank).total_memory / 1024**3
+            free_memory = total - reserved
+            logger.info(f"GPU {local_rank} memory before training: {allocated:.2f} GB allocated, {reserved:.2f} GB reserved, {free_memory:.2f} GB free")
             logger.info("Cleared CUDA cache aggressively before training start")
+            
+            if free_memory < 2.5:
+                logger.warning(f"WARNING: Very low free memory ({free_memory:.2f} GB). DDP initialization needs ~2 GB. This may fail with OOM.")
         
         try:
             self.trainer.train(resume_from_checkpoint=resume_from_checkpoint)

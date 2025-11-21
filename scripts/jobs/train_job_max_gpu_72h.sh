@@ -90,7 +90,7 @@ echo "=========================================="
 
 # Run training
 echo "Starting training with maximum resources..."
-echo "Config: configs/config_7b_optimized.json"
+echo "Config: configs/config_7b_8gpu.json"
 echo "=========================================="
 
 # Check and install bitsandbytes if needed
