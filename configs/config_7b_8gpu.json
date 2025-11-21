@@ -13,7 +13,7 @@
   "lora_dropout": 0.1,
   "lora_target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"],
   "max_length": 512,
-  "gradient_accumulation_steps": 16,
+  "gradient_accumulation_steps": 32,
   "eval_batch_size": 1,
   "eval_accumulation_steps": 4,
   "weight_decay": 0.01,

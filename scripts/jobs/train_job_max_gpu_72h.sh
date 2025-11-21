@@ -3,7 +3,7 @@
 #SBATCH --partition=gpu_72h
 #SBATCH --qos=gpu
 #SBATCH --account=gpu
-#SBATCH --gres=gpu:rtx2080:2
+#SBATCH --gres=gpu:rtx2080:4
 #SBATCH --cpus-per-task=30
 #SBATCH --time=72:00:00
 #SBATCH --output=logs/train_max_%j.out
@@ -44,7 +44,7 @@ echo "Job Name: $SLURM_JOB_NAME"
 echo "Partition: $SLURM_JOB_PARTITION"
 echo "Node: $SLURM_NODELIST"
 echo "CPUs: $SLURM_CPUS_PER_TASK"
-echo "GPUs: 8"
+echo "GPUs: 4 (using 4 GPUs for better memory per GPU to avoid OOM during DDP init)"
 echo "Time Limit: 72 hours (3 days)"
 echo "Start Time: $(date)"
 echo "Working Directory: $(pwd)"
@@ -61,7 +61,10 @@ echo "=========================================="
 export CUDA_HOME=/usr/local/cuda-10.0
 export PATH=$CUDA_HOME/bin:$PATH
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
-export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+# Use only 4 GPUs to have more memory per GPU for DDP initialization
+# With 8 GPUs, each has ~1.5 GB free, but DDP needs ~2 GB
+# With 4 GPUs, each has the same memory but less fragmentation
+export CUDA_VISIBLE_DEVICES=0,1,2,3
 
 # Set PyTorch memory allocator to reduce fragmentation (helps with OOM during DDP init)
 # Note: PYTORCH_CUDA_ALLOC_CONF is deprecated, use PYTORCH_ALLOC_CONF instead
