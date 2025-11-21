@@ -1,15 +1,15 @@
 #!/bin/bash
 #SBATCH --job-name=yyy_model_train_max
-#SBATCH --partition=batch_72h
+#SBATCH --partition=gpu_72h
 #SBATCH --qos=gpu
 #SBATCH --account=gpu
-#SBATCH --gres=gpu:titanrtx:2
-#SBATCH --cpus-per-task=42
+#SBATCH --gres=gpu:rtx2080:2
+#SBATCH --cpus-per-task=30
 #SBATCH --time=72:00:00
 #SBATCH --output=logs/train_max_%j.out
 #SBATCH --error=logs/train_max_%j.err
 #SBATCH --ntasks=1
-#SBATCH --nodelist=gpu55
+
 
 # Set base directory to avoid disk quota issues
 BASE_DIR="/research/d7/fyp25/yyyu2"
@@ -63,6 +63,10 @@ export PATH=$CUDA_HOME/bin:$PATH
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 
+# Set PyTorch memory allocator to reduce fragmentation (helps with OOM during DDP init)
+# Note: PYTORCH_CUDA_ALLOC_CONF is deprecated, use PYTORCH_ALLOC_CONF instead
+export PYTORCH_ALLOC_CONF=expandable_segments:True
+
 # Print CUDA information
 echo "CUDA_HOME: $CUDA_HOME"
 echo "CUDA version: $(nvcc --version 2>/dev/null | grep 'release' || echo 'nvcc not found')"
@@ -89,6 +93,15 @@ echo "Starting training with maximum resources..."
 echo "Config: configs/config_7b_optimized.json"
 echo "=========================================="
 
+# Check and install bitsandbytes if needed
+echo "Checking for bitsandbytes..."
+if ! uv run python -c "import bitsandbytes" 2>/dev/null; then
+    echo "bitsandbytes not found. Installing..."
+    uv pip install bitsandbytes
+else
+    echo "bitsandbytes is already installed."
+fi
+
 # Count number of GPUs available (use actual GPU count from PyTorch if available, otherwise count CUDA_VISIBLE_DEVICES)
 NUM_GPUS=$(uv run python -c 'import torch; print(torch.cuda.device_count())' 2>/dev/null)
 if [ -z "$NUM_GPUS" ] || [ "$NUM_GPUS" = "0" ]; then
@@ -103,7 +116,7 @@ uv run accelerate launch \
     --num_machines 1 \
     --mixed_precision bf16 \
     scripts/training/train_qwen_counsel_multi_gpu.py \
-    --config configs/config_7b_optimized \
+    --config configs/config_7b_8gpu.json \
     --model_name Qwen/Qwen2.5-7B-Instruct \
     --dataset_path datasets/all_mental_health_combined
 

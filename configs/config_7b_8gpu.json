@@ -8,8 +8,8 @@
   "learning_rate": 1.5e-4,
   "use_wandb": false,
   "use_4bit": true,
-  "lora_r": 4,
-  "lora_alpha": 8,
+  "lora_r": 2,
+  "lora_alpha": 4,
   "lora_dropout": 0.1,
   "lora_target_modules": [
     "q_proj",
@@ -17,7 +17,7 @@
     "v_proj",
     "o_proj"
   ],
-  "max_length": 516,
+  "max_length": 256,
   "gradient_accumulation_steps": 16,
   "eval_batch_size": 1,
   "eval_accumulation_steps": 4,

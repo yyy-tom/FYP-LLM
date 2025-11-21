@@ -353,8 +353,8 @@ class MultiGPUTrainer:
         
         # Resolve relative paths relative to project root
         if not os.path.isabs(dataset_path):
-            script_dir = Path(__file__).parent
-            project_root = script_dir.parent
+            script_dir = Path(__file__).parent  # scripts/training/
+            project_root = script_dir.parent.parent  # FYP-LLM/
             resolved_path = project_root / dataset_path
             
             if not resolved_path.exists():
@@ -479,7 +479,7 @@ class MultiGPUTrainer:
             "run_name": self.config.get("run_name", "qwen2.5-14b-counsel-chat-8gpu"),
             "seed": self.config.get("seed", 42),
             "ddp_find_unused_parameters": self.config.get("ddp_find_unused_parameters", False),
-            "ddp_bucket_cap_mb": 25,  # Reduce DDP bucket size to save memory during sync
+            "ddp_bucket_cap_mb": 10,  # Reduce DDP bucket size to save memory during sync (lower = less memory but slower)
         }
         
         # Note: FSDP is incompatible with BitsAndBytes quantized models
@@ -493,8 +493,8 @@ class MultiGPUTrainer:
         # Check if tokenized dataset already exists
         dataset_path = self.config["dataset_path"]
         if not os.path.isabs(dataset_path):
-            script_dir = Path(__file__).parent
-            project_root = script_dir.parent
+            script_dir = Path(__file__).parent  # scripts/training/
+            project_root = script_dir.parent.parent  # FYP-LLM/
             resolved_path = project_root / dataset_path
             if not resolved_path.exists() and not dataset_path.startswith("datasets/"):
                 alternative_path = project_root / "datasets" / dataset_path
@@ -670,7 +670,22 @@ class MultiGPUTrainer:
         # Check for existing checkpoints to resume from
         resume_from_checkpoint = None
         output_dir = self.config["output_dir"]
-        if os.path.exists(output_dir):
+        
+        # Check available memory before deciding to resume
+        should_resume = True
+        if torch.cuda.is_available():
+            local_rank = int(os.environ.get("LOCAL_RANK", 0))
+            allocated = torch.cuda.memory_allocated(local_rank) / 1024**3
+            reserved = torch.cuda.memory_reserved(local_rank) / 1024**3
+            total = torch.cuda.get_device_properties(local_rank).total_memory / 1024**3
+            free_memory = total - reserved
+            
+            # If less than 3GB free, skip checkpoint resumption to avoid OOM
+            if free_memory < 3.0:
+                logger.warning(f"Low free memory ({free_memory:.2f} GB). Skipping checkpoint resumption to avoid OOM.")
+                should_resume = False
+        
+        if should_resume and os.path.exists(output_dir):
             checkpoints = [d for d in os.listdir(output_dir) if d.startswith("checkpoint-") and not d.endswith(".backup")]
             if checkpoints:
                 # Get the latest checkpoint by step number (skip non-numeric suffixes)
@@ -684,15 +699,44 @@ class MultiGPUTrainer:
                 
                 if checkpoint_steps:
                     latest_checkpoint = f"checkpoint-{max(checkpoint_steps)}"
-                    resume_from_checkpoint = os.path.join(output_dir, latest_checkpoint)
-                    logger.info(f"Found existing checkpoint: {resume_from_checkpoint}")
-                    logger.info("Resuming training from checkpoint...")
+                    checkpoint_path = os.path.join(output_dir, latest_checkpoint)
                     
-                    # Clear GPU cache before resuming to reduce OOM risk
-                    if torch.cuda.is_available():
-                        torch.cuda.empty_cache()
-                        gc.collect()
-                        logger.info("Cleared CUDA cache before checkpoint resume")
+                    # Check if checkpoint config matches current config (especially LoRA rank)
+                    checkpoint_config_path = os.path.join(checkpoint_path, "training_config.json")
+                    if os.path.exists(checkpoint_config_path):
+                        try:
+                            import json
+                            with open(checkpoint_config_path, 'r') as f:
+                                checkpoint_config = json.load(f)
+                            
+                            current_lora_r = self.config.get("lora_r", 16)
+                            checkpoint_lora_r = checkpoint_config.get("lora_r", current_lora_r)
+                            
+                            if current_lora_r != checkpoint_lora_r:
+                                logger.warning(
+                                    f"LoRA rank mismatch detected! "
+                                    f"Checkpoint has lora_r={checkpoint_lora_r}, but current config has lora_r={current_lora_r}. "
+                                    f"Skipping checkpoint resumption to avoid shape mismatch errors. "
+                                    f"To resume, either: "
+                                    f"1) Use the same lora_r as the checkpoint ({checkpoint_lora_r}), or "
+                                    f"2) Start training from scratch by removing/renaming the checkpoint directory."
+                                )
+                                should_resume = False
+                        except Exception as e:
+                            logger.warning(f"Could not read checkpoint config: {e}. Proceeding with caution.")
+                    
+                    if should_resume:
+                        resume_from_checkpoint = checkpoint_path
+                        logger.info(f"Found existing checkpoint: {resume_from_checkpoint}")
+                        logger.info("Resuming training from checkpoint...")
+        
+        # Clear GPU cache aggressively before training to reduce OOM risk during DDP initialization
+        if torch.cuda.is_available():
+            # Multiple cache clears to ensure maximum memory is freed
+            for i in range(3):
+                torch.cuda.empty_cache()
+                gc.collect()
+            logger.info("Cleared CUDA cache aggressively before training start")
         
         try:
             self.trainer.train(resume_from_checkpoint=resume_from_checkpoint)
