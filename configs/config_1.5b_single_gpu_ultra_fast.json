@@ -1,0 +1,81 @@
+{
+  "_comment": "Qwen2.5-1.5B-Instruct - ULTRA FAST single GPU training for rapid experimentation",
+  "_use_case": "Quick prototyping, testing hyperparameters, or training on 1 GPU",
+  "_effective_batch": "Effective batch size = 1 GPU × 16 batch × 2 accumulation = 32 samples per update",
+  
+  "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+  "dataset_path": "datasets/all_mental_health_combined",
+  "output_dir": "models/qwen2.5-1.5b-single-gpu-fast",
+  
+  "batch_size": 16,
+  "num_epochs": 3,
+  "learning_rate": 3e-4,
+  "use_wandb": false,
+  
+  "use_4bit": true,
+  "lora_r": 32,
+  "lora_alpha": 64,
+  "lora_dropout": 0.1,
+  "lora_target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  
+  "max_length": 1024,
+  "gradient_accumulation_steps": 2,
+  "eval_batch_size": 32,
+  "eval_accumulation_steps": 1,
+  
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.05,
+  "logging_steps": 5,
+  "eval_steps": 50,
+  "save_steps": 200,
+  "save_total_limit": 2,
+  
+  "fp16": false,
+  "bf16": true,
+  "prediction_loss_only": true,
+  "early_stopping": true,
+  "seed": 42,
+  
+  "run_name": "qwen2.5-1.5b-single-gpu-fast",
+  "wandb_project": "qwen2.5-1.5b-counsel-chat",
+  
+  "dataloader_num_workers": 4,
+  "dataloader_pin_memory": true,
+  "gradient_checkpointing": true,
+  "ddp_find_unused_parameters": false,
+  
+  "optim": "adamw_torch_fused",
+  "adam_beta1": 0.9,
+  "adam_beta2": 0.999,
+  "adam_epsilon": 1e-8,
+  "max_grad_norm": 1.0,
+  "lr_scheduler_type": "cosine",
+  
+  "save_strategy": "steps",
+  "eval_strategy": "steps",
+  "load_best_model_at_end": true,
+  "metric_for_best_model": "eval_loss",
+  "greater_is_better": false,
+  "report_to": "none",
+  "remove_unused_columns": false,
+  "use_cache": false,
+  
+  "_speed_optimizations": [
+    "Very high batch_size (16) for single GPU - maximizes throughput",
+    "Low gradient_accumulation (2) - faster optimizer steps",
+    "Aggressive LoRA settings for quality without slowdown",
+    "High learning rate for rapid convergence",
+    "Minimal warmup to learn immediately",
+    "Frequent checkpoints to catch best model early",
+    "Large eval batch (32) for fast validation"
+  ]
+}
+
