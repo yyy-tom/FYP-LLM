@@ -134,7 +134,7 @@ Perfect for demonstrating your model works! ✨
 - Read: `docs/EVALUATION_EMPATHETIC_GUIDE.md`
 
 ### Understanding Metrics?
-- See: `../MODEL_EVALUATION_GUIDE.md` (in project root)
+- See: `../docs/evaluation/MODEL_EVALUATION_GUIDE.md`
 
 ### Complete Reference?
 - Check: `INDEX.md`

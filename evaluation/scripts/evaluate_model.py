@@ -45,15 +45,28 @@ except ImportError:
 
 def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-Instruct", device: str = "cuda"):
     """Load model - base model only or fine-tuned with LoRA."""
+    # Detect available device
+    if device == "cuda" and not torch.cuda.is_available():
+        print("⚠️  CUDA not available, falling back to CPU")
+        device = "cpu"
+    
     print(f"Loading base model: {base_model_name}")
+    print(f"Using device: {device}")
     tokenizer = AutoTokenizer.from_pretrained(base_model_name)
+    
+    # Use appropriate dtype based on device
+    dtype = torch.float16 if device == "cuda" else torch.float32
     
     base_model = AutoModelForCausalLM.from_pretrained(
         base_model_name,
-        torch_dtype=torch.float16,
-        device_map="auto",
+        torch_dtype=dtype,
+        device_map="auto" if device == "cuda" else None,
         trust_remote_code=True
     )
+    
+    # Move to CPU if needed
+    if device == "cpu":
+        base_model = base_model.to("cpu")
     
     # Check if LoRA weights exist
     if model_path and Path(model_path).exists() and any(Path(model_path).iterdir()):
@@ -94,6 +107,16 @@ def generate_response(
     top_p: float = 0.9
 ) -> str:
     """Generate response from model."""
+    # Detect device from model if not specified
+    if device == "cuda" and not torch.cuda.is_available():
+        device = "cpu"
+    
+    # Get device from model if using device_map="auto"
+    if hasattr(model, 'device'):
+        device = str(model.device).split(':')[0] if ':' in str(model.device) else str(model.device)
+    elif next(model.parameters()).device.type == 'cpu':
+        device = "cpu"
+    
     # Format prompt
     example = {"input": input_text}
     prompt = format_prompt(example, tokenizer)
@@ -132,6 +155,12 @@ def generate_response(
 
 def calculate_perplexity(model, tokenizer, test_dataset, device: str = "cuda", max_samples: int = 100) -> float:
     """Calculate perplexity on test set."""
+    # Get actual device from model
+    if device == "cuda" and not torch.cuda.is_available():
+        device = "cpu"
+    actual_device = next(model.parameters()).device
+    device = str(actual_device).split(':')[0] if ':' in str(actual_device) else str(actual_device)
+    
     print(f"Calculating perplexity on {min(max_samples, len(test_dataset))} samples...")
     model.eval()
     total_loss = 0.0
@@ -316,15 +345,28 @@ def run_evaluation(
 ):
     """Run complete evaluation pipeline."""
     
+    # Detect and set device
+    if device == "cuda" and not torch.cuda.is_available():
+        print("⚠️  CUDA not available, using CPU instead")
+        device = "cpu"
+    elif device == "cuda":
+        print(f"✓ CUDA available: {torch.cuda.get_device_name(0)}")
+    
     print("=" * 60)
     print("Model Evaluation for Mental Health Counseling")
     print("=" * 60)
+    print(f"Device: {device.upper()}")
     
     # Load model
     print("\n[1/5] Loading model...")
     model, tokenizer = load_model(model_path, base_model_name, device)
     model_type = "Fine-tuned" if model_path and Path(model_path).exists() and any(Path(model_path).iterdir()) else "Base"
     print(f"✓ {model_type} model loaded")
+    
+    # Get actual device from model
+    actual_device = next(model.parameters()).device
+    device = str(actual_device).split(':')[0] if ':' in str(actual_device) else str(actual_device)
+    print(f"✓ Model on device: {device}")
     
     # Load test dataset
     print(f"\n[2/5] Loading test dataset from: {test_dataset_path}")
@@ -489,11 +531,16 @@ def main():
     )
     parser.add_argument(
         "--device",
-        default="cuda",
-        help="Device to use (cuda or cpu)"
+        default="auto",
+        help="Device to use (auto, cuda, or cpu). 'auto' will use CUDA if available, else CPU."
     )
     
     args = parser.parse_args()
+    
+    # Auto-detect device if requested
+    if args.device == "auto":
+        args.device = "cuda" if torch.cuda.is_available() else "cpu"
+        print(f"Auto-detected device: {args.device}")
     
     run_evaluation(
         args.model_path,

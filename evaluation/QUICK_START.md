@@ -21,10 +21,16 @@ uv run evaluation/scripts/evaluate_model.py \
     --base_model Qwen/Qwen2.5-7B-Instruct \
     --test_dataset datasets/all_mental_health_combined \
     --output base_model_results.json \
-    --max_samples 100
+    --max_samples 100 \
+    --device auto
 ```
 
-**Note:** No `--model_path` needed! The script will use the base model only.
+**Notes:**
+
+- No `--model_path` needed! The script will use the base model only.
+- `--device auto` will use CUDA if available, else CPU (default)
+- For CPU-only: `--device cpu`
+- CPU evaluation is slower but works fine for smaller sample sizes
 
 ### Evaluate Fine-Tuned Model (After Training Completes)
 
@@ -34,8 +40,15 @@ uv run evaluation/scripts/evaluate_model.py \
     --base_model Qwen/Qwen2.5-7B-Instruct \
     --test_dataset datasets/all_mental_health_combined \
     --output finetuned_model_results.json \
-    --max_samples 100
+    --max_samples 100 \
+    --device auto
 ```
+
+**Device Options:**
+
+- `--device auto` - Auto-detect (CUDA if available, else CPU) - **Recommended**
+- `--device cpu` - Force CPU (slower but works everywhere)
+- `--device cuda` - Force CUDA (faster, requires GPU)
 
 **Why this is best:**
 
