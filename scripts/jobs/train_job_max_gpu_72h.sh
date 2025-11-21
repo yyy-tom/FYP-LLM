@@ -20,7 +20,7 @@ mkdir -p logs
 
 # Set HuggingFace cache directories to use quota path (CRITICAL for avoiding quota errors)
 export HF_HOME="$BASE_DIR/.cache/huggingface"
-export TRANSFORMERS_CACHE="$BASE_DIR/.cache/huggingface/transformers"
+# Note: TRANSFORMERS_CACHE is deprecated, using HF_HOME instead
 export HF_DATASETS_CACHE="$BASE_DIR/.cache/huggingface/datasets"
 export HF_HUB_CACHE="$BASE_DIR/.cache/huggingface/hub"
 export XET_CACHE="$BASE_DIR/.cache/huggingface/xet"
@@ -30,7 +30,6 @@ export UV_CACHE_DIR="$BASE_DIR/.cache/uv"
 
 # Create cache directories
 mkdir -p "$HF_HOME"
-mkdir -p "$TRANSFORMERS_CACHE"
 mkdir -p "$HF_DATASETS_CACHE"
 mkdir -p "$HF_HUB_CACHE"
 mkdir -p "$XET_CACHE"
@@ -52,7 +51,6 @@ echo "Working Directory: $(pwd)"
 echo "=========================================="
 echo "Cache Directories:"
 echo "HF_HOME: $HF_HOME"
-echo "TRANSFORMERS_CACHE: $TRANSFORMERS_CACHE"
 echo "HF_DATASETS_CACHE: $HF_DATASETS_CACHE"
 echo "HF_HUB_CACHE: $HF_HUB_CACHE"
 echo "XET_CACHE: $XET_CACHE"
@@ -88,9 +86,26 @@ echo "=========================================="
 
 # Run training
 echo "Starting training with maximum resources..."
-echo "Config: configs/config.json"
+echo "Config: configs/config_7b_optimized.json"
 echo "=========================================="
-uv run python scripts/training/train_qwen_counsel.py  --config configs/config_14b_optimized --model_name Qwen/Qwen2.5-14B-Instruct --dataset_path ../datasets/all_mental_health_combined
+
+# Count number of GPUs available (use actual GPU count from PyTorch if available, otherwise count CUDA_VISIBLE_DEVICES)
+NUM_GPUS=$(uv run python -c 'import torch; print(torch.cuda.device_count())' 2>/dev/null)
+if [ -z "$NUM_GPUS" ] || [ "$NUM_GPUS" = "0" ]; then
+    # Fallback: count GPUs in CUDA_VISIBLE_DEVICES
+    NUM_GPUS=$(echo $CUDA_VISIBLE_DEVICES | tr ',' '\n' | grep -v '^$' | wc -l)
+fi
+echo "Number of GPUs detected: $NUM_GPUS"
+
+# Launch training with accelerate for proper multi-GPU support
+uv run accelerate launch \
+    --num_processes $NUM_GPUS \
+    --num_machines 1 \
+    --mixed_precision bf16 \
+    scripts/training/train_qwen_counsel_multi_gpu.py \
+    --config configs/config_7b_optimized \
+    --model_name Qwen/Qwen2.5-7B-Instruct \
+    --dataset_path datasets/all_mental_health_combined
 
 
 # Print completion time
