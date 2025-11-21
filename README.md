@@ -23,25 +23,25 @@ uv sync --extra cuda
 ### 2. Test Setup
 
 ```bash
-uv run python scripts/test_setup.py
+uv run python scripts/setup/test_setup.py
 ```
 
 ### 3. Prepare Dataset (Small Test)
 
 ```bash
-uv run python scripts/prepare_counsel_dataset.py --max_samples 100
+uv run python scripts/data/prepare_counsel_dataset.py --max_samples 100
 ```
 
 ### 4. Train Model
 
 ```bash
-uv run python scripts/train_qwen_counsel.py
+uv run python scripts/training/train_qwen_counsel.py
 ```
 
 ### 5. Test Inference
 
 ```bash
-uv run python scripts/inference.py --interactive
+uv run python scripts/inference/inference.py --interactive
 ```
 
 ## Project Structure
@@ -65,10 +65,10 @@ FYP-LLM/
 ## Files Overview
 
 - `configs/config.json` - Training configuration (using Qwen2.5-0.5B for testing)
-- `scripts/prepare_counsel_dataset.py` - Dataset preparation script
-- `scripts/train_qwen_counsel.py` - Main training script with LoRA
-- `scripts/inference.py` - Inference script for testing the trained model
-- `scripts/test_setup.py` - Setup verification script
+- `scripts/data/prepare_counsel_dataset.py` - Dataset preparation script
+- `scripts/training/train_qwen_counsel.py` - Main training script with LoRA
+- `scripts/inference/inference.py` - Inference script for testing the trained model
+- `scripts/setup/test_setup.py` - Setup verification script
 
 ## Configuration
 
