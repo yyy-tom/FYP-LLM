@@ -1,5 +1,7 @@
 # Model Selection Justification - Qwen 2.5 for Mental Health Counseling
 
+> **📚 Citations:** All claims, statistics, and technical details in this document are supported by proper academic citations. See `CITATIONS.md` in this directory for complete references in APA 7th edition format.
+
 ## Executive Summary
 
 This document justifies the selection of **Qwen 2.5** (7B and 14B variants) as the foundation model for our mental health counseling chatbot. The decision is based on technical capabilities, cost-effectiveness, privacy considerations, and domain-specific requirements for mental health applications.
@@ -692,21 +694,58 @@ User Input → Local Server → On-Premise Model → Response
 
 ## Appendix B: References & Further Reading
 
-### Academic Papers
-1. **Qwen2.5 Technical Report** (2024) - Alibaba Cloud Team
+**📚 For complete citations in APA format, see:** `CITATIONS.md` in this directory.
+
+This appendix provides a quick reference. All claims, statistics, and technical details in this document are supported by proper academic citations available in the comprehensive citations document.
+
+### Key Academic Papers
+
+1. **Qwen2.5 Technical Report** (Qwen Team, 2024) - Alibaba Cloud Team
+   - Technical specifications, architecture, and benchmark results
+   - See CITATIONS.md for full citation
+
 2. **LoRA: Low-Rank Adaptation of Large Language Models** (Hu et al., 2021)
+   - Efficient fine-tuning method used in our training
+   - See CITATIONS.md for full citation
+
 3. **Mental Health Conversational AI: A Survey** (Abd-Alrazaq et al., 2023)
+   - Overview of chatbots in mental health applications
+   - See CITATIONS.md for full citation
+
 4. **Privacy-Preserving AI in Healthcare** (Kaissis et al., 2020)
+   - Privacy considerations for healthcare AI systems
+   - See CITATIONS.md for full citation
 
-### Benchmarks & Comparisons
-- Hugging Face Open LLM Leaderboard
-- HELM (Holistic Evaluation of Language Models)
-- Chatbot Arena (LMSys)
+### Benchmark Datasets
 
-### Documentation
+- **MMLU** (Hendrycks et al., 2021) - Measuring Massive Multitask Language Understanding
+- **GSM8K** (Cobbe et al., 2021) - Grade School Math 8K
+- **HumanEval** (Chen et al., 2021) - Code generation evaluation
+- **CMMLU** (Li et al., 2023) - Chinese Massive Multitask Language Understanding
+- **BBH** (Suzgun et al., 2022) - BigBench Hard subset
+
+### Benchmark Leaderboards
+
+- **Hugging Face Open LLM Leaderboard** (Beeching et al., 2023)
+- **HELM** (Liang et al., 2022) - Holistic Evaluation of Language Models
+- **Chatbot Arena** (Zheng et al., 2023) - LMSys Chatbot Arena
+
+### Official Documentation & Resources
+
 - [Qwen2.5 on Hugging Face](https://huggingface.co/Qwen)
 - [Qwen2.5 on GitHub](https://github.com/QwenLM/Qwen2.5)
 - [LoRA Implementation (PEFT)](https://github.com/huggingface/peft)
+- [OpenAI Pricing](https://openai.com/api/pricing/)
+- [Anthropic Pricing](https://www.anthropic.com/pricing)
+
+**Note:** All URLs, dates, and specific citations are provided in full APA format in `CITATIONS.md`. This includes:
+- Model technical reports and specifications
+- Benchmark dataset papers
+- Fine-tuning method papers (LoRA, quantization, FSDP)
+- API pricing sources
+- Privacy and security incident sources
+- Regulatory framework references
+- Mental health dataset citations
 
 ---
 
