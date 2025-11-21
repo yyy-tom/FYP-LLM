@@ -1,20 +1,20 @@
 {
-  "_comment": "Qwen2.5-1.5B-Instruct - Optimized for MAXIMUM TRAINING SPEED on 8 GPUs (RTX 2080 Ti)",
-  "_performance": "~2-3x faster than 3B, can use much higher batch sizes for rapid convergence",
-  "_effective_batch": "Effective batch size = 8 GPUs × 8 batch × 4 accumulation = 256 samples per update",
+  "_comment": "Qwen2.5-1.5B-Instruct - Optimized for FAST & STABLE training on 8 GPUs (RTX 2080 Ti 11GB)",
+  "_performance": "~2-3x faster than 3B, conservative settings for 10.57 GB VRAM",
+  "_effective_batch": "Effective batch size = 8 GPUs × 2 batch × 8 accumulation = 128 samples per update",
 
   "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
   "dataset_path": "datasets/all_mental_health_combined",
   "output_dir": "models/qwen2.5-1.5b-fast-8gpu",
 
-  "batch_size": 8,
+  "batch_size": 2,
   "num_epochs": 3,
-  "learning_rate": 3e-4,
+  "learning_rate": 2e-4,
   "use_wandb": false,
 
   "use_4bit": true,
-  "lora_r": 32,
-  "lora_alpha": 64,
+  "lora_r": 16,
+  "lora_alpha": 32,
   "lora_dropout": 0.1,
   "lora_target_modules": [
     "q_proj",
@@ -26,10 +26,10 @@
     "down_proj"
   ],
 
-  "max_length": 1024,
-  "gradient_accumulation_steps": 4,
-  "eval_batch_size": 16,
-  "eval_accumulation_steps": 2,
+  "max_length": 768,
+  "gradient_accumulation_steps": 8,
+  "eval_batch_size": 4,
+  "eval_accumulation_steps": 4,
 
   "weight_decay": 0.01,
   "warmup_ratio": 0.05,
@@ -69,13 +69,13 @@
   "use_cache": false,
 
   "_optimization_notes": [
-    "Higher batch_size (8) leverages smaller model size for speed",
-    "Lower gradient_accumulation (4) for faster updates",
-    "Higher LoRA rank (32) for better quality without slowdown on 1.5B",
-    "Increased learning_rate (3e-4) for faster convergence",
-    "Reduced warmup (0.05) to start learning faster",
-    "More frequent eval (50 steps) to catch best model early",
-    "More workers (4) for faster data loading",
+    "Conservative batch_size (2) to fit in 10.57 GB VRAM",
+    "Higher gradient_accumulation (8) maintains effective batch of 128",
+    "Reduced max_length (768) saves significant memory",
+    "LoRA rank (16) balances quality and memory usage",
+    "Still 2-3x faster than 3B/7B models",
+    "Safe memory margins for stable training",
+    "Frequent eval (50 steps) to catch best model early",
     "Prediction_loss_only for faster evaluation"
   ]
 }
