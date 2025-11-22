@@ -33,22 +33,22 @@ echo "=========================================="
 echo "SLURM Job ID: $SLURM_JOB_ID"
 echo "Job Name: $SLURM_JOB_NAME"
 echo "Node: $SLURM_NODELIST"
-echo "Number of GPUs: $SLURM_GPUS_ON_NODE"
+
 echo "CPUs per task: $SLURM_CPUS_PER_TASK"
-echo "Memory: $SLURM_MEM_PER_NODE MB"
+
 echo "Start time: $(date)"
 echo "=========================================="
 
 # Configuration
 CONFIG_FILE="${1:-configs/config_1.5b_fast.json}"
 BASE_DIR="${HF_BASE_DIR:-/research/d7/fyp25/yyyu2}"
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+
 
 echo ""
 echo "Configuration:"
 echo "  Config file: $CONFIG_FILE"
 echo "  Base directory: $BASE_DIR"
-echo "  Project root: $PROJECT_ROOT"
+
 echo ""
 
 # Set cache directories
@@ -66,7 +66,7 @@ mkdir -p "$HF_HUB_CACHE"
 mkdir -p "$XET_CACHE"
 
 # Create logs directory if it doesn't exist
-mkdir -p "$PROJECT_ROOT/logs"
+mkdir -p "$BASE_DIR/logs"
 
 # Environment setup
 echo "=========================================="
@@ -80,11 +80,11 @@ echo "=========================================="
 # module load gcc/11.2.0
 
 # Activate virtual environment or use uv
-cd "$PROJECT_ROOT"
+cd "$BASE_DIR"
 
-if [ -f "$PROJECT_ROOT/.venv/bin/activate" ]; then
+if [ -f "$BASE_DIR/.venv/bin/activate" ]; then
     echo "Activating virtual environment..."
-    source "$PROJECT_ROOT/.venv/bin/activate"
+    source "$BASE_DIR/.venv/bin/activate"
 elif command -v uv &> /dev/null; then
     echo "Using uv for Python environment..."
     export PATH="$HOME/.cargo/bin:$PATH"
@@ -128,7 +128,7 @@ echo "Training with $NUM_GPUS GPUs"
 echo ""
 
 # Training script
-TRAINING_SCRIPT="$PROJECT_ROOT/scripts/training/train_qwen_counsel_multi_gpu.py"
+TRAINING_SCRIPT="$BASE_DIR/scripts/training/train_qwen_counsel_multi_gpu.py"
 
 if [ ! -f "$TRAINING_SCRIPT" ]; then
     echo "ERROR: Training script not found: $TRAINING_SCRIPT"
