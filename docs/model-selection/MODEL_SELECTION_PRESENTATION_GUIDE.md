@@ -434,6 +434,60 @@
 
 ---
 
+## 📚 References
+
+All claims, statistics, and technical details in this guide are supported by proper academic citations. For complete references in APA 7th edition format, see **Appendix B: References** in `MODEL_SELECTION_JUSTIFICATION.md` or the comprehensive `CITATIONS.md` file.
+
+### Key Citations Referenced in This Guide
+
+**Model Specifications:**
+
+- Qwen Team (2024). Qwen2.5 Technical Report
+- OpenAI (2023). GPT-4 Technical Report
+- Anthropic (2024). Claude 3 Model Card
+- Dubey et al. (2024). LLaMA 3.1
+- Jiang et al. (2023). Mistral 7B
+
+**Benchmark Datasets:**
+
+- Hendrycks et al. (2021). MMLU
+- Cobbe et al. (2021). GSM8K
+- Chen et al. (2021). HumanEval
+- Li et al. (2023). CMMLU
+- Suzgun et al. (2022). BBH
+
+**Fine-Tuning Methods:**
+
+- Hu et al. (2021). LoRA
+- Dettmers et al. (2024). QLoRA
+- Zhao et al. (2023). FSDP
+
+**Pricing Information:**
+
+- OpenAI (2024). Pricing
+- Anthropic (2024). Pricing
+
+**Privacy & Security:**
+
+- OpenAI (2023). ChatGPT data breach
+- Garante per la Protezione dei Dati Personali (2023). Italy ChatGPT ban
+- Lee (2023); Kim (2023). Samsung data leak
+
+**Mental Health & AI:**
+
+- Abd-Alrazaq et al. (2023). Mental health conversational AI survey
+- Kaissis et al. (2020). Privacy-preserving AI in healthcare
+
+**Regulatory Frameworks:**
+
+- European Union (2016). GDPR
+- U.S. Department of Health and Human Services (1996). HIPAA
+- Hong Kong Privacy Commissioner for Personal Data (2021). Personal Data (Privacy) Ordinance
+
+For full citations with URLs, DOIs, and complete bibliographic information, please refer to the References section in `MODEL_SELECTION_JUSTIFICATION.md`.
+
+---
+
 ## 📚 Additional Resources
 
 ### If You Need More Details:
