@@ -2,10 +2,10 @@
 #SBATCH --job-name=train_1.5b_fast
 #SBATCH --output=logs/train_1.5b_fast_%j.out
 #SBATCH --error=logs/train_1.5b_fast_%j.err
-#SBATCH --partition=gpu
+#SBATCH --partition=gpu_72h
 #SBATCH --gres=rtx2080:gpu:8
 #SBATCH --cpus-per-task=30
-#SBATCH --mem=128G
+
 #SBATCH --time=72:00:00
 
 
@@ -40,8 +40,9 @@ echo "Start time: $(date)"
 echo "=========================================="
 
 # Configuration
-CONFIG_FILE="${1:-configs/config_1.5b_fast.json}"
-BASE_DIR="${HF_BASE_DIR:-/research/d7/fyp25/yyyu2}"
+BASE_DIR="/research/d7/fyp25/yyyu2/FYP-LLM/"
+CONFIG_FILE="$BASE_DIR/configs/config_1.5b_fast.json"
+
 
 
 echo ""
