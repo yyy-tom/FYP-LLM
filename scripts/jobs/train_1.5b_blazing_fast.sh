@@ -3,7 +3,7 @@
 #SBATCH --output=logs/train_blazing_%j.out
 #SBATCH --error=logs/train_blazing_%j.err
 #SBATCH --partition=gpu_72h
-#SBATCH --gres=rtx2080:gpu:8
+#SBATCH --gres=gpu:rtx2080:8
 #SBATCH --cpus-per-task=30
 #SBATCH --time=02:00:00
 

@@ -1,14 +1,14 @@
 {
   "_comment": "Qwen2.5-1.5B-Instruct - BLAZING FAST mode - Maximum speed, minimal quality",
   "_use_case": "Fastest possible training - 30-45 minutes on 8 GPUs",
-  "_effective_batch": "Effective batch size = 8 GPUs × 8 batch × 2 accumulation = 128 samples per update",
+  "_effective_batch": "Effective batch size = 8 GPUs × 2 batch × 8 accumulation = 128 samples per update",
   "_quality_warning": "This config prioritizes SPEED over quality. Expect reduced performance.",
 
   "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
   "dataset_path": "datasets/all_mental_health_combined",
   "output_dir": "models/qwen2.5-1.5b-blazing-fast",
 
-  "batch_size": 8,
+  "batch_size": 2,
   "num_epochs": 1,
   "learning_rate": 5e-4,
   "use_wandb": false,
@@ -21,15 +21,15 @@
   "lora_target_modules": ["q_proj", "v_proj"],
 
   "max_length": 512,
-  "gradient_accumulation_steps": 2,
-  "eval_batch_size": 16,
+  "gradient_accumulation_steps": 8,
+  "eval_batch_size": 8,
   "eval_accumulation_steps": 1,
 
   "weight_decay": 0.0,
   "warmup_ratio": 0.01,
   "logging_steps": 20,
   "eval_steps": 200,
-  "save_steps": 500,
+  "save_steps": 400,
   "save_total_limit": 1,
 
   "fp16": false,
@@ -43,7 +43,7 @@
 
   "dataloader_num_workers": 8,
   "dataloader_pin_memory": true,
-  "gradient_checkpointing": false,
+  "gradient_checkpointing": true,
   "ddp_find_unused_parameters": false,
 
   "optim": "adamw_torch_fused",
@@ -64,14 +64,14 @@
 
   "_extreme_speed_optimizations": [
     "✅ Only 1 epoch - minimal training time",
-    "✅ max_length=256 (4x faster than 1024)",
+    "✅ max_length=512 (2x faster than 1024)",
     "✅ LoRA rank=8 (minimal adapter size)",
     "✅ Only 2 LoRA modules (q_proj, v_proj) - 3.5x fewer parameters",
-    "✅ batch_size=8 per GPU - maximum throughput",
-    "✅ gradient_accumulation=2 - fast optimizer updates",
-    "✅ No gradient checkpointing - trades memory for speed",
+    "✅ batch_size=2 per GPU - safe for RTX 2080 Ti (10.57 GB VRAM)",
+    "✅ gradient_accumulation=8 - maintains effective batch of 128",
+    "✅ Gradient checkpointing enabled - necessary for max_length=512",
     "✅ Rare eval (200 steps) - minimal validation overhead",
-    "✅ Rare saves (500 steps) - minimal I/O",
+    "✅ Rare saves (400 steps) - minimal I/O",
     "✅ No early stopping - no eval overhead",
     "✅ Constant LR schedule - no schedule compute",
     "✅ No weight decay - faster optimizer",
@@ -79,7 +79,7 @@
     "✅ 8 dataloader workers - maximize data throughput",
     "✅ High learning rate (5e-4) - rapid convergence",
     "✅ ignore_checkpoints=true - always start fresh (no resume overhead)",
-    "⚠️ Expected time: 30-45 minutes on 8 GPUs",
+    "⚠️ Expected time: 45-60 minutes on 8 GPUs (slightly slower due to gradient checkpointing)",
     "⚠️ Quality will be significantly lower than normal configs"
   ]
 }
