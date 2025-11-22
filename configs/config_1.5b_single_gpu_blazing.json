@@ -1,0 +1,86 @@
+{
+  "_comment": "Qwen2.5-1.5B-Instruct - BLAZING FAST single GPU - Lightning fast prototyping",
+  "_use_case": "Absolute fastest training on 1 GPU - 10-15 minutes",
+  "_effective_batch": "Effective batch size = 1 GPU × 32 batch × 1 accumulation = 32 samples per update",
+  "_quality_warning": "SPEED ONLY - Quality will be poor. Good for testing code/pipelines.",
+  
+  "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+  "dataset_path": "datasets/all_mental_health_combined",
+  "output_dir": "models/qwen2.5-1.5b-single-blazing",
+  
+  "batch_size": 32,
+  "num_epochs": 1,
+  "learning_rate": 5e-4,
+  "use_wandb": false,
+  "ignore_checkpoints": true,
+  
+  "use_4bit": true,
+  "lora_r": 4,
+  "lora_alpha": 8,
+  "lora_dropout": 0.0,
+  "lora_target_modules": [
+    "q_proj",
+    "v_proj"
+  ],
+  
+  "max_length": 128,
+  "gradient_accumulation_steps": 1,
+  "eval_batch_size": 64,
+  "eval_accumulation_steps": 1,
+  
+  "weight_decay": 0.0,
+  "warmup_ratio": 0.0,
+  "logging_steps": 50,
+  "eval_steps": 500,
+  "save_steps": 1000,
+  "save_total_limit": 1,
+  
+  "fp16": false,
+  "bf16": true,
+  "prediction_loss_only": true,
+  "early_stopping": false,
+  "seed": 42,
+  
+  "run_name": "qwen2.5-1.5b-single-blazing",
+  "wandb_project": "qwen2.5-1.5b-counsel-chat",
+  
+  "dataloader_num_workers": 8,
+  "dataloader_pin_memory": true,
+  "gradient_checkpointing": false,
+  "ddp_find_unused_parameters": false,
+  
+  "optim": "adamw_torch_fused",
+  "adam_beta1": 0.9,
+  "adam_beta2": 0.95,
+  "adam_epsilon": 1e-8,
+  "max_grad_norm": 1.0,
+  "lr_scheduler_type": "constant",
+  
+  "save_strategy": "steps",
+  "eval_strategy": "steps",
+  "load_best_model_at_end": false,
+  "metric_for_best_model": "eval_loss",
+  "greater_is_better": false,
+  "report_to": "none",
+  "remove_unused_columns": false,
+  "use_cache": false,
+  
+  "_insane_speed_optimizations": [
+    "🚀 Only 1 epoch",
+    "🚀 max_length=128 (TINY - 8x faster than 1024)",
+    "🚀 LoRA rank=4 (absolute minimum)",
+    "🚀 Only 2 LoRA modules (50% fewer params than already-minimal config)",
+    "🚀 batch_size=32 - MAXIMUM single GPU throughput",
+    "🚀 No gradient accumulation - instant updates",
+    "🚀 No gradient checkpointing",
+    "🚀 Extremely rare eval/saves",
+    "🚀 No warmup whatsoever",
+    "🚀 No weight decay",
+    "🚀 No dropout",
+    "🚀 Constant learning rate",
+    "🚀 ignore_checkpoints=true - always start fresh",
+    "⚡ Expected time: 10-15 minutes on single RTX 2080 Ti",
+    "⚠️ This is for TESTING ONLY - quality will be very poor"
+  ]
+}
+

@@ -636,7 +636,12 @@ class MultiGPUTrainer:
         resume_from_checkpoint = None
         output_dir = self.config["output_dir"]
         
-        if os.path.exists(output_dir):
+        # Check if user wants to ignore existing checkpoints
+        ignore_checkpoints = self.config.get("ignore_checkpoints", False)
+        
+        if ignore_checkpoints:
+            logger.info("ignore_checkpoints=True: Starting fresh training, ignoring any existing checkpoints")
+        elif os.path.exists(output_dir):
             checkpoints = [d for d in os.listdir(output_dir) if d.startswith("checkpoint-") and not d.endswith(".backup")]
             if checkpoints:
                 # Get the latest checkpoint by step number (skip non-numeric suffixes)

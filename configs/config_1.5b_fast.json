@@ -11,6 +11,7 @@
   "num_epochs": 3,
   "learning_rate": 2e-4,
   "use_wandb": false,
+  "ignore_checkpoints": false,
 
   "use_4bit": true,
   "lora_r": 16,
