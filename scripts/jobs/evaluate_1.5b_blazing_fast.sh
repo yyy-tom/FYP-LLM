@@ -275,32 +275,44 @@ else
     DEVICE_ARG="auto"
 fi
 
-# Run evaluation with multi-GPU support if available
+# Build evaluation command with optional flags
+EVAL_CMD="uv run $EVALUATION_SCRIPT"
+EVAL_CMD="$EVAL_CMD --model_path $MODEL_PATH"
+EVAL_CMD="$EVAL_CMD --base_model $BASE_MODEL"
+EVAL_CMD="$EVAL_CMD --test_dataset $TEST_DATASET"
+EVAL_CMD="$EVAL_CMD --output $OUTPUT_FILE"
+EVAL_CMD="$EVAL_CMD --max_samples $MAX_SAMPLES"
+EVAL_CMD="$EVAL_CMD --device $DEVICE_ARG"
+
+# Add multi-GPU flag if enabled
 if [ "$USE_MULTI_GPU" = "true" ]; then
     echo ""
     echo "🚀 Launching multi-GPU evaluation (DataParallel)..."
     echo "   This will use all $NUM_GPUS GPUs to accelerate evaluation"
     echo ""
-    
-    # Use --multi_gpu flag - Python script will handle DataParallel
-    uv run "$EVALUATION_SCRIPT" \
-        --model_path "$MODEL_PATH" \
-        --base_model "$BASE_MODEL" \
-        --test_dataset "$TEST_DATASET" \
-        --output "$OUTPUT_FILE" \
-        --max_samples "$MAX_SAMPLES" \
-        --device "$DEVICE_ARG" \
-        --multi_gpu
+    EVAL_CMD="$EVAL_CMD --multi_gpu"
 else
-    # Single GPU or CPU
-    uv run "$EVALUATION_SCRIPT" \
-        --model_path "$MODEL_PATH" \
-        --base_model "$BASE_MODEL" \
-        --test_dataset "$TEST_DATASET" \
-        --output "$OUTPUT_FILE" \
-        --max_samples "$MAX_SAMPLES" \
-        --device "$DEVICE_ARG"
+    echo ""
+    echo "🚀 Launching evaluation..."
+    echo ""
 fi
+
+# Add comparison flags (can be enabled via environment variables or script modification)
+# To enable comparison, set: COMPARE_WITH_BASE=true before running
+if [ "${COMPARE_WITH_BASE:-false}" = "true" ]; then
+    echo "📊 Comparison mode enabled: Will compare with base model"
+    EVAL_CMD="$EVAL_CMD --compare_with_base"
+    EVAL_CMD="$EVAL_CMD --num_comparison_examples ${NUM_COMPARISON_EXAMPLES:-10}"
+fi
+
+# Add save responses flag (can be enabled via environment variable)
+if [ "${SAVE_RESPONSES:-false}" = "true" ]; then
+    echo "💾 Response saving enabled: Will save all individual responses"
+    EVAL_CMD="$EVAL_CMD --save_responses"
+fi
+
+# Run the evaluation
+eval $EVAL_CMD
 
 EXIT_CODE=$?
 

@@ -398,7 +398,10 @@ def run_evaluation(
     output_file: str = "evaluation_results.json",
     max_samples: int = 100,
     device: str = "cuda",
-    use_multi_gpu: bool = False
+    use_multi_gpu: bool = False,
+    compare_with_base: bool = False,
+    save_responses: bool = False,
+    num_comparison_examples: int = 10
 ):
     """Run complete evaluation pipeline."""
     
@@ -440,8 +443,22 @@ def run_evaluation(
         'model_path': model_path if model_path else None,
         'base_model': base_model_name,
         'test_samples': min(max_samples, len(test_data)),
-        'metrics': {}
+        'metrics': {},
+        'comparisons': [] if compare_with_base else None,
+        'responses': [] if save_responses else None
     }
+    
+    # Load base model for comparison if requested
+    base_model = None
+    base_tokenizer = None
+    if compare_with_base and model_path:
+        print("\n[0/5] Loading base model for comparison...")
+        try:
+            base_model, base_tokenizer = load_model(None, base_model_name, device, False)
+            print("✓ Base model loaded for comparison")
+        except Exception as e:
+            print(f"⚠️  Failed to load base model for comparison: {e}")
+            compare_with_base = False
     
     # 1. Perplexity
     print(f"\n[3/5] Calculating perplexity...")
@@ -474,8 +491,16 @@ def run_evaluation(
             user_input = example.get("input", example.get("instruction", ""))
             reference = example.get("output", "")
             
-            # Generate response
+            # Generate response from fine-tuned model
             generated = generate_response(model, tokenizer, user_input, device)
+            
+            # Generate response from base model if comparison requested
+            base_generated = None
+            if compare_with_base and base_model is not None:
+                try:
+                    base_generated = generate_response(base_model, base_tokenizer, user_input, device)
+                except Exception as e:
+                    print(f"  Warning: Failed to generate base model response for sample {i}: {e}")
             
             # BLEU
             if BLEU_AVAILABLE and reference:
@@ -506,6 +531,45 @@ def run_evaluation(
             unique_sentences = len(set(s.lower() for s in sentences))
             coherence = unique_sentences / max(len(sentences), 1)
             coherence_scores.append(coherence)
+            
+            # Store response and comparison if requested
+            if save_responses:
+                response_data = {
+                    'sample_id': i,
+                    'input': user_input,
+                    'reference': reference,
+                    'generated': generated,
+                    'bleu': calculate_bleu(reference, generated) if BLEU_AVAILABLE and reference else None,
+                    'rouge': calculate_rouge(reference, generated, rouge_scorer_obj) if (ROUGE_AVAILABLE and reference and 'rouge_scorer_obj' in locals()) else None,
+                    'domain_quality': quality,
+                    'safety': is_safe,
+                    'length': len(words),
+                    'coherence': coherence
+                }
+                if base_generated:
+                    response_data['base_generated'] = base_generated
+                results['responses'].append(response_data)
+            
+            # Store comparison examples
+            if compare_with_base and base_generated and i < num_comparison_examples:
+                base_quality = evaluate_counseling_quality(base_generated)
+                base_safety_issues, base_safety = evaluate_safety(base_generated)
+                comparison = {
+                    'sample_id': i,
+                    'input': user_input,
+                    'reference': reference,
+                    'base_response': base_generated,
+                    'finetuned_response': generated,
+                    'base_bleu': calculate_bleu(reference, base_generated) if BLEU_AVAILABLE and reference else None,
+                    'finetuned_bleu': calculate_bleu(reference, generated) if BLEU_AVAILABLE and reference else None,
+                    'base_rouge': calculate_rouge(reference, base_generated, rouge_scorer_obj) if (ROUGE_AVAILABLE and reference and 'rouge_scorer_obj' in locals()) else None,
+                    'finetuned_rouge': calculate_rouge(reference, generated, rouge_scorer_obj) if (ROUGE_AVAILABLE and reference and 'rouge_scorer_obj' in locals()) else None,
+                    'base_domain_quality': base_quality,
+                    'finetuned_domain_quality': quality,
+                    'base_safety': base_safety,
+                    'finetuned_safety': is_safe
+                }
+                results['comparisons'].append(comparison)
             
         except Exception as e:
             print(f"Error processing sample {i}: {e}")
@@ -556,6 +620,23 @@ def run_evaluation(
         json.dump(results, f, indent=2)
     print("✓ Evaluation complete!")
     
+    # Print comparison summary if available
+    if compare_with_base and results['comparisons']:
+        print(f"\n{'='*60}")
+        print("Comparison Summary (Base vs Fine-tuned)")
+        print(f"{'='*60}")
+        print(f"Saved {len(results['comparisons'])} comparison examples")
+        if results['comparisons']:
+            avg_base_bleu = np.mean([c['base_bleu'] for c in results['comparisons'] if c['base_bleu'] is not None])
+            avg_ft_bleu = np.mean([c['finetuned_bleu'] for c in results['comparisons'] if c['finetuned_bleu'] is not None])
+            print(f"Average BLEU - Base: {avg_base_bleu:.4f}, Fine-tuned: {avg_ft_bleu:.4f}")
+            if avg_base_bleu > 0:
+                improvement = ((avg_ft_bleu - avg_base_bleu) / avg_base_bleu) * 100
+                print(f"BLEU Improvement: {improvement:+.2f}%")
+    
+    if save_responses and results['responses']:
+        print(f"\nSaved {len(results['responses'])} individual responses")
+    
     return results
 
 
@@ -598,6 +679,22 @@ def main():
         "--multi_gpu",
         action="store_true",
         help="Use multiple GPUs for parallel evaluation (DataParallel)"
+    )
+    parser.add_argument(
+        "--compare_with_base",
+        action="store_true",
+        help="Compare fine-tuned model responses with base model responses"
+    )
+    parser.add_argument(
+        "--save_responses",
+        action="store_true",
+        help="Save individual model responses for each sample"
+    )
+    parser.add_argument(
+        "--num_comparison_examples",
+        type=int,
+        default=10,
+        help="Number of examples to save for comparison (default: 10)"
     )
     
     args = parser.parse_args()
@@ -664,7 +761,10 @@ def main():
         args.output,
         args.max_samples,
         args.device,
-        use_multi_gpu
+        use_multi_gpu,
+        args.compare_with_base,
+        args.save_responses,
+        args.num_comparison_examples
     )
 
 
