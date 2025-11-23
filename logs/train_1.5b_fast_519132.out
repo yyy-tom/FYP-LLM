@@ -1,0 +1,122 @@
+==========================================
+SLURM Job ID: 519132
+Job Name: train_1.5b_fast
+Node: gpu39
+CPUs per task: 30
+Start time: Sat Nov 22 05:42:57 PM HKT 2025
+==========================================
+
+Configuration:
+  Config file: /research/d7/fyp25/yyyu2/FYP-LLM//configs/config_1.5b_fast.json
+  Base directory: /research/d7/fyp25/yyyu2/FYP-LLM/
+
+==========================================
+Setting up Python environment...
+==========================================
+Activating virtual environment...
+
+Environment check:
+Python 3.12.12
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/python
+
+GPU Information:
+0, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+1, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+2, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+3, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+4, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+5, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+6, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+7, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+
+Using config file: /research/d7/fyp25/yyyu2/FYP-LLM//configs/config_1.5b_fast.json
+
+{
+  "_comment": "Qwen2.5-1.5B-Instruct - Optimized for FAST & STABLE training on 8 GPUs (RTX 2080 Ti 11GB)",
+  "_performance": "~2-3x faster than 3B, conservative settings for 10.57 GB VRAM",
+  "_effective_batch": "Effective batch size = 8 GPUs × 2 batch × 8 accumulation = 128 samples per update",
+
+  "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+  "dataset_path": "datasets/all_mental_health_combined",
+  "output_dir": "models/qwen2.5-1.5b-fast-8gpu",
+
+  "batch_size": 2,
+  "num_epochs": 3,
+  "learning_rate": 2e-4,
+  "use_wandb": false,
+
+  "use_4bit": true,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.1,
+  "lora_target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+
+  "max_length": 768,
+  "gradient_accumulation_steps": 8,
+  "eval_batch_size": 4,
+  "eval_accumulation_steps": 4,
+
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.05,
+  "logging_steps": 5,
+  "eval_steps": 50,
+  "save_steps": 200,
+  "save_total_limit": 3,
+
+  "fp16": false,
+  "bf16": true,
+  "prediction_loss_only": true,
+  "early_stopping": true,
+  "seed": 42,
+
+  "run_name": "qwen2.5-1.5b-fast-8gpu",
+  "wandb_project": "qwen2.5-1.5b-counsel-chat",
+
+  "dataloader_num_workers": 4,
+  "dataloader_pin_memory": true,
+  "gradient_checkpointing": true,
+  "ddp_find_unused_parameters": false,
+
+  "optim": "adamw_torch_fused",
+  "adam_beta1": 0.9,
+  "adam_beta2": 0.999,
+  "adam_epsilon": 1e-8,
+  "max_grad_norm": 1.0,
+  "lr_scheduler_type": "cosine",
+
+  "save_strategy": "steps",
+  "eval_strategy": "steps",
+  "load_best_model_at_end": true,
+  "metric_for_best_model": "eval_loss",
+  "greater_is_better": false,
+  "report_to": "none",
+  "remove_unused_columns": false,
+  "use_cache": false,
+
+  "_optimization_notes": [
+    "Conservative batch_size (2) to fit in 10.57 GB VRAM",
+    "Higher gradient_accumulation (8) maintains effective batch of 128",
+    "Reduced max_length (768) saves significant memory",
+    "LoRA rank (16) balances quality and memory usage",
+    "Still 2-3x faster than 3B/7B models",
+    "Safe memory margins for stable training",
+    "Frequent eval (50 steps) to catch best model early",
+    "Prediction_loss_only for faster evaluation"
+  ]
+}
+
+Training with 8 GPUs
+
+==========================================
+Starting training at Sat Nov 22 05:42:58 PM HKT 2025
+==========================================
+
+Launching multi-GPU training with accelerate...

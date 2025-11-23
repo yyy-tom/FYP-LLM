@@ -1,0 +1,32 @@
+==========================================
+SLURM Job ID: 519125
+Job Name: train_1.5b_fast
+Node: gpu39
+CPUs per task: 30
+Start time: Sat Nov 22 05:17:20 PM HKT 2025
+==========================================
+
+Configuration:
+  Config file: configs/config_1.5b_fast.json
+  Base directory: /research/d7/fyp25/yyyu2
+
+==========================================
+Setting up Python environment...
+==========================================
+Using uv for Python environment...
+
+Environment check:
+Python 3.12.3
+/bin/python
+
+GPU Information:
+0, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+1, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+2, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+3, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+4, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+5, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+6, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+7, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+
+ERROR: Config file not found: configs/config_1.5b_fast.json

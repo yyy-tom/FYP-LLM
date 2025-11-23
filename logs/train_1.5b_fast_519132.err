@@ -1,0 +1,204 @@
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2025-11-22 17:44:41,517 - __main__ - INFO - Logging configured for main process (rank 0, local_rank 0)
+2025-11-22 17:44:41,520 - __main__ - INFO - HF_HOME: /research/d7/fyp25/yyyu2/FYP-LLM//.cache/huggingface
+2025-11-22 17:44:41,521 - __main__ - INFO - TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/FYP-LLM//.cache/huggingface/transformers
+2025-11-22 17:44:41,547 - __main__ - INFO - Starting multi-GPU training setup...
+2025-11-22 17:44:41,547 - __main__ - INFO - World size: 8, Rank: 0, Local rank: 0
+2025-11-22 17:44:43,917 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-1.5B-Instruct
+2025-11-22 17:44:47,114 - __main__ - INFO - Tokenizer loaded. Vocab size: 151665
+2025-11-22 17:44:47,115 - __main__ - INFO - Loading model from Qwen/Qwen2.5-1.5B-Instruct
+2025-11-22 17:44:47,323 - __main__ - INFO - Number of GPUs available: 8
+2025-11-22 17:44:47,403 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 17:44:47,405 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 17:44:47,406 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 17:44:47,406 - __main__ - INFO - GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 17:44:47,406 - __main__ - INFO - GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 17:44:47,406 - __main__ - INFO - GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 17:44:47,406 - __main__ - INFO - GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 17:44:47,406 - __main__ - INFO - GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 17:44:47,406 - __main__ - INFO - GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 17:44:47,406 - __main__ - INFO - Total VRAM across all GPUs: 84.55 GB
+2025-11-22 17:44:47,406 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 17:44:47,408 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 17:44:47,416 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 17:44:47,423 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 17:44:47,433 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 17:44:47,442 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 17:44:47,446 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 17:44:54,886 - __main__ - INFO - Using 4-bit quantization with BitsAndBytes
+2025-11-22 17:44:54,886 - __main__ - INFO - Loading model with 4-bit quantization...
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+loading configuration file config.json from cache at /research/d7/fyp25/yyyu2/FYP-LLM//.cache/huggingface/transformers/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/config.json
+`torch_dtype` is deprecated! Use `dtype` instead!
+Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151645,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 32768,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 1041, in _get_resolved_checkpoint_files
+    resolved_archive_file = cached_file(pretrained_model_name_or_path, filename, **cached_file_kwargs)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 322, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 567, in cached_files
+    raise e
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 479, in cached_files
+    hf_hub_download(
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1010, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1171, in _hf_hub_download_to_cache_dir
+    _download_to_tmp_and_move(
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1723, in _download_to_tmp_and_move
+    xet_get(
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 629, in xet_get
+    download_files(
+RuntimeError: Data processing error: CAS service error : IO Error: Disk quota exceeded (os error 122)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 952, in <module>
+    main()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 948, in main
+    trainer.train()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 710, in train
+    self.setup_model()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 224, in setup_model
+    self.model = AutoModelForCausalLM.from_pretrained(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 604, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 277, in _wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4903, in from_pretrained
+    checkpoint_files, sharded_metadata = _get_resolved_checkpoint_files(
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 1164, in _get_resolved_checkpoint_files
+    raise OSError(
+OSError: Can't load the model for 'Qwen/Qwen2.5-1.5B-Instruct'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure 'Qwen/Qwen2.5-1.5B-Instruct' is the correct path to a directory containing a file named pytorch_model.bin, tf_model.h5, model.ckpt or flax_model.msgpack.
+W1122 17:45:27.741000 3509975 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 3510081 closing signal SIGTERM
+W1122 17:45:27.745000 3509975 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 3510082 closing signal SIGTERM
+W1122 17:45:27.747000 3509975 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 3510083 closing signal SIGTERM
+W1122 17:45:27.749000 3509975 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 3510084 closing signal SIGTERM
+W1122 17:45:27.750000 3509975 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 3510086 closing signal SIGTERM
+W1122 17:45:27.752000 3509975 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 3510087 closing signal SIGTERM
+W1122 17:45:27.754000 3509975 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 3510088 closing signal SIGTERM
+E1122 17:45:29.552000 3509975 torch/distributed/elastic/multiprocessing/api.py:882] failed (exitcode: 1) local_rank: 4 (pid: 3510085) of binary: /research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/python
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/accelerate", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/accelerate_cli.py", line 50, in main
+    args.func(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 1226, in launch_command
+    multi_gpu_launcher(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 853, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/run.py", line 927, in run
+    elastic_launch(
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 156, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 293, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-11-22_17:45:27
+  host      : gpu39.cse.cuhk.edu.hk
+  rank      : 4 (local_rank: 4)
+  exitcode  : 1 (pid: 3510085)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

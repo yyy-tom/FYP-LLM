@@ -1,0 +1,67 @@
+Job ID: 518924
+Job Name: qwen_train
+Node: gpu39
+Start Time: Fri Nov 21 08:59:35 PM HKT 2025
+Working Directory: /research/d7/fyp25/yyyu2/FYP-LLM
+HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+HF_DATASETS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/datasets
+HF_HUB_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/hub
+XET_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/xet
+UV_CACHE_DIR: /research/d7/fyp25/yyyu2/.cache/uv
+CUDA_HOME: /usr/local/cuda-10.0
+CUDA version: nvcc not found
+GPU Information:
+Fri Nov 21 20:59:35 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.124.06             Driver Version: 570.124.06     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:4F:00.0 Off |                  N/A |
+| 27%   27C    P8             22W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:52:00.0 Off |                  N/A |
+| 30%   37C    P5             21W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:53:00.0 Off |                  N/A |
+| 31%   39C    P5             53W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:56:00.0 Off |                  N/A |
+| 33%   40C    P5              5W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   4  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:57:00.0 Off |                  N/A |
+| 31%   38C    P5             23W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   5  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:CE:00.0 Off |                  N/A |
+| 31%   38C    P8             27W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   6  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:D1:00.0 Off |                  N/A |
+| 37%   41C    P5             21W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   7  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:D2:00.0 Off |                  N/A |
+| 30%   38C    P5             11W /  250W |       1MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Python version: Python 3.12.3
+PyTorch version: 
+CUDA available: 
+Number of GPUs: 
+Starting training...

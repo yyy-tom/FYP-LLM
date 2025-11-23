@@ -1,0 +1,156 @@
+The following values were not passed to `accelerate launch` and had defaults used instead:
+		More than one GPU was found, enabling multi-GPU training.
+		If this was unintended please pass in `--num_processes=1`.
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+2025-11-22 00:43:57,220 - __main__ - INFO - Logging configured for main process (rank 0, local_rank 0)
+2025-11-22 00:43:57,224 - __main__ - INFO - HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+2025-11-22 00:43:57,224 - __main__ - INFO - TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+2025-11-22 00:43:57,233 - __main__ - INFO - Starting multi-GPU training setup...
+2025-11-22 00:43:57,234 - __main__ - INFO - World size: 2, Rank: 0, Local rank: 0
+2025-11-22 00:43:57,380 - __main__ - INFO - Found existing checkpoint: models/qwen2.5-7b-counsel-chat-8gpu/checkpoint-2000
+2025-11-22 00:43:57,380 - __main__ - INFO - PRIORITY: Will resume training from checkpoint...
+2025-11-22 00:43:57,381 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-7B-Instruct
+2025-11-22 00:43:58,597 - __main__ - INFO - Tokenizer loaded. Vocab size: 151665
+2025-11-22 00:43:58,597 - __main__ - INFO - Loading model from Qwen/Qwen2.5-7B-Instruct
+2025-11-22 00:43:58,803 - __main__ - INFO - Number of GPUs available: 2
+2025-11-22 00:43:58,810 - __main__ - INFO - GPU 0: NVIDIA TITAN RTX - 23.46 GB VRAM
+2025-11-22 00:43:58,810 - __main__ - INFO - GPU 1: NVIDIA TITAN RTX - 23.46 GB VRAM
+2025-11-22 00:43:58,810 - __main__ - INFO - Total VRAM across all GPUs: 46.92 GB
+2025-11-22 00:44:00,729 - __main__ - INFO - Using 4-bit quantization with BitsAndBytes
+2025-11-22 00:44:00,729 - __main__ - INFO - Loading model with 4-bit quantization...
+loading configuration file config.json from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/config.json
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151645,
+  "hidden_act": "silu",
+  "hidden_size": 3584,
+  "initializer_range": 0.02,
+  "intermediate_size": 18944,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 32768,
+  "max_window_layers": 28,
+  "model_type": "qwen2",
+  "num_attention_heads": 28,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 4,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": null,
+  "tie_word_embeddings": false,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_sliding_window": false,
+  "vocab_size": 152064
+}
+
+loading weights file model.safetensors from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/model.safetensors.index.json
+Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151645
+}
+
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:16<00:50, 16.86s/it]Loading checkpoint shards:  25%|██▌       | 1/4 [00:16<00:50, 16.92s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:33<00:33, 16.72s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:33<00:33, 16.74s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:50<00:16, 16.81s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:50<00:16, 16.82s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:04<00:00, 15.88s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:04<00:00, 16.21s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [01:04<00:00, 15.88s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:04<00:00, 16.22s/it]
+loading configuration file generation_config.json from cache at /research/d7/fyp25/yyyu2/.cache/huggingface/transformers/models--Qwen--Qwen2.5-7B-Instruct/snapshots/a09a35458c702b33eeacc393d103063234e8bc28/generation_config.json
+Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.05,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+Could not locate the custom_generate/generate.py inside Qwen/Qwen2.5-7B-Instruct.
+2025-11-22 00:45:07,195 - __main__ - INFO - Model loaded with 4-bit quantization on device cuda:0
+2025-11-22 00:45:07,216 - __main__ - INFO - Model prepared for k-bit training
+2025-11-22 00:45:07,216 - __main__ - INFO - Disabled use_cache for BitsAndBytes quantized model
+2025-11-22 00:45:07,403 - __main__ - INFO - Enabling gradient checkpointing for memory savings.
+2025-11-22 00:45:07,419 - __main__ - INFO - Trainable parameters: 2,523,136 / 4,355,495,424 (0.06%)
+2025-11-22 00:45:07,419 - __main__ - INFO - Model loaded and LoRA configured
+2025-11-22 00:45:07,803 - __main__ - INFO - Model already loaded from checkpoint - clearing memory before Trainer initialization...
+2025-11-22 00:45:08,565 - __main__ - INFO - GPU 0 memory after model load: 7.22 GB allocated, 10.72 GB reserved, 23.46 GB total
+2025-11-22 00:45:08,566 - __main__ - INFO - Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+2025-11-22 00:45:10,278 - __main__ - INFO - Dataset loaded. Train: 561962, Val: 62443
+2025-11-22 00:45:10,279 - __main__ - INFO - Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+2025-11-22 00:45:11,921 - __main__ - INFO - Pre-tokenized dataset loaded successfully!
+PyTorch: setting up devices
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/training/train_qwen_counsel_multi_gpu.py:549: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/training/train_qwen_counsel_multi_gpu.py:549: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+Using auto half precision backend
+2025-11-22 00:45:12,117 - __main__ - INFO - Verified gradient checkpointing remains enabled after Trainer initialization
+2025-11-22 00:45:12,118 - __main__ - INFO - Starting training...
+2025-11-22 00:45:12,118 - __main__ - INFO - Training on 2 GPU(s)
+2025-11-22 00:45:12,126 - __main__ - INFO - Training steps per epoch: 280981
+2025-11-22 00:45:12,134 - __main__ - INFO - Total training steps: 561962
+2025-11-22 00:45:12,134 - __main__ - INFO - PRIORITY: Resuming from checkpoint: models/qwen2.5-7b-counsel-chat-8gpu/checkpoint-2000
+2025-11-22 00:45:15,017 - __main__ - INFO - GPU 0 memory before training: 7.22 GB allocated, 10.72 GB reserved, 12.74 GB free
+2025-11-22 00:45:15,017 - __main__ - INFO - Cleared CUDA cache aggressively before training start
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+Loading model from models/qwen2.5-7b-counsel-chat-8gpu/checkpoint-2000.
+***** Running training *****
+  Num examples = 561,962
+  Num Epochs = 2
+  Instantaneous batch size per device = 1
+  Total train batch size (w. parallel, distributed & accumulation) = 128
+  Gradient Accumulation steps = 64
+  Total optimization steps = 8,782
+  Number of trainable parameters = 2,523,136
+  Continuing training from checkpoint, will skip to saved global_step
+  Continuing training from epoch 0
+  Continuing training from global step 2000
+  Will skip the first 0 epochs then the first 128000 batches in the first epoch.
+  0%|          | 0/8782 [00:00<?, ?it/s]Didn't manage to set back the RNG states of the CUDA because of the following error:
+ tuple index out of range
+This won't yield the same results as if the training had not been interrupted.
+Didn't manage to set back the RNG states of the CUDA because of the following error:
+ tuple index out of range
+This won't yield the same results as if the training had not been interrupted.
+ 23%|██▎       | 2001/8782 [00:48<02:43, 41.37it/s] 23%|██▎       | 2001/8782 [01:05<02:43, 41.37it/s] 23%|██▎       | 2002/8782 [01:35<06:30, 17.37it/s] 23%|██▎       | 2003/8782 [02:24<12:07,  9.32it/s] 23%|██▎       | 2004/8782 [03:15<20:28,  5.52it/s] 23%|██▎       | 2005/8782 [04:05<32:08,  3.51it/s] 23%|██▎       | 2006/8782 [04:55<48:56,  2.31it/s] 23%|██▎       | 2007/8782 [05:46<1:12:28,  1.56it/s] 23%|██▎       | 2008/8782 [06:35<1:45:27,  1.07it/s] 23%|██▎       | 2009/8782 [07:24<2:30:52,  1.34s/it] 23%|██▎       | 2010/8782 [08:13<3:35:29,  1.91s/it]                                                      23%|██▎       | 2010/8782 [08:13<3:35:29,  1.91s/it] 23%|██▎       | 2011/8782 [09:02<5:04:16,  2.70s/it] 23%|██▎       | 2012/8782 [09:51<7:06:22,  3.78s/it] 23%|██▎       | 2013/8782 [10:40<9:51:26,  5.24s/it] 23%|██▎       | 2014/8782 [11:29<13:24:46,  7.13s/it] 23%|██▎       | 2015/8782 [12:19<18:10:18,  9.67s/it] 23%|██▎       | 2016/8782 [13:08<23:56:17, 12.74s/it] 23%|██▎       | 2017/8782 [13:56<30:39:50, 16.32s/it] 23%|██▎       | 2018/8782 [14:44<38:13:56, 20.35s/it] 23%|██▎       | 2019/8782 [15:34<46:35:12, 24.80s/it] 23%|██▎       | 2020/8782 [16:24<54:54:20, 29.23s/it]                                                       23%|██▎       | 2020/8782 [16:24<54:54:20, 29.23s/it] 23%|██▎       | 2021/8782 [17:12<62:18:18, 33.18s/it] 23%|██▎       | 2022/8782 [18:02<69:01:46, 36.76s/it] 23%|██▎       | 2023/8782 [18:49<73:55:20, 39.37s/it] 23%|██▎       | 2024/8782 [19:38<78:34:54, 41.86s/it] 23%|██▎       | 2025/8782 [20:27<81:55:10, 43.65s/it] 23%|██▎       | 2026/8782 [21:15<84:27:07, 45.00s/it] 23%|██▎       | 2027/8782 [22:04<86:34:09, 46.14s/it] 23%|██▎       | 2028/8782 [22:52<87:33:31, 46.67s/it] 23%|██▎       | 2029/8782 [23:40<88:21:39, 47.10s/it] 23%|██▎       | 2030/8782 [24:30<89:35:27, 47.77s/it]                                                       23%|██▎       | 2030/8782 [24:30<89:35:27, 47.77s/it] 23%|██▎       | 2031/8782 [25:19<90:20:13, 48.17s/it] 23%|██▎       | 2032/8782 [26:07<90:18:58, 48.17s/it] 23%|██▎       | 2033/8782 [26:56<90:51:48, 48.47s/it] 23%|██▎       | 2034/8782 [27:46<91:30:07, 48.82s/it] 23%|██▎       | 2035/8782 [28:34<91:12:04, 48.66s/it] 23%|██▎       | 2036/8782 [29:23<91:23:26, 48.77s/it] 23%|██▎       | 2037/8782 [30:11<90:48:03, 48.46s/it] 23%|██▎       | 2038/8782 [30:59<90:53:53, 48.52s/it] 23%|██▎       | 2039/8782 [31:48<91:06:52, 48.64s/it] 23%|██▎       | 2040/8782 [32:36<90:46:48, 48.47s/it]                                                       23%|██▎       | 2040/8782 [32:36<90:46:48, 48.47s/it] 23%|██▎       | 2041/8782 [33:26<91:21:27, 48.79s/it] 23%|██▎       | 2042/8782 [34:16<92:00:50, 49.15s/it] 23%|██▎       | 2043/8782 [35:04<91:35:01, 48.92s/it] 23%|██▎       | 2044/8782 [35:54<91:51:03, 49.07s/it] 23%|██▎       | 2045/8782 [36:42<91:36:52, 48.96s/it] 23%|██▎       | 2046/8782 [37:31<91:13:21, 48.75s/it] 23%|██▎       | 2047/8782 [38:19<91:00:31, 48.65s/it] 23%|██▎       | 2048/8782 [39:09<91:46:01, 49.06s/it] 23%|██▎       | 2049/8782 [39:58<91:23:37, 48.87s/it] 23%|██▎       | 2050/8782 [40:47<91:30:42, 48.94s/it]                                                       23%|██▎       | 2050/8782 [40:47<91:30:42, 48.94s/it] 23%|██▎       | 2051/8782 [41:35<91:20:50, 48.86s/it] 23%|██▎       | 2052/8782 [42:25<91:41:35, 49.05s/it] 23%|██▎       | 2053/8782 [43:15<92:19:24, 49.39s/it] 23%|██▎       | 2054/8782 [44:03<91:39:04, 49.04s/it] 23%|██▎       | 2055/8782 [44:52<91:17:58, 48.86s/it] 23%|██▎       | 2056/8782 [45:41<91:28:47, 48.96s/it] 23%|██▎       | 2057/8782 [46:29<91:07:40, 48.78s/it]slurmstepd: error: *** JOB 518982 ON gpu57 CANCELLED AT 2025-11-22T01:32:08 ***

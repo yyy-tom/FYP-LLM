@@ -1,0 +1,36 @@
+==========================================
+🔥 BLAZING FAST TRAINING MODE 🔥
+SLURM Job ID: 519167
+Node: projgpu3
+Start time: Sat Nov 22 10:44:54 PM HKT 2025
+==========================================
+
+Configuration:
+  Config: config_1.5b_blazing_fast.json
+  Expected time: 30-45 minutes
+
+Python: Python 3.12.12
+GPUs detected:
+0, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+1, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+2, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+3, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+4, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+5, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+6, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+7, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+
+Training with 8 GPUs
+
+==========================================
+🚀 Starting BLAZING FAST training at Sat Nov 22 10:44:55 PM HKT 2025
+==========================================
+
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705

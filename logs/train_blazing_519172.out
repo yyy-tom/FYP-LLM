@@ -1,0 +1,47 @@
+==========================================
+🔥 BLAZING FAST TRAINING MODE 🔥
+SLURM Job ID: 519172
+Node: gpu39
+Start time: Sat Nov 22 10:55:33 PM HKT 2025
+==========================================
+
+Configuration:
+  Config: config_1.5b_blazing_fast.json
+  Expected time: 30-45 minutes
+
+Python: Python 3.12.12
+GPUs detected:
+0, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+1, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+2, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+3, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+4, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+5, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+6, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+7, NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+
+Training with 8 GPUs
+
+==========================================
+🚀 Starting BLAZING FAST training at Sat Nov 22 10:55:33 PM HKT 2025
+==========================================
+
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+NCCL version 2.27.5+cuda12.9
+{'loss': 1.8182, 'grad_norm': 0.4999752640724182, 'learning_rate': 0.0005, 'epoch': 0.0}
+{'loss': 1.3205, 'grad_norm': 0.15207763016223907, 'learning_rate': 0.0005, 'epoch': 0.01}
+{'loss': 1.2478, 'grad_norm': 0.1442287713289261, 'learning_rate': 0.0005, 'epoch': 0.01}
+{'loss': 1.195, 'grad_norm': 0.20457695424556732, 'learning_rate': 0.0005, 'epoch': 0.02}
+{'loss': 1.1707, 'grad_norm': 0.16436687111854553, 'learning_rate': 0.0005, 'epoch': 0.02}
+{'loss': 1.1445, 'grad_norm': 0.16376987099647522, 'learning_rate': 0.0005, 'epoch': 0.03}
+{'loss': 1.1399, 'grad_norm': 0.24134308099746704, 'learning_rate': 0.0005, 'epoch': 0.03}
+{'loss': 1.1166, 'grad_norm': 0.20005148649215698, 'learning_rate': 0.0005, 'epoch': 0.04}
+{'loss': 1.1243, 'grad_norm': 0.1761244833469391, 'learning_rate': 0.0005, 'epoch': 0.04}
+{'loss': 1.1, 'grad_norm': 0.16867008805274963, 'learning_rate': 0.0005, 'epoch': 0.05}

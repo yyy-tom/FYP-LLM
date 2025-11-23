@@ -1,0 +1,873 @@
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+The following values were not passed to `accelerate launch` and had defaults used instead:
+		More than one GPU was found, enabling multi-GPU training.
+		If this was unintended please pass in `--num_processes=1`.
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+INFO:__main__:HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+INFO:__main__:TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+INFO:__main__:HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+INFO:__main__:TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+INFO:__main__:HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+INFO:__main__:TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+INFO:__main__:HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+INFO:__main__:TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+INFO:__main__:HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+INFO:__main__:TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+INFO:__main__:HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+INFO:__main__:TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+INFO:__main__:HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+INFO:__main__:TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+INFO:__main__:HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+INFO:__main__:TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+INFO:__main__:Starting multi-GPU training setup...
+INFO:__main__:Using 8 GPUs
+INFO:__main__:Process rank: 2
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Starting multi-GPU training setup...
+INFO:__main__:Using 8 GPUs
+INFO:__main__:Process rank: 0
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Starting multi-GPU training setup...
+INFO:__main__:Using 8 GPUs
+INFO:__main__:Process rank: 4
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Starting multi-GPU training setup...
+INFO:__main__:Using 8 GPUs
+INFO:__main__:Process rank: 3
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Starting multi-GPU training setup...
+INFO:__main__:Using 8 GPUs
+INFO:__main__:Process rank: 1
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Starting multi-GPU training setup...
+INFO:__main__:Using 8 GPUs
+INFO:__main__:Process rank: 6
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Starting multi-GPU training setup...
+INFO:__main__:Using 8 GPUs
+INFO:__main__:Process rank: 7
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Starting multi-GPU training setup...
+INFO:__main__:Using 8 GPUs
+INFO:__main__:Process rank: 5
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Tokenizer loaded. Vocab size: 151665
+INFO:__main__:Loading model from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Tokenizer loaded. Vocab size: 151665
+INFO:__main__:Loading model from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Tokenizer loaded. Vocab size: 151665
+INFO:__main__:Loading model from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Tokenizer loaded. Vocab size: 151665
+INFO:__main__:Loading model from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Tokenizer loaded. Vocab size: 151665
+INFO:__main__:Loading model from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Tokenizer loaded. Vocab size: 151665
+INFO:__main__:Loading model from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Tokenizer loaded. Vocab size: 151665
+INFO:__main__:Loading model from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Tokenizer loaded. Vocab size: 151665
+INFO:__main__:Loading model from Qwen/Qwen2.5-14B-Instruct
+INFO:__main__:Number of GPUs available: 8
+INFO:__main__:GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:Total VRAM across all GPUs: 84.55 GB
+INFO:__main__:Number of GPUs available: 8
+INFO:__main__:GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:Total VRAM across all GPUs: 84.55 GB
+INFO:__main__:Number of GPUs available: 8
+INFO:__main__:GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:Total VRAM across all GPUs: 84.55 GB
+INFO:__main__:Number of GPUs available: 8
+INFO:__main__:GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:Total VRAM across all GPUs: 84.55 GB
+INFO:__main__:Number of GPUs available: 8
+INFO:__main__:GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:Total VRAM across all GPUs: 84.55 GB
+INFO:__main__:Number of GPUs available: 8
+INFO:__main__:GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:Total VRAM across all GPUs: 84.55 GB
+INFO:__main__:Number of GPUs available: 8
+INFO:__main__:GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:Total VRAM across all GPUs: 84.55 GB
+INFO:__main__:Number of GPUs available: 8
+INFO:__main__:GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+INFO:__main__:Total VRAM across all GPUs: 84.55 GB
+INFO:__main__:Using 4-bit quantization with BitsAndBytes
+INFO:__main__:Loading model with 4-bit quantization...
+INFO:__main__:Using 4-bit quantization with BitsAndBytes
+INFO:__main__:Loading model with 4-bit quantization...
+INFO:__main__:Using 4-bit quantization with BitsAndBytes
+INFO:__main__:Loading model with 4-bit quantization...
+INFO:__main__:Using 4-bit quantization with BitsAndBytes
+INFO:__main__:Loading model with 4-bit quantization...
+INFO:__main__:Using 4-bit quantization with BitsAndBytes
+INFO:__main__:Loading model with 4-bit quantization...
+INFO:__main__:Using 4-bit quantization with BitsAndBytes
+INFO:__main__:Loading model with 4-bit quantization...
+INFO:__main__:Using 4-bit quantization with BitsAndBytes
+INFO:__main__:Loading model with 4-bit quantization...
+INFO:__main__:Using 4-bit quantization with BitsAndBytes
+INFO:__main__:Loading model with 4-bit quantization...
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:17<02:04, 17.80s/it]Loading checkpoint shards:  12%|█▎        | 1/8 [00:17<02:03, 17.64s/it]Loading checkpoint shards:  12%|█▎        | 1/8 [00:17<02:04, 17.74s/it]Loading checkpoint shards:  12%|█▎        | 1/8 [00:17<02:04, 17.73s/it]Loading checkpoint shards:  12%|█▎        | 1/8 [00:17<02:04, 17.77s/it]Loading checkpoint shards:  12%|█▎        | 1/8 [00:17<02:03, 17.69s/it]Loading checkpoint shards:  12%|█▎        | 1/8 [00:17<02:04, 17.73s/it]Loading checkpoint shards:  12%|█▎        | 1/8 [00:17<02:03, 17.65s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:38<01:55, 19.27s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:38<01:55, 19.31s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:38<01:55, 19.26s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:38<01:56, 19.34s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:38<01:55, 19.30s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:38<01:55, 19.28s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:38<01:55, 19.30s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:38<01:56, 19.34s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:58<01:39, 19.86s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:58<01:39, 19.88s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:58<01:39, 19.90s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:58<01:39, 19.90s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:58<01:39, 19.88s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:58<01:39, 19.87s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:58<01:39, 19.88s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:58<01:39, 19.89s/it]Loading checkpoint shards:  50%|█████     | 4/8 [01:18<01:19, 19.85s/it]Loading checkpoint shards:  50%|█████     | 4/8 [01:18<01:19, 19.82s/it]Loading checkpoint shards:  50%|█████     | 4/8 [01:18<01:19, 19.84s/it]Loading checkpoint shards:  50%|█████     | 4/8 [01:18<01:19, 19.82s/it]Loading checkpoint shards:  50%|█████     | 4/8 [01:18<01:19, 19.83s/it]Loading checkpoint shards:  50%|█████     | 4/8 [01:18<01:19, 19.84s/it]Loading checkpoint shards:  50%|█████     | 4/8 [01:18<01:19, 19.83s/it]Loading checkpoint shards:  50%|█████     | 4/8 [01:18<01:19, 19.84s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [01:39<01:00, 20.20s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [01:39<01:00, 20.19s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [01:39<01:00, 20.21s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [01:39<01:00, 20.20s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [01:39<01:00, 20.21s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [01:39<01:00, 20.20s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [01:39<01:00, 20.20s/it]Loading checkpoint shards:  62%|██████▎   | 5/8 [01:39<01:00, 20.20s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [01:58<00:39, 19.99s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [01:58<00:39, 19.99s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [01:58<00:40, 20.00s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [01:58<00:39, 20.00s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [01:58<00:39, 19.99s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [01:58<00:39, 19.99s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [01:58<00:39, 20.00s/it]Loading checkpoint shards:  75%|███████▌  | 6/8 [01:58<00:39, 20.00s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [02:19<00:20, 20.22s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [02:19<00:20, 20.23s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [02:19<00:20, 20.23s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [02:19<00:20, 20.24s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [02:19<00:20, 20.24s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [02:19<00:20, 20.23s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [02:19<00:20, 20.24s/it]Loading checkpoint shards:  88%|████████▊ | 7/8 [02:19<00:20, 20.24s/it]Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 15.78s/it]Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 18.24s/it]
+Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 15.78s/it]Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 18.23s/it]
+Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 15.78s/it]Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 18.23s/it]
+Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 15.78s/it]Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 18.24s/it]
+Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 15.78s/it]Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 18.24s/it]
+Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 15.78s/it]Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 18.23s/it]
+Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 15.78s/it]Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 18.23s/it]
+Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 15.79s/it]Loading checkpoint shards: 100%|██████████| 8/8 [02:25<00:00, 18.24s/it]
+INFO:__main__:Model loaded with 4-bit quantization
+INFO:__main__:Model loaded with 4-bit quantization
+INFO:__main__:Model loaded with 4-bit quantization
+INFO:__main__:Model loaded with 4-bit quantization
+INFO:__main__:Model loaded with 4-bit quantization
+INFO:__main__:Model loaded with 4-bit quantization
+INFO:__main__:Model loaded with 4-bit quantization
+INFO:__main__:Model loaded with 4-bit quantization
+WARNING:__main__:Error preparing model for k-bit training: CUDA out of memory. Tried to allocate 2.90 GiB. GPU 7 has a total capacity of 10.57 GiB of which 1.02 GiB is free. Including non-PyTorch memory, this process has 9.54 GiB memory in use. Of the allocated memory 9.25 GiB is allocated by PyTorch, and 119.72 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables). Continuing anyway.
+WARNING:__main__:Error preparing model for k-bit training: CUDA out of memory. Tried to allocate 2.90 GiB. GPU 3 has a total capacity of 10.57 GiB of which 1.02 GiB is free. Including non-PyTorch memory, this process has 9.54 GiB memory in use. Of the allocated memory 9.25 GiB is allocated by PyTorch, and 119.72 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables). Continuing anyway.
+WARNING:__main__:Error preparing model for k-bit training: CUDA out of memory. Tried to allocate 2.90 GiB. GPU 2 has a total capacity of 10.57 GiB of which 1.02 GiB is free. Including non-PyTorch memory, this process has 9.54 GiB memory in use. Of the allocated memory 9.25 GiB is allocated by PyTorch, and 119.72 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables). Continuing anyway.
+WARNING:__main__:Error preparing model for k-bit training: CUDA out of memory. Tried to allocate 2.90 GiB. GPU 1 has a total capacity of 10.57 GiB of which 1.02 GiB is free. Including non-PyTorch memory, this process has 9.54 GiB memory in use. Of the allocated memory 9.25 GiB is allocated by PyTorch, and 119.72 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables). Continuing anyway.
+WARNING:__main__:Error preparing model for k-bit training: CUDA out of memory. Tried to allocate 2.90 GiB. GPU 5 has a total capacity of 10.57 GiB of which 1.02 GiB is free. Including non-PyTorch memory, this process has 9.54 GiB memory in use. Of the allocated memory 9.25 GiB is allocated by PyTorch, and 119.72 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables). Continuing anyway.
+WARNING:__main__:Error preparing model for k-bit training: CUDA out of memory. Tried to allocate 2.90 GiB. GPU 0 has a total capacity of 10.57 GiB of which 1.02 GiB is free. Including non-PyTorch memory, this process has 9.54 GiB memory in use. Of the allocated memory 9.25 GiB is allocated by PyTorch, and 119.72 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables). Continuing anyway.
+WARNING:__main__:Error preparing model for k-bit training: CUDA out of memory. Tried to allocate 2.90 GiB. GPU 6 has a total capacity of 10.57 GiB of which 1.02 GiB is free. Including non-PyTorch memory, this process has 9.54 GiB memory in use. Of the allocated memory 9.25 GiB is allocated by PyTorch, and 119.72 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables). Continuing anyway.
+WARNING:__main__:Error preparing model for k-bit training: CUDA out of memory. Tried to allocate 2.90 GiB. GPU 4 has a total capacity of 10.57 GiB of which 1.02 GiB is free. Including non-PyTorch memory, this process has 9.54 GiB memory in use. Of the allocated memory 9.25 GiB is allocated by PyTorch, and 119.72 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables). Continuing anyway.
+INFO:__main__:Trainable parameters: 68,812,800 / 8,232,817,664 (0.84%)
+INFO:__main__:Model loaded and LoRA configured
+INFO:__main__:Trainable parameters: 68,812,800 / 8,232,817,664 (0.84%)
+INFO:__main__:Model loaded and LoRA configured
+INFO:__main__:Trainable parameters: 68,812,800 / 8,232,817,664 (0.84%)
+INFO:__main__:Model loaded and LoRA configured
+INFO:__main__:Trainable parameters: 68,812,800 / 8,232,817,664 (0.84%)
+INFO:__main__:Model loaded and LoRA configured
+INFO:__main__:Trainable parameters: 68,812,800 / 8,232,817,664 (0.84%)
+INFO:__main__:Trainable parameters: 68,812,800 / 8,232,817,664 (0.84%)
+INFO:__main__:Model loaded and LoRA configured
+INFO:__main__:Model loaded and LoRA configured
+INFO:__main__:Trainable parameters: 68,812,800 / 8,232,817,664 (0.84%)
+INFO:__main__:Model loaded and LoRA configured
+INFO:__main__:Trainable parameters: 68,812,800 / 8,232,817,664 (0.84%)
+INFO:__main__:Model loaded and LoRA configured
+INFO:__main__:Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+INFO:__main__:Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+INFO:__main__:Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+INFO:__main__:Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+INFO:__main__:Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+INFO:__main__:Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+INFO:__main__:Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+INFO:__main__:Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+INFO:__main__:Dataset loaded. Train: 561962, Val: 62443
+INFO:__main__:Dataset loaded. Train: 561962, Val: 62443
+INFO:__main__:Dataset loaded. Train: 561962, Val: 62443
+INFO:__main__:Dataset loaded. Train: 561962, Val: 62443
+INFO:__main__:Dataset loaded. Train: 561962, Val: 62443
+INFO:__main__:Dataset loaded. Train: 561962, Val: 62443
+INFO:__main__:Dataset loaded. Train: 561962, Val: 62443
+INFO:__main__:Dataset loaded. Train: 561962, Val: 62443
+INFO:__main__:Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+INFO:__main__:Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+INFO:__main__:Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+INFO:__main__:Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+INFO:__main__:Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+INFO:__main__:Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+INFO:__main__:Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+INFO:__main__:Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+INFO:__main__:Pre-tokenized dataset loaded successfully!
+INFO:__main__:Pre-tokenized dataset loaded successfully!
+INFO:__main__:FSDP enabled with config: ['full_shard', 'auto_wrap']
+INFO:__main__:FSDP enabled with config: ['full_shard', 'auto_wrap']
+INFO:__main__:Pre-tokenized dataset loaded successfully!
+INFO:__main__:Pre-tokenized dataset loaded successfully!
+INFO:__main__:Pre-tokenized dataset loaded successfully!
+INFO:__main__:Pre-tokenized dataset loaded successfully!
+INFO:__main__:FSDP enabled with config: ['full_shard', 'auto_wrap']
+INFO:__main__:FSDP enabled with config: ['full_shard', 'auto_wrap']
+INFO:__main__:FSDP enabled with config: ['full_shard', 'auto_wrap']
+INFO:__main__:FSDP enabled with config: ['full_shard', 'auto_wrap']
+INFO:__main__:Pre-tokenized dataset loaded successfully!
+INFO:__main__:Pre-tokenized dataset loaded successfully!
+INFO:__main__:FSDP enabled with config: ['full_shard', 'auto_wrap']
+INFO:__main__:FSDP enabled with config: ['full_shard', 'auto_wrap']
+When using FSDP full shard, instead of using `gradient_checkpointing` in TrainingArguments, please use `activation_checkpointing` in `fsdp_config`. The former introduces a redundant AllGather operation in backward pass. Reference: https://github.com/huggingface/transformers/issues/30404
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:395: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+When using FSDP full shard, instead of using `gradient_checkpointing` in TrainingArguments, please use `activation_checkpointing` in `fsdp_config`. The former introduces a redundant AllGather operation in backward pass. Reference: https://github.com/huggingface/transformers/issues/30404
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:395: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+When using FSDP full shard, instead of using `gradient_checkpointing` in TrainingArguments, please use `activation_checkpointing` in `fsdp_config`. The former introduces a redundant AllGather operation in backward pass. Reference: https://github.com/huggingface/transformers/issues/30404
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:395: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+When using FSDP full shard, instead of using `gradient_checkpointing` in TrainingArguments, please use `activation_checkpointing` in `fsdp_config`. The former introduces a redundant AllGather operation in backward pass. Reference: https://github.com/huggingface/transformers/issues/30404
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:395: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+When using FSDP full shard, instead of using `gradient_checkpointing` in TrainingArguments, please use `activation_checkpointing` in `fsdp_config`. The former introduces a redundant AllGather operation in backward pass. Reference: https://github.com/huggingface/transformers/issues/30404
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:395: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+When using FSDP full shard, instead of using `gradient_checkpointing` in TrainingArguments, please use `activation_checkpointing` in `fsdp_config`. The former introduces a redundant AllGather operation in backward pass. Reference: https://github.com/huggingface/transformers/issues/30404
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:395: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+When using FSDP full shard, instead of using `gradient_checkpointing` in TrainingArguments, please use `activation_checkpointing` in `fsdp_config`. The former introduces a redundant AllGather operation in backward pass. Reference: https://github.com/huggingface/transformers/issues/30404
+When using FSDP full shard, instead of using `gradient_checkpointing` in TrainingArguments, please use `activation_checkpointing` in `fsdp_config`. The former introduces a redundant AllGather operation in backward pass. Reference: https://github.com/huggingface/transformers/issues/30404
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:395: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py:395: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `Trainer.__init__`. Use `processing_class` instead.
+  trainer = Trainer(
+INFO:__main__:Starting training...
+INFO:__main__:Starting training...
+INFO:__main__:Training on 8 GPU(s)
+INFO:__main__:Training on 8 GPU(s)
+INFO:__main__:Starting training...
+INFO:__main__:Training on 8 GPU(s)
+INFO:__main__:Starting training...
+INFO:__main__:Training on 8 GPU(s)
+INFO:__main__:Training steps per epoch: 35123
+INFO:__main__:Training steps per epoch: 35123
+INFO:__main__:Training steps per epoch: 35123
+INFO:__main__:Training steps per epoch: 35123
+INFO:__main__:Total training steps: 105369
+INFO:__main__:Total training steps: 105369
+INFO:__main__:Total training steps: 105369
+INFO:__main__:Total training steps: 105369
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+INFO:__main__:Starting training...
+INFO:__main__:Training on 8 GPU(s)
+INFO:__main__:Starting training...
+INFO:__main__:Starting training...
+INFO:__main__:Training on 8 GPU(s)
+INFO:__main__:Training on 8 GPU(s)
+INFO:__main__:Training steps per epoch: 35123
+INFO:__main__:Starting training...
+INFO:__main__:Training on 8 GPU(s)
+INFO:__main__:Training steps per epoch: 35123
+INFO:__main__:Training steps per epoch: 35123
+INFO:__main__:Total training steps: 105369
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+INFO:__main__:Training steps per epoch: 35123
+INFO:__main__:Total training steps: 105369
+INFO:__main__:Total training steps: 105369
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+INFO:__main__:Total training steps: 105369
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+ERROR:__main__:Training failed with error: Cannot flatten integer dtype tensors
+ERROR:__main__:Training failed with error: Cannot flatten integer dtype tensors
+ERROR:__main__:Training failed with error: Cannot flatten integer dtype tensors
+ERROR:__main__:Training failed with error: Cannot flatten integer dtype tensors
+ERROR:__main__:Training failed with error: Cannot flatten integer dtype tensors
+ERROR:__main__:Training failed with error: Cannot flatten integer dtype tensors
+ERROR:__main__:Training failed with error: Cannot flatten integer dtype tensors
+ERROR:__main__:Training failed with error: Cannot flatten integer dtype tensors
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 587, in <module>
+[rank1]:     main()
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 583, in main
+[rank1]:     trainer.train()
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 441, in train
+[rank1]:     self.trainer.train()
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2325, in train
+[rank1]:     return inner_training_loop(
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2466, in _inner_training_loop
+[rank1]:     self.model = self.accelerator.prepare(self.model)
+[rank1]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1555, in prepare
+[rank1]:     result = tuple(
+[rank1]:              ^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1556, in <genexpr>
+[rank1]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank1]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1398, in _prepare_one
+[rank1]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1889, in prepare_model
+[rank1]:     model = FSDP(model, **kwargs)
+[rank1]:             ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 471, in __init__
+[rank1]:     _auto_wrap(
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_wrap_utils.py", line 101, in _auto_wrap
+[rank1]:     _recursive_wrap(**recursive_wrap_kwargs, **root_kwargs)  # type: ignore[arg-type]
+[rank1]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank1]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank1]:                                         ^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank1]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank1]:                                         ^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank1]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank1]:                                         ^^^^^^^^^^^^^^^^
+[rank1]:   [Previous line repeated 2 more times]
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 551, in _recursive_wrap
+[rank1]:     return _wrap(module, wrapper_cls, **kwargs), nonwrapped_numel
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 480, in _wrap
+[rank1]:     return wrapper_cls(module, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 497, in __init__
+[rank1]:     _init_param_handle_from_module(
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 622, in _init_param_handle_from_module
+[rank1]:     _init_param_handle_from_params(state, managed_params, fully_sharded_module)
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 634, in _init_param_handle_from_params
+[rank1]:     handle = FlatParamHandle(
+[rank1]:              ^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 588, in __init__
+[rank1]:     self._init_flat_param_and_metadata(
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 644, in _init_flat_param_and_metadata
+[rank1]:     ) = self._validate_tensors_to_flatten(params)
+[rank1]:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 786, in _validate_tensors_to_flatten
+[rank1]:     raise ValueError("Cannot flatten integer dtype tensors")
+[rank1]: ValueError: Cannot flatten integer dtype tensors
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 587, in <module>
+[rank6]:     main()
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 583, in main
+[rank6]:     trainer.train()
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 441, in train
+[rank6]:     self.trainer.train()
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2325, in train
+[rank6]:     return inner_training_loop(
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2466, in _inner_training_loop
+[rank6]:     self.model = self.accelerator.prepare(self.model)
+[rank6]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1555, in prepare
+[rank6]:     result = tuple(
+[rank6]:              ^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1556, in <genexpr>
+[rank6]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank6]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1398, in _prepare_one
+[rank6]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1889, in prepare_model
+[rank6]:     model = FSDP(model, **kwargs)
+[rank6]:             ^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 471, in __init__
+[rank6]:     _auto_wrap(
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_wrap_utils.py", line 101, in _auto_wrap
+[rank6]:     _recursive_wrap(**recursive_wrap_kwargs, **root_kwargs)  # type: ignore[arg-type]
+[rank6]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank6]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank6]:                                         ^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank6]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank6]:                                         ^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank6]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank6]:                                         ^^^^^^^^^^^^^^^^
+[rank6]:   [Previous line repeated 2 more times]
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 551, in _recursive_wrap
+[rank6]:     return _wrap(module, wrapper_cls, **kwargs), nonwrapped_numel
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 480, in _wrap
+[rank6]:     return wrapper_cls(module, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 497, in __init__
+[rank6]:     _init_param_handle_from_module(
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 622, in _init_param_handle_from_module
+[rank6]:     _init_param_handle_from_params(state, managed_params, fully_sharded_module)
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 634, in _init_param_handle_from_params
+[rank6]:     handle = FlatParamHandle(
+[rank6]:              ^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 588, in __init__
+[rank6]:     self._init_flat_param_and_metadata(
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 644, in _init_flat_param_and_metadata
+[rank6]:     ) = self._validate_tensors_to_flatten(params)
+[rank6]:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 786, in _validate_tensors_to_flatten
+[rank6]:     raise ValueError("Cannot flatten integer dtype tensors")
+[rank6]: ValueError: Cannot flatten integer dtype tensors
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 587, in <module>
+[rank2]:     main()
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 583, in main
+[rank2]:     trainer.train()
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 441, in train
+[rank2]:     self.trainer.train()
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2325, in train
+[rank2]:     return inner_training_loop(
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2466, in _inner_training_loop
+[rank2]:     self.model = self.accelerator.prepare(self.model)
+[rank2]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1555, in prepare
+[rank2]:     result = tuple(
+[rank2]:              ^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1556, in <genexpr>
+[rank2]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank2]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1398, in _prepare_one
+[rank2]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1889, in prepare_model
+[rank2]:     model = FSDP(model, **kwargs)
+[rank2]:             ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 471, in __init__
+[rank2]:     _auto_wrap(
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_wrap_utils.py", line 101, in _auto_wrap
+[rank2]:     _recursive_wrap(**recursive_wrap_kwargs, **root_kwargs)  # type: ignore[arg-type]
+[rank2]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank2]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank2]:                                         ^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank2]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank2]:                                         ^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank2]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank2]:                                         ^^^^^^^^^^^^^^^^
+[rank2]:   [Previous line repeated 2 more times]
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 551, in _recursive_wrap
+[rank2]:     return _wrap(module, wrapper_cls, **kwargs), nonwrapped_numel
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 480, in _wrap
+[rank2]:     return wrapper_cls(module, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 497, in __init__
+[rank2]:     _init_param_handle_from_module(
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 622, in _init_param_handle_from_module
+[rank2]:     _init_param_handle_from_params(state, managed_params, fully_sharded_module)
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 634, in _init_param_handle_from_params
+[rank2]:     handle = FlatParamHandle(
+[rank2]:              ^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 588, in __init__
+[rank2]:     self._init_flat_param_and_metadata(
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 644, in _init_flat_param_and_metadata
+[rank2]:     ) = self._validate_tensors_to_flatten(params)
+[rank2]:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 786, in _validate_tensors_to_flatten
+[rank2]:     raise ValueError("Cannot flatten integer dtype tensors")
+[rank2]: ValueError: Cannot flatten integer dtype tensors
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 587, in <module>
+[rank0]:     main()
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 583, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 441, in train
+[rank0]:     self.trainer.train()
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2325, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2466, in _inner_training_loop
+[rank0]:     self.model = self.accelerator.prepare(self.model)
+[rank0]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1555, in prepare
+[rank0]:     result = tuple(
+[rank0]:              ^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1556, in <genexpr>
+[rank0]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank0]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1398, in _prepare_one
+[rank0]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1889, in prepare_model
+[rank0]:     model = FSDP(model, **kwargs)
+[rank0]:             ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 471, in __init__
+[rank0]:     _auto_wrap(
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_wrap_utils.py", line 101, in _auto_wrap
+[rank0]:     _recursive_wrap(**recursive_wrap_kwargs, **root_kwargs)  # type: ignore[arg-type]
+[rank0]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank0]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank0]:                                         ^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank0]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank0]:                                         ^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank0]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank0]:                                         ^^^^^^^^^^^^^^^^
+[rank0]:   [Previous line repeated 2 more times]
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 551, in _recursive_wrap
+[rank0]:     return _wrap(module, wrapper_cls, **kwargs), nonwrapped_numel
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 480, in _wrap
+[rank0]:     return wrapper_cls(module, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 497, in __init__
+[rank0]:     _init_param_handle_from_module(
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 622, in _init_param_handle_from_module
+[rank0]:     _init_param_handle_from_params(state, managed_params, fully_sharded_module)
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 634, in _init_param_handle_from_params
+[rank0]:     handle = FlatParamHandle(
+[rank0]:              ^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 588, in __init__
+[rank0]:     self._init_flat_param_and_metadata(
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 644, in _init_flat_param_and_metadata
+[rank0]:     ) = self._validate_tensors_to_flatten(params)
+[rank0]:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 786, in _validate_tensors_to_flatten
+[rank0]:     raise ValueError("Cannot flatten integer dtype tensors")
+[rank0]: ValueError: Cannot flatten integer dtype tensors
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 587, in <module>
+[rank4]:     main()
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 583, in main
+[rank4]:     trainer.train()
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 441, in train
+[rank4]:     self.trainer.train()
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2325, in train
+[rank4]:     return inner_training_loop(
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2466, in _inner_training_loop
+[rank4]:     self.model = self.accelerator.prepare(self.model)
+[rank4]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1555, in prepare
+[rank4]:     result = tuple(
+[rank4]:              ^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1556, in <genexpr>
+[rank4]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank4]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1398, in _prepare_one
+[rank4]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1889, in prepare_model
+[rank4]:     model = FSDP(model, **kwargs)
+[rank4]:             ^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 471, in __init__
+[rank4]:     _auto_wrap(
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_wrap_utils.py", line 101, in _auto_wrap
+[rank4]:     _recursive_wrap(**recursive_wrap_kwargs, **root_kwargs)  # type: ignore[arg-type]
+[rank4]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank4]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank4]:                                         ^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank4]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank4]:                                         ^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank4]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank4]:                                         ^^^^^^^^^^^^^^^^
+[rank4]:   [Previous line repeated 2 more times]
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 551, in _recursive_wrap
+[rank4]:     return _wrap(module, wrapper_cls, **kwargs), nonwrapped_numel
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 480, in _wrap
+[rank4]:     return wrapper_cls(module, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 497, in __init__
+[rank4]:     _init_param_handle_from_module(
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 622, in _init_param_handle_from_module
+[rank4]:     _init_param_handle_from_params(state, managed_params, fully_sharded_module)
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 634, in _init_param_handle_from_params
+[rank4]:     handle = FlatParamHandle(
+[rank4]:              ^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 588, in __init__
+[rank4]:     self._init_flat_param_and_metadata(
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 644, in _init_flat_param_and_metadata
+[rank4]:     ) = self._validate_tensors_to_flatten(params)
+[rank4]:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 786, in _validate_tensors_to_flatten
+[rank4]:     raise ValueError("Cannot flatten integer dtype tensors")
+[rank4]: ValueError: Cannot flatten integer dtype tensors
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 587, in <module>
+[rank7]:     main()
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 583, in main
+[rank7]:     trainer.train()
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 441, in train
+[rank7]:     self.trainer.train()
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2325, in train
+[rank7]:     return inner_training_loop(
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2466, in _inner_training_loop
+[rank7]:     self.model = self.accelerator.prepare(self.model)
+[rank7]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1555, in prepare
+[rank7]:     result = tuple(
+[rank7]:              ^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1556, in <genexpr>
+[rank7]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank7]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1398, in _prepare_one
+[rank7]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1889, in prepare_model
+[rank7]:     model = FSDP(model, **kwargs)
+[rank7]:             ^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 471, in __init__
+[rank7]:     _auto_wrap(
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_wrap_utils.py", line 101, in _auto_wrap
+[rank7]:     _recursive_wrap(**recursive_wrap_kwargs, **root_kwargs)  # type: ignore[arg-type]
+[rank7]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank7]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank7]:                                         ^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank7]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank7]:                                         ^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank7]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank7]:                                         ^^^^^^^^^^^^^^^^
+[rank7]:   [Previous line repeated 2 more times]
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 551, in _recursive_wrap
+[rank7]:     return _wrap(module, wrapper_cls, **kwargs), nonwrapped_numel
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 480, in _wrap
+[rank7]:     return wrapper_cls(module, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 497, in __init__
+[rank7]:     _init_param_handle_from_module(
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 622, in _init_param_handle_from_module
+[rank7]:     _init_param_handle_from_params(state, managed_params, fully_sharded_module)
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 634, in _init_param_handle_from_params
+[rank7]:     handle = FlatParamHandle(
+[rank7]:              ^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 588, in __init__
+[rank7]:     self._init_flat_param_and_metadata(
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 644, in _init_flat_param_and_metadata
+[rank7]:     ) = self._validate_tensors_to_flatten(params)
+[rank7]:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 786, in _validate_tensors_to_flatten
+[rank7]:     raise ValueError("Cannot flatten integer dtype tensors")
+[rank7]: ValueError: Cannot flatten integer dtype tensors
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 587, in <module>
+[rank3]:     main()
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 583, in main
+[rank3]:     trainer.train()
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 441, in train
+[rank3]:     self.trainer.train()
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2325, in train
+[rank3]:     return inner_training_loop(
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2466, in _inner_training_loop
+[rank3]:     self.model = self.accelerator.prepare(self.model)
+[rank3]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1555, in prepare
+[rank3]:     result = tuple(
+[rank3]:              ^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1556, in <genexpr>
+[rank3]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank3]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1398, in _prepare_one
+[rank3]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1889, in prepare_model
+[rank3]:     model = FSDP(model, **kwargs)
+[rank3]:             ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 471, in __init__
+[rank3]:     _auto_wrap(
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_wrap_utils.py", line 101, in _auto_wrap
+[rank3]:     _recursive_wrap(**recursive_wrap_kwargs, **root_kwargs)  # type: ignore[arg-type]
+[rank3]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank3]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank3]:                                         ^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank3]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank3]:                                         ^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank3]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank3]:                                         ^^^^^^^^^^^^^^^^
+[rank3]:   [Previous line repeated 2 more times]
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 551, in _recursive_wrap
+[rank3]:     return _wrap(module, wrapper_cls, **kwargs), nonwrapped_numel
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 480, in _wrap
+[rank3]:     return wrapper_cls(module, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 497, in __init__
+[rank3]:     _init_param_handle_from_module(
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 622, in _init_param_handle_from_module
+[rank3]:     _init_param_handle_from_params(state, managed_params, fully_sharded_module)
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 634, in _init_param_handle_from_params
+[rank3]:     handle = FlatParamHandle(
+[rank3]:              ^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 588, in __init__
+[rank3]:     self._init_flat_param_and_metadata(
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 644, in _init_flat_param_and_metadata
+[rank3]:     ) = self._validate_tensors_to_flatten(params)
+[rank3]:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 786, in _validate_tensors_to_flatten
+[rank3]:     raise ValueError("Cannot flatten integer dtype tensors")
+[rank3]: ValueError: Cannot flatten integer dtype tensors
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 587, in <module>
+[rank5]:     main()
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 583, in main
+[rank5]:     trainer.train()
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/scripts/train_qwen_counsel_multi_gpu.py", line 441, in train
+[rank5]:     self.trainer.train()
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2325, in train
+[rank5]:     return inner_training_loop(
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/trainer.py", line 2466, in _inner_training_loop
+[rank5]:     self.model = self.accelerator.prepare(self.model)
+[rank5]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1555, in prepare
+[rank5]:     result = tuple(
+[rank5]:              ^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1556, in <genexpr>
+[rank5]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank5]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1398, in _prepare_one
+[rank5]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/accelerator.py", line 1889, in prepare_model
+[rank5]:     model = FSDP(model, **kwargs)
+[rank5]:             ^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 471, in __init__
+[rank5]:     _auto_wrap(
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_wrap_utils.py", line 101, in _auto_wrap
+[rank5]:     _recursive_wrap(**recursive_wrap_kwargs, **root_kwargs)  # type: ignore[arg-type]
+[rank5]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank5]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank5]:                                         ^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank5]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank5]:                                         ^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 533, in _recursive_wrap
+[rank5]:     wrapped_child, num_wrapped_params = _recursive_wrap(
+[rank5]:                                         ^^^^^^^^^^^^^^^^
+[rank5]:   [Previous line repeated 2 more times]
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 551, in _recursive_wrap
+[rank5]:     return _wrap(module, wrapper_cls, **kwargs), nonwrapped_numel
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/wrap.py", line 480, in _wrap
+[rank5]:     return wrapper_cls(module, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py", line 497, in __init__
+[rank5]:     _init_param_handle_from_module(
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 622, in _init_param_handle_from_module
+[rank5]:     _init_param_handle_from_params(state, managed_params, fully_sharded_module)
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py", line 634, in _init_param_handle_from_params
+[rank5]:     handle = FlatParamHandle(
+[rank5]:              ^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 588, in __init__
+[rank5]:     self._init_flat_param_and_metadata(
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 644, in _init_flat_param_and_metadata
+[rank5]:     ) = self._validate_tensors_to_flatten(params)
+[rank5]:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/fsdp/_flat_param.py", line 786, in _validate_tensors_to_flatten
+[rank5]:     raise ValueError("Cannot flatten integer dtype tensors")
+[rank5]: ValueError: Cannot flatten integer dtype tensors
+[rank0]:[W1119 04:21:04.659090613 ProcessGroupNCCL.cpp:1538] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W1119 04:21:06.166000 439894 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 439990 closing signal SIGTERM
+W1119 04:21:06.169000 439894 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 439991 closing signal SIGTERM
+W1119 04:21:06.170000 439894 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 439992 closing signal SIGTERM
+W1119 04:21:06.171000 439894 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 439993 closing signal SIGTERM
+W1119 04:21:06.172000 439894 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 439994 closing signal SIGTERM
+W1119 04:21:06.172000 439894 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 439995 closing signal SIGTERM
+W1119 04:21:06.173000 439894 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 439996 closing signal SIGTERM
+E1119 04:21:07.104000 439894 torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 1) local_rank: 0 (pid: 439989) of binary: /research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/python
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/accelerate", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/accelerate_cli.py", line 50, in main
+    args.func(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 1226, in launch_command
+    multi_gpu_launcher(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 853, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 143, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 277, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+scripts/train_qwen_counsel_multi_gpu.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-11-19_04:21:06
+  host      : gpu38
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 439989)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

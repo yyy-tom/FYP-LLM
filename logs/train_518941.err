@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'torch'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'torch'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'torch'
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+INFO:__main__:HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+INFO:__main__:TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/transformers
+INFO:__main__:HF_DATASETS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/datasets
+INFO:__main__:HF_HUB_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/hub
+INFO:__main__:XET_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/xet
+INFO:__main__:Starting training setup...
+INFO:__main__:Loading tokenizer from Qwen/Qwen2.5-0.5B-Instruct
+INFO:__main__:Tokenizer loaded. Vocab size: 151665
+INFO:__main__:Loading model from Qwen/Qwen2.5-0.5B-Instruct
+INFO:__main__:Using 4-bit quantization with BitsAndBytes
+slurmstepd: error: *** JOB 518941 ON gpu39 CANCELLED AT 2025-11-21T22:30:24 ***

@@ -1,0 +1,334 @@
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2025-11-22 22:45:20,802 - __main__ - INFO - Logging configured for main process (rank 0, local_rank 0)
+2025-11-22 22:45:20,803 - __main__ - INFO - HF_HOME: /research/d7/fyp25/yyyu2/FYP-LLM//.cache/huggingface
+2025-11-22 22:45:20,803 - __main__ - INFO - TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/FYP-LLM//.cache/huggingface/transformers
+2025-11-22 22:45:20,805 - __main__ - INFO - Starting multi-GPU training setup...
+2025-11-22 22:45:20,805 - __main__ - INFO - World size: 8, Rank: 0, Local rank: 0
+2025-11-22 22:45:22,996 - __main__ - INFO - ignore_checkpoints=True: Starting fresh training, ignoring any existing checkpoints
+2025-11-22 22:45:22,996 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-1.5B-Instruct
+2025-11-22 22:45:23,992 - __main__ - INFO - Tokenizer loaded. Vocab size: 151665
+2025-11-22 22:45:23,993 - __main__ - INFO - Loading model from Qwen/Qwen2.5-1.5B-Instruct
+2025-11-22 22:45:24,160 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 22:45:24,200 - __main__ - INFO - Number of GPUs available: 8
+2025-11-22 22:45:24,220 - __main__ - INFO - GPU 0: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 22:45:24,220 - __main__ - INFO - GPU 1: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 22:45:24,220 - __main__ - INFO - GPU 2: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 22:45:24,220 - __main__ - INFO - GPU 3: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 22:45:24,220 - __main__ - INFO - GPU 4: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 22:45:24,220 - __main__ - INFO - GPU 5: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 22:45:24,220 - __main__ - INFO - GPU 6: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 22:45:24,220 - __main__ - INFO - GPU 7: NVIDIA GeForce RTX 2080 Ti - 10.57 GB VRAM
+2025-11-22 22:45:24,220 - __main__ - INFO - Total VRAM across all GPUs: 84.55 GB
+2025-11-22 22:45:24,220 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 22:45:24,241 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 22:45:24,279 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 22:45:24,342 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 22:45:24,344 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 22:45:24,410 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 22:45:24,413 - __main__ - WARNING - Requested bf16 mixed precision, but the current GPU (compute capability sm_75) does not support native bf16. Falling back to fp16.
+2025-11-22 22:45:26,003 - __main__ - INFO - Using 4-bit quantization with BitsAndBytes
+2025-11-22 22:45:26,003 - __main__ - INFO - Loading model with 4-bit quantization...
+loading configuration file config.json from cache at /research/d7/fyp25/yyyu2/FYP-LLM//.cache/huggingface/transformers/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/config.json
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+Model config Qwen2Config {
+  "architectures": [
+    "Qwen2ForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 151643,
+  "dtype": "bfloat16",
+  "eos_token_id": 151645,
+  "hidden_act": "silu",
+  "hidden_size": 1536,
+  "initializer_range": 0.02,
+  "intermediate_size": 8960,
+  "layer_types": [
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention",
+    "full_attention"
+  ],
+  "max_position_embeddings": 32768,
+  "max_window_layers": 21,
+  "model_type": "qwen2",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 2,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 1000000.0,
+  "sliding_window": null,
+  "tie_word_embeddings": true,
+  "transformers_version": "4.57.0",
+  "use_cache": true,
+  "use_sliding_window": false,
+  "vocab_size": 151936
+}
+
+`torch_dtype` is deprecated! Use `dtype` instead!
+loading weights file model.safetensors from cache at /research/d7/fyp25/yyyu2/FYP-LLM//.cache/huggingface/transformers/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/model.safetensors
+Instantiating Qwen2ForCausalLM model under default dtype torch.bfloat16.
+Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "eos_token_id": 151645
+}
+
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+loading configuration file generation_config.json from cache at /research/d7/fyp25/yyyu2/FYP-LLM//.cache/huggingface/transformers/models--Qwen--Qwen2.5-1.5B-Instruct/snapshots/989aa7980e4cf806f80c7fef2b1adb7bc71aa306/generation_config.json
+Generate config GenerationConfig {
+  "bos_token_id": 151643,
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+Could not locate the custom_generate/generate.py inside Qwen/Qwen2.5-1.5B-Instruct.
+2025-11-22 22:45:38,093 - __main__ - INFO - Model loaded with 4-bit quantization on device cuda:0
+2025-11-22 22:45:38,119 - __main__ - INFO - Model prepared for k-bit training
+2025-11-22 22:45:38,119 - __main__ - INFO - Disabled use_cache for BitsAndBytes quantized model
+2025-11-22 22:45:38,232 - __main__ - INFO - Gradient checkpointing disabled per configuration
+2025-11-22 22:45:38,241 - __main__ - INFO - Trainable parameters: 1,089,536 / 889,705,984 (0.12%)
+2025-11-22 22:45:38,241 - __main__ - INFO - Model loaded and LoRA configured
+2025-11-22 22:45:38,655 - __main__ - INFO - GPU 0 memory after model load: 1.51 GB allocated, 2.35 GB reserved, 10.57 GB total
+2025-11-22 22:45:38,655 - __main__ - INFO - Loading dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined
+2025-11-22 22:45:42,435 - __main__ - INFO - Dataset loaded. Train: 561962, Val: 62443
+2025-11-22 22:45:42,436 - __main__ - INFO - Loading pre-tokenized dataset from /research/d7/fyp25/yyyu2/FYP-LLM/datasets/all_mental_health_combined_tokenized...
+2025-11-22 22:45:46,739 - __main__ - INFO - Pre-tokenized dataset loaded successfully!
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+        main()main()
+
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+    Traceback (most recent call last):
+main()    
+main()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+    trainer.train()
+    trainer.train()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 744, in train
+    trainer.train()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 744, in train
+      File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 744, in train
+trainer.train()
+        main()main()
+
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 744, in train
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+    self.trainer = self.setup_trainer(dataset)
+    self.trainer = self.setup_trainer(dataset)
+      self.trainer = self.setup_trainer(dataset) 
+                             self.trainer = self.setup_trainer(dataset)   
+             ^  ^  ^   ^  ^^  ^^  ^^  ^^ ^  ^^  ^^^ ^^    ^ ^^trainer.train()^ ^
+^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^ ^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 744, in train
+^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 541, in setup_trainer
+^^^
+^^^^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 541, in setup_trainer
+^^
+^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 541, in setup_trainer
+^^^Traceback (most recent call last):
+^^    ^trainer.train()^
+^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 541, in setup_trainer
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 744, in train
+        self.trainer = self.setup_trainer(dataset)training_args = self.setup_training_arguments()
+
+    training_args = self.setup_training_arguments()
+      training_args = self.setup_training_arguments()  
+                                                   training_args = self.setup_training_arguments()    
+                    ^self.trainer = self.setup_trainer(dataset)^^ ^  
+ ^ ^  ^^ ^ ^^^  ^^^  ^^^   ^^^^  ^^^^  ^^^^  ^^^^  ^^^^ ^^ ^^ ^^ ^^^ ^ ^^^ ^  ^^^^  ^^^^  ^^^^^  ^^^^^  ^  ^^^^^ ^^^^^^ ^    ^^^^^ ^^main()^^^ ^^^^^^
+^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 541, in setup_trainer
+^^^^^^^^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+
+^^
+^^^^^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 489, in setup_training_arguments
+
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 489, in setup_training_arguments
+^^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 489, in setup_training_arguments
+^^^^^^^^^^Traceback (most recent call last):
+^^^^^^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+^^^^^^^
+^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 541, in setup_trainer
+
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 489, in setup_training_arguments
+    training_args = self.setup_training_arguments()
+    return TrainingArguments(**training_args_dict)    
+return TrainingArguments(**training_args_dict)
+    return TrainingArguments(**training_args_dict) 
+           return TrainingArguments(**training_args_dict)   
+                                   ^        ^^  training_args = self.setup_training_arguments()  ^^ 
+^ ^^^  ^^^  ^^^^   ^^ ^^ ^^     ^^^^^ ^^ trainer.train()^^^^^^ ^^
+^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^^ ^^^^^^ ^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 744, in train
+^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^^^ ^^^^^^ ^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^    ^^^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 489, in setup_training_arguments
+
+^main()
+^^^
+
+^  File "<string>", line 135, in __init__
+^^^^  File "<string>", line 135, in __init__
+  File "<string>", line 135, in __init__
+^^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/training_args.py", line 1709, in __post_init__
+^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/training_args.py", line 1709, in __post_init__
+^  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/training_args.py", line 1709, in __post_init__
+^
+    ^^self.trainer = self.setup_trainer(dataset)^  File "<string>", line 135, in __init__
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+^
+^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/training_args.py", line 1709, in __post_init__
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 489, in setup_training_arguments
+       return TrainingArguments(**training_args_dict)
+                     ^^^ ^^ ^    ^ ^return TrainingArguments(**training_args_dict)^
+ ^^ ^^ ^^^^ ^ ^^ ^ ^^ ^ ^^ ^ ^^ ^ ^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^  File "<string>", line 135, in __init__
+^^^^^^  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/training_args.py", line 1709, in __post_init__
+^^^^^^^^^^^^^^    ^^^trainer.train()^^^
+^^^^^^^^
+^  File "<string>", line 135, in __init__
+
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/training_args.py", line 1709, in __post_init__
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 541, in setup_trainer
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 744, in train
+    training_args = self.setup_training_arguments()
+                    ^^^^^^^^^^^^^^^^^^^^^^^    ^self.trainer = self.setup_trainer(dataset)^
+^^^^^^
+   File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 489, in setup_training_arguments
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 541, in setup_trainer
+    return TrainingArguments(**training_args_dict)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 135, in __init__
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/training_args.py", line 1709, in __post_init__
+    training_args = self.setup_training_arguments()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 489, in setup_training_arguments
+    return TrainingArguments(**training_args_dict)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 135, in __init__
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/training_args.py", line 1709, in __post_init__
+        raise ValueError(raise ValueError(
+
+ValueErrorValueError: : --load_best_model_at_end requires the saving steps to be a round multiple of the evaluation steps, but found 500, which is not a round multiple of 200.--load_best_model_at_end requires the saving steps to be a round multiple of the evaluation steps, but found 500, which is not a round multiple of 200.
+
+        raise ValueError(raise ValueError(
+    
+raise ValueError(
+ValueError: ValueError--load_best_model_at_end requires the saving steps to be a round multiple of the evaluation steps, but found 500, which is not a round multiple of 200.: 
+--load_best_model_at_end requires the saving steps to be a round multiple of the evaluation steps, but found 500, which is not a round multiple of 200.ValueError
+:         --load_best_model_at_end requires the saving steps to be a round multiple of the evaluation steps, but found 500, which is not a round multiple of 200.raise ValueError(
+raise ValueError(
+
+ValueErrorValueError: : --load_best_model_at_end requires the saving steps to be a round multiple of the evaluation steps, but found 500, which is not a round multiple of 200.--load_best_model_at_end requires the saving steps to be a round multiple of the evaluation steps, but found 500, which is not a round multiple of 200.
+
+    raise ValueError(
+ValueError: --load_best_model_at_end requires the saving steps to be a round multiple of the evaluation steps, but found 500, which is not a round multiple of 200.
+W1122 22:45:49.683000 1235857 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1235955 closing signal SIGTERM
+W1122 22:45:49.687000 1235857 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1235956 closing signal SIGTERM
+W1122 22:45:49.688000 1235857 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1235957 closing signal SIGTERM
+W1122 22:45:49.690000 1235857 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1235958 closing signal SIGTERM
+W1122 22:45:49.691000 1235857 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1235960 closing signal SIGTERM
+W1122 22:45:49.693000 1235857 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1235961 closing signal SIGTERM
+W1122 22:45:49.694000 1235857 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1235962 closing signal SIGTERM
+E1122 22:45:50.312000 1235857 torch/distributed/elastic/multiprocessing/api.py:882] failed (exitcode: 1) local_rank: 4 (pid: 1235959) of binary: /research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/python
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/accelerate", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/accelerate_cli.py", line 50, in main
+    args.func(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 1226, in launch_command
+    multi_gpu_launcher(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 853, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/run.py", line 927, in run
+    elastic_launch(
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 156, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 293, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-11-22_22:45:49
+  host      : projgpu3.cse.cuhk.edu.hk
+  rank      : 4 (local_rank: 4)
+  exitcode  : 1 (pid: 1235959)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

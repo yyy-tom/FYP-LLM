@@ -1,0 +1,71 @@
+==========================================
+MAXIMUM RESOURCES JOB (GPU_72H)
+==========================================
+Job ID: 518982
+Job Name: yyy_model_train_max
+Partition: gpu_72h
+Node: gpu57
+CPUs: 12
+GPUs: 2 (using 2 GPUs for maximum memory per GPU to avoid OOM during DDP init)
+Time Limit: 72 hours (3 days)
+Start Time: Sat Nov 22 12:42:56 AM HKT 2025
+Working Directory: /research/d7/fyp25/yyyu2/FYP-LLM
+==========================================
+Cache Directories:
+HF_HOME: /research/d7/fyp25/yyyu2/.cache/huggingface
+HF_DATASETS_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/datasets
+HF_HUB_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/hub
+XET_CACHE: /research/d7/fyp25/yyyu2/.cache/huggingface/xet
+UV_CACHE_DIR: /research/d7/fyp25/yyyu2/.cache/uv
+==========================================
+CUDA_HOME: /usr/local/cuda-10.0
+CUDA version: nvcc not found
+==========================================
+GPU Information:
+==========================================
+Sat Nov 22 00:42:56 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.133.20             Driver Version: 570.133.20     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA TITAN RTX               Off |   00000000:3B:00.0 Off |                  N/A |
+| 43%   55C    P8             32W /  280W |       1MiB /  24576MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA TITAN RTX               Off |   00000000:AF:00.0 Off |                  N/A |
+| 45%   56C    P8             22W /  280W |       1MiB /  24576MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+==========================================
+Environment Information:
+==========================================
+Python version: Python 3.12.12
+PyTorch version: 2.9.1+cu128
+CUDA available: True
+Number of GPUs: 2
+CPU count: 12
+==========================================
+Starting training with maximum resources...
+Config: configs/config_7b_8gpu.json
+==========================================
+Checking for bitsandbytes...
+bitsandbytes is already installed.
+Number of GPUs detected: 2
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+{'loss': 0.9032, 'grad_norm': 0.2381974458694458, 'learning_rate': 0.0001425597239768174, 'epoch': 0.46}
+{'loss': 0.923, 'grad_norm': 0.24179475009441376, 'learning_rate': 0.00014242972598308822, 'epoch': 0.46}
+{'loss': 0.9095, 'grad_norm': 0.24682949483394623, 'learning_rate': 0.00014229866245709535, 'epoch': 0.46}
+{'loss': 0.9079, 'grad_norm': 0.24992813169956207, 'learning_rate': 0.00014216653546991967, 'epoch': 0.46}
+{'loss': 0.8969, 'grad_norm': 0.28039857745170593, 'learning_rate': 0.00014203334710944697, 'epoch': 0.47}

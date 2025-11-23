@@ -1,0 +1,849 @@
+==========================================
+SLURM Job ID: 519155
+Job Name: train_1.5b_fast
+Node: gpu39
+CPUs per task: 30
+Start time: Sat Nov 22 09:28:33 PM HKT 2025
+==========================================
+
+Configuration:
+  Config file: /research/d7/fyp25/yyyu2/FYP-LLM//configs/config_1.5b_fast.json
+  Base directory: /research/d7/fyp25/yyyu2/FYP-LLM/
+
+==========================================
+Setting up Python environment...
+==========================================
+Activating virtual environment...
+
+Environment check:
+Python 3.12.12
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/python
+
+GPU Information:
+0, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+1, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+2, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+3, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+4, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+5, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+6, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+7, NVIDIA GeForce RTX 2080 Ti, 11264, 10822
+
+Using config file: /research/d7/fyp25/yyyu2/FYP-LLM//configs/config_1.5b_fast.json
+
+{
+  "_comment": "Qwen2.5-1.5B-Instruct - Optimized for FAST & STABLE training on 8 GPUs (RTX 2080 Ti 11GB)",
+  "_performance": "~2-3x faster than 3B, conservative settings for 10.57 GB VRAM",
+  "_effective_batch": "Effective batch size = 8 GPUs × 2 batch × 8 accumulation = 128 samples per update",
+
+  "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+  "dataset_path": "datasets/all_mental_health_combined",
+  "output_dir": "models/qwen2.5-1.5b-fast-8gpu",
+
+  "batch_size": 2,
+  "num_epochs": 3,
+  "learning_rate": 2e-4,
+  "use_wandb": false,
+
+  "use_4bit": true,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.1,
+  "lora_target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+
+  "max_length": 768,
+  "gradient_accumulation_steps": 8,
+  "eval_batch_size": 4,
+  "eval_accumulation_steps": 4,
+
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.05,
+  "logging_steps": 5,
+  "eval_steps": 50,
+  "save_steps": 200,
+  "save_total_limit": 3,
+
+  "fp16": false,
+  "bf16": true,
+  "prediction_loss_only": true,
+  "early_stopping": true,
+  "seed": 42,
+
+  "run_name": "qwen2.5-1.5b-fast-8gpu",
+  "wandb_project": "qwen2.5-1.5b-counsel-chat",
+
+  "dataloader_num_workers": 4,
+  "dataloader_pin_memory": true,
+  "gradient_checkpointing": true,
+  "ddp_find_unused_parameters": false,
+
+  "optim": "adamw_torch_fused",
+  "adam_beta1": 0.9,
+  "adam_beta2": 0.999,
+  "adam_epsilon": 1e-8,
+  "max_grad_norm": 1.0,
+  "lr_scheduler_type": "cosine",
+
+  "save_strategy": "steps",
+  "eval_strategy": "steps",
+  "load_best_model_at_end": true,
+  "metric_for_best_model": "eval_loss",
+  "greater_is_better": false,
+  "report_to": "none",
+  "remove_unused_columns": false,
+  "use_cache": false,
+
+  "_optimization_notes": [
+    "Conservative batch_size (2) to fit in 10.57 GB VRAM",
+    "Higher gradient_accumulation (8) maintains effective batch of 128",
+    "Reduced max_length (768) saves significant memory",
+    "LoRA rank (16) balances quality and memory usage",
+    "Still 2-3x faster than 3B/7B models",
+    "Safe memory margins for stable training",
+    "Frequent eval (50 steps) to catch best model early",
+    "Prediction_loss_only for faster evaluation"
+  ]
+}
+
+Training with 8 GPUs
+
+==========================================
+Starting training at Sat Nov 22 09:28:33 PM HKT 2025
+==========================================
+
+Launching multi-GPU training with accelerate...
+trainable params: 18,464,768 || all params: 1,562,179,072 || trainable%: 1.1820
+trainable params: 18,464,768 || all params: 1,562,179,072 || trainable%: 1.1820
+trainable params: 18,464,768 || all params: 1,562,179,072 || trainable%: 1.1820
+trainable params: 18,464,768 || all params: 1,562,179,072 || trainable%: 1.1820
+trainable params: 18,464,768 || all params: 1,562,179,072 || trainable%: 1.1820
+trainable params: 18,464,768 || all params: 1,562,179,072 || trainable%: 1.1820
+trainable params: 18,464,768 || all params: 1,562,179,072 || trainable%: 1.1820
+trainable params: 18,464,768 || all params: 1,562,179,072 || trainable%: 1.1820
+gpu39:3512772:3512772 [0] NCCL INFO Bootstrap: Using ens106f0np0:137.189.88.86<0>
+gpu39:3512772:3512772 [0] NCCL INFO cudaDriverVersion 12080
+gpu39:3512772:3512772 [0] NCCL INFO NCCL version 2.27.5+cuda12.9
+gpu39:3512772:3512772 [0] NCCL INFO Comm config Blocking set to 1
+gpu39:3512776:3512776 [4] NCCL INFO cudaDriverVersion 12080
+gpu39:3512776:3512776 [4] NCCL INFO Bootstrap: Using ens106f0np0:137.189.88.86<0>
+gpu39:3512776:3512776 [4] NCCL INFO NCCL version 2.27.5+cuda12.9
+gpu39:3512776:3512776 [4] NCCL INFO Comm config Blocking set to 1
+gpu39:3512773:3512773 [1] NCCL INFO cudaDriverVersion 12080
+gpu39:3512773:3512773 [1] NCCL INFO Bootstrap: Using ens106f0np0:137.189.88.86<0>
+gpu39:3512773:3512773 [1] NCCL INFO NCCL version 2.27.5+cuda12.9
+gpu39:3512773:3512773 [1] NCCL INFO Comm config Blocking set to 1
+gpu39:3512774:3512774 [2] NCCL INFO cudaDriverVersion 12080
+gpu39:3512774:3512774 [2] NCCL INFO Bootstrap: Using ens106f0np0:137.189.88.86<0>
+gpu39:3512774:3512774 [2] NCCL INFO NCCL version 2.27.5+cuda12.9
+gpu39:3512774:3512774 [2] NCCL INFO Comm config Blocking set to 1
+gpu39:3512778:3512778 [6] NCCL INFO cudaDriverVersion 12080
+gpu39:3512778:3512778 [6] NCCL INFO Bootstrap: Using ens106f0np0:137.189.88.86<0>
+gpu39:3512778:3512778 [6] NCCL INFO NCCL version 2.27.5+cuda12.9
+gpu39:3512778:3512778 [6] NCCL INFO Comm config Blocking set to 1
+gpu39:3512777:3512777 [5] NCCL INFO cudaDriverVersion 12080
+gpu39:3512777:3512777 [5] NCCL INFO Bootstrap: Using ens106f0np0:137.189.88.86<0>
+gpu39:3512777:3512777 [5] NCCL INFO NCCL version 2.27.5+cuda12.9
+gpu39:3512777:3512777 [5] NCCL INFO Comm config Blocking set to 1
+gpu39:3512775:3512775 [3] NCCL INFO cudaDriverVersion 12080
+gpu39:3512779:3512779 [7] NCCL INFO cudaDriverVersion 12080
+gpu39:3512775:3512775 [3] NCCL INFO Bootstrap: Using ens106f0np0:137.189.88.86<0>
+gpu39:3512775:3512775 [3] NCCL INFO NCCL version 2.27.5+cuda12.9
+gpu39:3512779:3512779 [7] NCCL INFO Bootstrap: Using ens106f0np0:137.189.88.86<0>
+gpu39:3512779:3512779 [7] NCCL INFO NCCL version 2.27.5+cuda12.9
+gpu39:3512779:3512779 [7] NCCL INFO Comm config Blocking set to 1
+gpu39:3512775:3512775 [3] NCCL INFO Comm config Blocking set to 1
+gpu39:3512773:3513081 [1] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+gpu39:3512776:3513080 [4] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+gpu39:3512779:3513085 [7] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+gpu39:3512773:3513081 [1] NCCL INFO NCCL_IB_DISABLE set by environment to 0.
+gpu39:3512776:3513080 [4] NCCL INFO NCCL_IB_DISABLE set by environment to 0.
+gpu39:3512772:3513079 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+gpu39:3512779:3513085 [7] NCCL INFO NCCL_IB_DISABLE set by environment to 0.
+gpu39:3512777:3513084 [5] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+gpu39:3512778:3513083 [6] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+gpu39:3512775:3513086 [3] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+gpu39:3512772:3513079 [0] NCCL INFO NCCL_IB_DISABLE set by environment to 0.
+gpu39:3512777:3513084 [5] NCCL INFO NCCL_IB_DISABLE set by environment to 0.
+gpu39:3512778:3513083 [6] NCCL INFO NCCL_IB_DISABLE set by environment to 0.
+gpu39:3512775:3513086 [3] NCCL INFO NCCL_IB_DISABLE set by environment to 0.
+gpu39:3512774:3513082 [2] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+gpu39:3512774:3513082 [2] NCCL INFO NCCL_IB_DISABLE set by environment to 0.
+gpu39:3512777:3513084 [5] NCCL INFO NET/IB : No device found.
+gpu39:3512773:3513081 [1] NCCL INFO NET/IB : No device found.
+gpu39:3512772:3513079 [0] NCCL INFO NET/IB : No device found.
+gpu39:3512773:3513081 [1] NCCL INFO NET/IB : Using [RO]; OOB ens106f0np0:137.189.88.86<0>
+gpu39:3512779:3513085 [7] NCCL INFO NET/IB : No device found.
+gpu39:3512776:3513080 [4] NCCL INFO NET/IB : No device found.
+gpu39:3512777:3513084 [5] NCCL INFO NET/IB : Using [RO]; OOB ens106f0np0:137.189.88.86<0>
+gpu39:3512775:3513086 [3] NCCL INFO NET/IB : No device found.
+gpu39:3512778:3513083 [6] NCCL INFO NET/IB : No device found.
+gpu39:3512772:3513079 [0] NCCL INFO NET/IB : Using [RO]; OOB ens106f0np0:137.189.88.86<0>
+gpu39:3512779:3513085 [7] NCCL INFO NET/IB : Using [RO]; OOB ens106f0np0:137.189.88.86<0>
+gpu39:3512776:3513080 [4] NCCL INFO NET/IB : Using [RO]; OOB ens106f0np0:137.189.88.86<0>
+gpu39:3512775:3513086 [3] NCCL INFO NET/IB : Using [RO]; OOB ens106f0np0:137.189.88.86<0>
+gpu39:3512778:3513083 [6] NCCL INFO NET/IB : Using [RO]; OOB ens106f0np0:137.189.88.86<0>
+gpu39:3512773:3513081 [1] NCCL INFO NET/Socket : Using [0]ens106f0np0:137.189.88.86<0> [1]enxbe3af2b6059f:169.254.3.1<0>
+gpu39:3512773:3513081 [1] NCCL INFO Initialized NET plugin Socket
+gpu39:3512777:3513084 [5] NCCL INFO NET/Socket : Using [0]ens106f0np0:137.189.88.86<0> [1]enxbe3af2b6059f:169.254.3.1<0>
+gpu39:3512779:3513085 [7] NCCL INFO NET/Socket : Using [0]ens106f0np0:137.189.88.86<0> [1]enxbe3af2b6059f:169.254.3.1<0>
+gpu39:3512777:3513084 [5] NCCL INFO Initialized NET plugin Socket
+gpu39:3512779:3513085 [7] NCCL INFO Initialized NET plugin Socket
+gpu39:3512773:3513081 [1] NCCL INFO Assigned NET plugin Socket to comm
+gpu39:3512773:3513081 [1] NCCL INFO Using network Socket
+gpu39:3512776:3513080 [4] NCCL INFO NET/Socket : Using [0]ens106f0np0:137.189.88.86<0> [1]enxbe3af2b6059f:169.254.3.1<0>
+gpu39:3512772:3513079 [0] NCCL INFO NET/Socket : Using [0]ens106f0np0:137.189.88.86<0> [1]enxbe3af2b6059f:169.254.3.1<0>
+gpu39:3512776:3513080 [4] NCCL INFO Initialized NET plugin Socket
+gpu39:3512772:3513079 [0] NCCL INFO Initialized NET plugin Socket
+gpu39:3512775:3513086 [3] NCCL INFO NET/Socket : Using [0]ens106f0np0:137.189.88.86<0> [1]enxbe3af2b6059f:169.254.3.1<0>
+gpu39:3512779:3513085 [7] NCCL INFO Assigned NET plugin Socket to comm
+gpu39:3512775:3513086 [3] NCCL INFO Initialized NET plugin Socket
+gpu39:3512777:3513084 [5] NCCL INFO Assigned NET plugin Socket to comm
+gpu39:3512779:3513085 [7] NCCL INFO Using network Socket
+gpu39:3512777:3513084 [5] NCCL INFO Using network Socket
+gpu39:3512778:3513083 [6] NCCL INFO NET/Socket : Using [0]ens106f0np0:137.189.88.86<0> [1]enxbe3af2b6059f:169.254.3.1<0>
+gpu39:3512774:3513082 [2] NCCL INFO NET/IB : No device found.
+gpu39:3512778:3513083 [6] NCCL INFO Initialized NET plugin Socket
+gpu39:3512776:3513080 [4] NCCL INFO Assigned NET plugin Socket to comm
+gpu39:3512775:3513086 [3] NCCL INFO Assigned NET plugin Socket to comm
+gpu39:3512776:3513080 [4] NCCL INFO Using network Socket
+gpu39:3512772:3513079 [0] NCCL INFO Assigned NET plugin Socket to comm
+gpu39:3512775:3513086 [3] NCCL INFO Using network Socket
+gpu39:3512774:3513082 [2] NCCL INFO NET/IB : Using [RO]; OOB ens106f0np0:137.189.88.86<0>
+gpu39:3512772:3513079 [0] NCCL INFO Using network Socket
+gpu39:3512778:3513083 [6] NCCL INFO Assigned NET plugin Socket to comm
+gpu39:3512778:3513083 [6] NCCL INFO Using network Socket
+gpu39:3512774:3513082 [2] NCCL INFO NET/Socket : Using [0]ens106f0np0:137.189.88.86<0> [1]enxbe3af2b6059f:169.254.3.1<0>
+gpu39:3512774:3513082 [2] NCCL INFO Initialized NET plugin Socket
+gpu39:3512774:3513082 [2] NCCL INFO Assigned NET plugin Socket to comm
+gpu39:3512774:3513082 [2] NCCL INFO Using network Socket
+gpu39:3512773:3513081 [1] NCCL INFO ncclCommInitRankConfig comm 0x3bb5b030 rank 1 nranks 8 cudaDev 1 nvmlDev 1 busId 52000 commId 0x6cfc41e440da089b - Init START
+gpu39:3512776:3513080 [4] NCCL INFO ncclCommInitRankConfig comm 0x29d21b80 rank 4 nranks 8 cudaDev 4 nvmlDev 4 busId 57000 commId 0x6cfc41e440da089b - Init START
+gpu39:3512772:3513079 [0] NCCL INFO ncclCommInitRankConfig comm 0x3229d6b0 rank 0 nranks 8 cudaDev 0 nvmlDev 0 busId 4f000 commId 0x6cfc41e440da089b - Init START
+gpu39:3512778:3513083 [6] NCCL INFO ncclCommInitRankConfig comm 0x45c3ce00 rank 6 nranks 8 cudaDev 6 nvmlDev 6 busId d1000 commId 0x6cfc41e440da089b - Init START
+gpu39:3512779:3513085 [7] NCCL INFO ncclCommInitRankConfig comm 0x2e20e180 rank 7 nranks 8 cudaDev 7 nvmlDev 7 busId d2000 commId 0x6cfc41e440da089b - Init START
+gpu39:3512777:3513084 [5] NCCL INFO ncclCommInitRankConfig comm 0x44e012c0 rank 5 nranks 8 cudaDev 5 nvmlDev 5 busId ce000 commId 0x6cfc41e440da089b - Init START
+gpu39:3512775:3513086 [3] NCCL INFO ncclCommInitRankConfig comm 0x1ee91de0 rank 3 nranks 8 cudaDev 3 nvmlDev 3 busId 56000 commId 0x6cfc41e440da089b - Init START
+gpu39:3512774:3513082 [2] NCCL INFO ncclCommInitRankConfig comm 0x317516f0 rank 2 nranks 8 cudaDev 2 nvmlDev 2 busId 53000 commId 0x6cfc41e440da089b - Init START
+gpu39:3512777:3513084 [5] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+gpu39:3512778:3513083 [6] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+gpu39:3512776:3513080 [4] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+gpu39:3512779:3513085 [7] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+gpu39:3512773:3513081 [1] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+gpu39:3512775:3513086 [3] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+gpu39:3512774:3513082 [2] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+gpu39:3512772:3513079 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+gpu39:3512776:3513080 [4] NCCL INFO Bootstrap timings total 0.004259 (create 0.000081, send 0.000287, recv 0.002205, ring 0.000449, delay 0.000001)
+gpu39:3512779:3513085 [7] NCCL INFO Bootstrap timings total 0.002427 (create 0.000114, send 0.000329, recv 0.000198, ring 0.000402, delay 0.000001)
+gpu39:3512778:3513083 [6] NCCL INFO Bootstrap timings total 0.002623 (create 0.000083, send 0.000364, recv 0.000318, ring 0.000444, delay 0.000002)
+gpu39:3512775:3513086 [3] NCCL INFO Bootstrap timings total 0.002038 (create 0.000075, send 0.000247, recv 0.000180, ring 0.000454, delay 0.000001)
+gpu39:3512777:3513084 [5] NCCL INFO Bootstrap timings total 0.002258 (create 0.000073, send 0.000241, recv 0.000313, ring 0.000486, delay 0.000001)
+gpu39:3512774:3513082 [2] NCCL INFO Bootstrap timings total 0.001860 (create 0.000072, send 0.000280, recv 0.000120, ring 0.000451, delay 0.000001)
+gpu39:3512773:3513081 [1] NCCL INFO Bootstrap timings total 0.004552 (create 0.000085, send 0.000294, recv 0.002719, ring 0.000488, delay 0.000001)
+gpu39:3512772:3513079 [0] NCCL INFO Bootstrap timings total 0.002828 (create 0.000071, send 0.000277, recv 0.000186, ring 0.000462, delay 0.000001)
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512776:3513080 [4] NCCL INFO Setting affinity for GPU 4 to 0-14,32-46
+gpu39:3512776:3513080 [4] NCCL INFO NVLS multicast support is not available on dev 4 (NVLS_NCHANNELS 0)
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512778:3513083 [6] NCCL INFO NVLS multicast support is not available on dev 6 (NVLS_NCHANNELS 0)
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO Setting affinity for GPU 0 to 0-14,32-46
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512772:3513079 [0] NCCL INFO NVLS multicast support is not available on dev 0 (NVLS_NCHANNELS 0)
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512774:3513082 [2] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512773:3513081 [1] NCCL INFO Setting affinity for GPU 1 to 0-14,32-46
+gpu39:3512774:3513082 [2] NCCL INFO Setting affinity for GPU 2 to 0-14,32-46
+gpu39:3512773:3513081 [1] NCCL INFO NVLS multicast support is not available on dev 1 (NVLS_NCHANNELS 0)
+gpu39:3512774:3513082 [2] NCCL INFO NVLS multicast support is not available on dev 2 (NVLS_NCHANNELS 0)
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512775:3513086 [3] NCCL INFO Setting affinity for GPU 3 to 0-14,32-46
+gpu39:3512775:3513086 [3] NCCL INFO NVLS multicast support is not available on dev 3 (NVLS_NCHANNELS 0)
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 1 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 2 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 3 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 4 and 0. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 0 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 2 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 3 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 4 and 1. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 0 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 1 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 3 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 4 and 2. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 0 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 1 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 2 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 4 and 3. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 0 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 1 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 2 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 3 and 4. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 6 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 7 and 5. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 5 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 7 and 6. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 5 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512779:3513085 [7] NCCL INFO P2P is disabled between connected GPUs 6 and 7. You can repress this message with NCCL_IGNORE_DISABLED_P2P=1.
+gpu39:3512777:3513084 [5] NCCL INFO NVLS multicast support is not available on dev 5 (NVLS_NCHANNELS 0)
+gpu39:3512779:3513085 [7] NCCL INFO NVLS multicast support is not available on dev 7 (NVLS_NCHANNELS 0)
+gpu39:3512773:3513081 [1] NCCL INFO comm 0x3bb5b030 rank 1 nRanks 8 nNodes 1 localRanks 8 localRank 1 MNNVL 0
+gpu39:3512774:3513082 [2] NCCL INFO comm 0x317516f0 rank 2 nRanks 8 nNodes 1 localRanks 8 localRank 2 MNNVL 0
+gpu39:3512776:3513080 [4] NCCL INFO comm 0x29d21b80 rank 4 nRanks 8 nNodes 1 localRanks 8 localRank 4 MNNVL 0
+gpu39:3512779:3513085 [7] NCCL INFO comm 0x2e20e180 rank 7 nRanks 8 nNodes 1 localRanks 8 localRank 7 MNNVL 0
+gpu39:3512772:3513079 [0] NCCL INFO comm 0x3229d6b0 rank 0 nRanks 8 nNodes 1 localRanks 8 localRank 0 MNNVL 0
+gpu39:3512777:3513084 [5] NCCL INFO comm 0x44e012c0 rank 5 nRanks 8 nNodes 1 localRanks 8 localRank 5 MNNVL 0
+gpu39:3512775:3513086 [3] NCCL INFO comm 0x1ee91de0 rank 3 nRanks 8 nNodes 1 localRanks 8 localRank 3 MNNVL 0
+gpu39:3512778:3513083 [6] NCCL INFO comm 0x45c3ce00 rank 6 nRanks 8 nNodes 1 localRanks 8 localRank 6 MNNVL 0
+gpu39:3512773:3513081 [1] NCCL INFO Trees [0] 2/-1/-1->1->0 [1] 2/-1/-1->1->0
+gpu39:3512774:3513082 [2] NCCL INFO Trees [0] 3/-1/-1->2->1 [1] 3/-1/-1->2->1
+gpu39:3512776:3513080 [4] NCCL INFO Trees [0] -1/-1/-1->4->7 [1] -1/-1/-1->4->7
+gpu39:3512779:3513085 [7] NCCL INFO Trees [0] 4/-1/-1->7->6 [1] 4/-1/-1->7->6
+gpu39:3512772:3513079 [0] NCCL INFO Channel 00/02 : 0 1 2 3 4 5 6 7
+gpu39:3512773:3513081 [1] NCCL INFO P2P Chunksize set to 131072
+gpu39:3512777:3513084 [5] NCCL INFO Trees [0] 6/-1/-1->5->3 [1] 6/-1/-1->5->3
+gpu39:3512774:3513082 [2] NCCL INFO P2P Chunksize set to 131072
+gpu39:3512776:3513080 [4] NCCL INFO P2P Chunksize set to 131072
+gpu39:3512775:3513086 [3] NCCL INFO Trees [0] 5/-1/-1->3->2 [1] 5/-1/-1->3->2
+gpu39:3512779:3513085 [7] NCCL INFO P2P Chunksize set to 131072
+gpu39:3512778:3513083 [6] NCCL INFO Trees [0] 7/-1/-1->6->5 [1] 7/-1/-1->6->5
+gpu39:3512772:3513079 [0] NCCL INFO Channel 01/02 : 0 1 2 3 4 5 6 7
+gpu39:3512777:3513084 [5] NCCL INFO P2P Chunksize set to 131072
+gpu39:3512775:3513086 [3] NCCL INFO P2P Chunksize set to 131072
+gpu39:3512778:3513083 [6] NCCL INFO P2P Chunksize set to 131072
+gpu39:3512772:3513079 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1
+gpu39:3512772:3513079 [0] NCCL INFO P2P Chunksize set to 131072
+gpu39:3512772:3513079 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+gpu39:3512777:3513084 [5] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+gpu39:3512772:3513079 [0] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0
+gpu39:3512779:3513085 [7] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+gpu39:3512772:3513095 [0] NCCL INFO [Proxy Service] Device 0 CPU core 10
+gpu39:3512777:3513096 [5] NCCL INFO [Proxy Service] Device 5 CPU core 6
+gpu39:3512772:3513097 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 3
+gpu39:3512777:3513098 [5] NCCL INFO [Proxy Service UDS] Device 5 CPU core 0
+gpu39:3512779:3513100 [7] NCCL INFO [Proxy Service UDS] Device 7 CPU core 1
+gpu39:3512778:3513083 [6] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+gpu39:3512773:3513081 [1] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+gpu39:3512775:3513086 [3] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+gpu39:3512779:3513099 [7] NCCL INFO [Proxy Service] Device 7 CPU core 46
+gpu39:3512778:3513101 [6] NCCL INFO [Proxy Service] Device 6 CPU core 4
+gpu39:3512775:3513103 [3] NCCL INFO [Proxy Service] Device 3 CPU core 2
+gpu39:3512773:3513102 [1] NCCL INFO [Proxy Service] Device 1 CPU core 13
+gpu39:3512774:3513082 [2] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+gpu39:3512778:3513104 [6] NCCL INFO [Proxy Service UDS] Device 6 CPU core 6
+gpu39:3512776:3513080 [4] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+gpu39:3512775:3513106 [3] NCCL INFO [Proxy Service UDS] Device 3 CPU core 14
+gpu39:3512773:3513105 [1] NCCL INFO [Proxy Service UDS] Device 1 CPU core 46
+gpu39:3512774:3513107 [2] NCCL INFO [Proxy Service] Device 2 CPU core 43
+gpu39:3512774:3513108 [2] NCCL INFO [Proxy Service UDS] Device 2 CPU core 12
+gpu39:3512776:3513109 [4] NCCL INFO [Proxy Service] Device 4 CPU core 7
+gpu39:3512776:3513110 [4] NCCL INFO [Proxy Service UDS] Device 4 CPU core 3
+gpu39:3512779:3513085 [7] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+gpu39:3512779:3513085 [7] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+gpu39:3512778:3513083 [6] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+gpu39:3512778:3513083 [6] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+gpu39:3512772:3513079 [0] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+gpu39:3512772:3513079 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+gpu39:3512775:3513086 [3] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+gpu39:3512775:3513086 [3] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+gpu39:3512773:3513081 [1] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+gpu39:3512773:3513081 [1] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+gpu39:3512774:3513082 [2] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+gpu39:3512774:3513082 [2] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+gpu39:3512777:3513084 [5] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+gpu39:3512777:3513084 [5] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+gpu39:3512776:3513080 [4] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+gpu39:3512776:3513080 [4] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+gpu39:3512772:3513079 [0] NCCL INFO CC Off, workFifoBytes 1048576
+gpu39:3512779:3513085 [7] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+gpu39:3512772:3513079 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+gpu39:3512779:3513085 [7] NCCL INFO ncclCommInitRankConfig comm 0x2e20e180 rank 7 nranks 8 cudaDev 7 nvmlDev 7 busId d2000 commId 0x6cfc41e440da089b - Init COMPLETE
+gpu39:3512772:3513079 [0] NCCL INFO ncclCommInitRankConfig comm 0x3229d6b0 rank 0 nranks 8 cudaDev 0 nvmlDev 0 busId 4f000 commId 0x6cfc41e440da089b - Init COMPLETE
+gpu39:3512779:3513085 [7] NCCL INFO Init timings - ncclCommInitRankConfig: rank 7 nranks 8 total 1.02 (kernels 0.49, alloc 0.38, bootstrap 0.00, allgathers 0.00, topo 0.08, graphs 0.04, connections 0.01, rest 0.03)
+gpu39:3512772:3513079 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 0 nranks 8 total 1.07 (kernels 0.53, alloc 0.38, bootstrap 0.00, allgathers 0.01, topo 0.07, graphs 0.03, connections 0.01, rest 0.02)
+gpu39:3512776:3513080 [4] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+gpu39:3512776:3513080 [4] NCCL INFO ncclCommInitRankConfig comm 0x29d21b80 rank 4 nranks 8 cudaDev 4 nvmlDev 4 busId 57000 commId 0x6cfc41e440da089b - Init COMPLETE
+gpu39:3512777:3513084 [5] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+gpu39:3512775:3513086 [3] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+gpu39:3512776:3513080 [4] NCCL INFO Init timings - ncclCommInitRankConfig: rank 4 nranks 8 total 1.05 (kernels 0.51, alloc 0.38, bootstrap 0.00, allgathers 0.01, topo 0.07, graphs 0.04, connections 0.01, rest 0.02)
+gpu39:3512773:3513081 [1] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+gpu39:3512777:3513084 [5] NCCL INFO ncclCommInitRankConfig comm 0x44e012c0 rank 5 nranks 8 cudaDev 5 nvmlDev 5 busId ce000 commId 0x6cfc41e440da089b - Init COMPLETE
+gpu39:3512775:3513086 [3] NCCL INFO ncclCommInitRankConfig comm 0x1ee91de0 rank 3 nranks 8 cudaDev 3 nvmlDev 3 busId 56000 commId 0x6cfc41e440da089b - Init COMPLETE
+gpu39:3512773:3513081 [1] NCCL INFO ncclCommInitRankConfig comm 0x3bb5b030 rank 1 nranks 8 cudaDev 1 nvmlDev 1 busId 52000 commId 0x6cfc41e440da089b - Init COMPLETE
+gpu39:3512777:3513084 [5] NCCL INFO Init timings - ncclCommInitRankConfig: rank 5 nranks 8 total 1.03 (kernels 0.50, alloc 0.38, bootstrap 0.00, allgathers 0.00, topo 0.08, graphs 0.04, connections 0.01, rest 0.02)
+gpu39:3512775:3513086 [3] NCCL INFO Init timings - ncclCommInitRankConfig: rank 3 nranks 8 total 1.02 (kernels 0.49, alloc 0.38, bootstrap 0.00, allgathers 0.01, topo 0.08, graphs 0.04, connections 0.01, rest 0.02)
+gpu39:3512773:3513081 [1] NCCL INFO Init timings - ncclCommInitRankConfig: rank 1 nranks 8 total 1.04 (kernels 0.51, alloc 0.38, bootstrap 0.00, allgathers 0.01, topo 0.07, graphs 0.03, connections 0.01, rest 0.02)
+gpu39:3512774:3513082 [2] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+gpu39:3512774:3513082 [2] NCCL INFO ncclCommInitRankConfig comm 0x317516f0 rank 2 nranks 8 cudaDev 2 nvmlDev 2 busId 53000 commId 0x6cfc41e440da089b - Init COMPLETE
+gpu39:3512774:3513082 [2] NCCL INFO Init timings - ncclCommInitRankConfig: rank 2 nranks 8 total 1.04 (kernels 0.51, alloc 0.38, bootstrap 0.00, allgathers 0.01, topo 0.07, graphs 0.04, connections 0.01, rest 0.02)
+gpu39:3512778:3513083 [6] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+gpu39:3512778:3513083 [6] NCCL INFO ncclCommInitRankConfig comm 0x45c3ce00 rank 6 nranks 8 cudaDev 6 nvmlDev 6 busId d1000 commId 0x6cfc41e440da089b - Init COMPLETE
+gpu39:3512778:3513083 [6] NCCL INFO Init timings - ncclCommInitRankConfig: rank 6 nranks 8 total 1.03 (kernels 0.50, alloc 0.38, bootstrap 0.00, allgathers 0.02, topo 0.07, graphs 0.03, connections 0.01, rest 0.03)
+gpu39:3512775:3513117 [3] NCCL INFO Channel 00 : 3[3] -> 4[4] via SHM/direct/direct
+gpu39:3512779:3513111 [7] NCCL INFO Channel 00 : 7[7] -> 0[0] via SHM/direct/direct
+gpu39:3512777:3513112 [5] NCCL INFO Channel 00 : 5[5] -> 6[6] via SHM/direct/direct
+gpu39:3512778:3513113 [6] NCCL INFO Channel 00 : 6[6] -> 7[7] via SHM/direct/direct
+gpu39:3512775:3513117 [3] NCCL INFO Channel 01 : 3[3] -> 4[4] via SHM/direct/direct
+gpu39:3512772:3513116 [0] NCCL INFO Channel 00 : 0[0] -> 1[1] via SHM/direct/direct
+gpu39:3512772:3513116 [0] NCCL INFO Channel 01 : 0[0] -> 1[1] via SHM/direct/direct
+gpu39:3512777:3513112 [5] NCCL INFO Channel 01 : 5[5] -> 6[6] via SHM/direct/direct
+gpu39:3512779:3513111 [7] NCCL INFO Channel 01 : 7[7] -> 0[0] via SHM/direct/direct
+gpu39:3512774:3513118 [2] NCCL INFO Channel 00 : 2[2] -> 3[3] via SHM/direct/direct
+gpu39:3512778:3513113 [6] NCCL INFO Channel 01 : 6[6] -> 7[7] via SHM/direct/direct
+gpu39:3512774:3513118 [2] NCCL INFO Channel 01 : 2[2] -> 3[3] via SHM/direct/direct
+gpu39:3512776:3513115 [4] NCCL INFO Channel 00 : 4[4] -> 5[5] via SHM/direct/direct
+gpu39:3512773:3513114 [1] NCCL INFO Channel 00 : 1[1] -> 2[2] via SHM/direct/direct
+gpu39:3512773:3513114 [1] NCCL INFO Channel 01 : 1[1] -> 2[2] via SHM/direct/direct
+gpu39:3512776:3513115 [4] NCCL INFO Channel 01 : 4[4] -> 5[5] via SHM/direct/direct
+gpu39:3512776:3513115 [4] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+gpu39:3512775:3513117 [3] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+gpu39:3512777:3513112 [5] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+gpu39:3512772:3513116 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+gpu39:3512774:3513118 [2] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+gpu39:3512773:3513114 [1] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+gpu39:3512779:3513111 [7] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+gpu39:3512778:3513113 [6] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+{'loss': 2.3462, 'grad_norm': 2.9042115211486816, 'learning_rate': 1.213960546282246e-06, 'epoch': 0.0}
+{'loss': 2.3523, 'grad_norm': 2.4293715953826904, 'learning_rate': 2.7314112291350532e-06, 'epoch': 0.0}
+{'loss': 2.2895, 'grad_norm': 1.539465069770813, 'learning_rate': 4.24886191198786e-06, 'epoch': 0.0}
+{'loss': 2.2314, 'grad_norm': 1.181225061416626, 'learning_rate': 5.766312594840667e-06, 'epoch': 0.0}
+{'loss': 2.1948, 'grad_norm': 1.070117712020874, 'learning_rate': 7.283763277693475e-06, 'epoch': 0.01}
+{'loss': 2.1271, 'grad_norm': 1.0502941608428955, 'learning_rate': 8.801213960546282e-06, 'epoch': 0.01}
+{'loss': 2.0628, 'grad_norm': 0.8727028369903564, 'learning_rate': 1.031866464339909e-05, 'epoch': 0.01}
+{'loss': 1.9895, 'grad_norm': 0.7771453261375427, 'learning_rate': 1.1836115326251897e-05, 'epoch': 0.01}
+{'loss': 1.8931, 'grad_norm': 0.7776823043823242, 'learning_rate': 1.3353566009104704e-05, 'epoch': 0.01}
+{'loss': 1.8178, 'grad_norm': 0.8343927264213562, 'learning_rate': 1.4871016691957512e-05, 'epoch': 0.01}
+{'eval_loss': 1.7849633693695068, 'eval_runtime': 653.0185, 'eval_samples_per_second': 95.622, 'eval_steps_per_second': 2.989, 'epoch': 0.01}
+{'loss': 1.7192, 'grad_norm': 0.8681460618972778, 'learning_rate': 1.638846737481032e-05, 'epoch': 0.01}
+{'loss': 1.6148, 'grad_norm': 0.7960370182991028, 'learning_rate': 1.7905918057663127e-05, 'epoch': 0.01}
+{'loss': 1.5186, 'grad_norm': 0.7209560871124268, 'learning_rate': 1.9423368740515935e-05, 'epoch': 0.01}
+{'loss': 1.4461, 'grad_norm': 0.6814092397689819, 'learning_rate': 2.094081942336874e-05, 'epoch': 0.02}
+{'loss': 1.3776, 'grad_norm': 0.5741040706634521, 'learning_rate': 2.245827010622155e-05, 'epoch': 0.02}
+{'loss': 1.3282, 'grad_norm': 0.4453985095024109, 'learning_rate': 2.3975720789074358e-05, 'epoch': 0.02}
+{'loss': 1.307, 'grad_norm': 0.3130547106266022, 'learning_rate': 2.5493171471927164e-05, 'epoch': 0.02}
+{'loss': 1.2947, 'grad_norm': 0.2635447084903717, 'learning_rate': 2.701062215477997e-05, 'epoch': 0.02}
+{'loss': 1.2704, 'grad_norm': 0.2179746925830841, 'learning_rate': 2.852807283763278e-05, 'epoch': 0.02}
+{'loss': 1.2713, 'grad_norm': 0.18676801025867462, 'learning_rate': 3.0045523520485587e-05, 'epoch': 0.02}
+{'eval_loss': 1.2655688524246216, 'eval_runtime': 653.5875, 'eval_samples_per_second': 95.539, 'eval_steps_per_second': 2.987, 'epoch': 0.02}
+{'loss': 1.2441, 'grad_norm': 0.1866135448217392, 'learning_rate': 3.156297420333839e-05, 'epoch': 0.02}
+{'loss': 1.2312, 'grad_norm': 0.19194777309894562, 'learning_rate': 3.30804248861912e-05, 'epoch': 0.03}
+{'loss': 1.2227, 'grad_norm': 0.23301038146018982, 'learning_rate': 3.4597875569044006e-05, 'epoch': 0.03}
+{'loss': 1.199, 'grad_norm': 0.15830039978027344, 'learning_rate': 3.611532625189681e-05, 'epoch': 0.03}
+{'loss': 1.2064, 'grad_norm': 0.19362179934978485, 'learning_rate': 3.7632776934749624e-05, 'epoch': 0.03}
+{'loss': 1.1985, 'grad_norm': 0.2061765193939209, 'learning_rate': 3.915022761760243e-05, 'epoch': 0.03}
+{'loss': 1.189, 'grad_norm': 0.19086481630802155, 'learning_rate': 4.0667678300455234e-05, 'epoch': 0.03}
+{'loss': 1.1825, 'grad_norm': 0.32651904225349426, 'learning_rate': 4.218512898330804e-05, 'epoch': 0.03}
+{'loss': 1.1757, 'grad_norm': 0.2068607360124588, 'learning_rate': 4.370257966616085e-05, 'epoch': 0.03}
+{'loss': 1.1533, 'grad_norm': 0.24228332936763763, 'learning_rate': 4.522003034901366e-05, 'epoch': 0.03}
+{'eval_loss': 1.183513879776001, 'eval_runtime': 653.0515, 'eval_samples_per_second': 95.617, 'eval_steps_per_second': 2.989, 'epoch': 0.03}
+{'loss': 1.1571, 'grad_norm': 0.18848122656345367, 'learning_rate': 4.673748103186646e-05, 'epoch': 0.04}
+{'loss': 1.1336, 'grad_norm': 0.25606030225753784, 'learning_rate': 4.8254931714719275e-05, 'epoch': 0.04}
+{'loss': 1.153, 'grad_norm': 0.25716501474380493, 'learning_rate': 4.977238239757208e-05, 'epoch': 0.04}
+{'loss': 1.1339, 'grad_norm': 0.19550420343875885, 'learning_rate': 5.1289833080424886e-05, 'epoch': 0.04}
+{'loss': 1.1444, 'grad_norm': 0.23900172114372253, 'learning_rate': 5.280728376327769e-05, 'epoch': 0.04}
+{'loss': 1.157, 'grad_norm': 0.22017526626586914, 'learning_rate': 5.4324734446130496e-05, 'epoch': 0.04}
+{'loss': 1.1235, 'grad_norm': 0.24461162090301514, 'learning_rate': 5.5842185128983315e-05, 'epoch': 0.04}
+{'loss': 1.1163, 'grad_norm': 0.24027301371097565, 'learning_rate': 5.735963581183612e-05, 'epoch': 0.04}
+{'loss': 1.0983, 'grad_norm': 0.2688820958137512, 'learning_rate': 5.8877086494688926e-05, 'epoch': 0.04}
+{'loss': 1.1091, 'grad_norm': 0.2654630243778229, 'learning_rate': 6.039453717754173e-05, 'epoch': 0.05}
+{'eval_loss': 1.1360465288162231, 'eval_runtime': 652.9159, 'eval_samples_per_second': 95.637, 'eval_steps_per_second': 2.99, 'epoch': 0.05}
+{'loss': 1.1351, 'grad_norm': 0.302752286195755, 'learning_rate': 6.191198786039454e-05, 'epoch': 0.05}
+{'loss': 1.1007, 'grad_norm': 0.2574067711830139, 'learning_rate': 6.342943854324735e-05, 'epoch': 0.05}
+{'loss': 1.1276, 'grad_norm': 0.27894896268844604, 'learning_rate': 6.494688922610015e-05, 'epoch': 0.05}
+{'loss': 1.1134, 'grad_norm': 0.24189363420009613, 'learning_rate': 6.646433990895296e-05, 'epoch': 0.05}
+{'loss': 1.0842, 'grad_norm': 0.24789980053901672, 'learning_rate': 6.798179059180577e-05, 'epoch': 0.05}
+{'loss': 1.0865, 'grad_norm': 0.23708213865756989, 'learning_rate': 6.949924127465858e-05, 'epoch': 0.05}
+{'loss': 1.0942, 'grad_norm': 0.26933252811431885, 'learning_rate': 7.101669195751139e-05, 'epoch': 0.05}
+{'loss': 1.0737, 'grad_norm': 0.2964775562286377, 'learning_rate': 7.25341426403642e-05, 'epoch': 0.05}
+{'loss': 1.0734, 'grad_norm': 0.3253575563430786, 'learning_rate': 7.4051593323217e-05, 'epoch': 0.06}
+{'loss': 1.0522, 'grad_norm': 0.2556474208831787, 'learning_rate': 7.55690440060698e-05, 'epoch': 0.06}

@@ -1,0 +1,13 @@
+==========================================
+SLURM Job ID: 518995
+Job Name: train_1.5b_fast
+Node: gpu39
+CPUs per task: 30
+Start time: Sat Nov 22 02:09:15 AM HKT 2025
+==========================================
+
+Configuration:
+  Config file: configs/config_1.5b_fast.json
+  Base directory: /research/d7/fyp25/yyyu2
+  Project root: /var/spool
+

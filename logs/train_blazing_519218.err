@@ -1,0 +1,273 @@
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:827: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:1034: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  r = torch._C._cuda_getDeviceCount() if nvml_count < 0 else nvml_count
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2025-11-23 14:09:32,385 - __main__ - INFO - Logging configured for main process (rank 0, local_rank 0)
+2025-11-23 14:09:32,392 - __main__ - INFO - HF_HOME: /research/d7/fyp25/yyyu2/FYP-LLM//.cache/huggingface
+2025-11-23 14:09:32,392 - __main__ - INFO - TRANSFORMERS_CACHE: /research/d7/fyp25/yyyu2/FYP-LLM//.cache/huggingface/transformers
+2025-11-23 14:09:32,400 - __main__ - INFO - Starting multi-GPU training setup...
+2025-11-23 14:09:32,400 - __main__ - INFO - World size: 8, Rank: 0, Local rank: 0
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:182: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:182: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:182: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:182: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:182: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:182: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:182: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:182: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+2025-11-23 14:09:32,421 - __main__ - INFO - ignore_checkpoints=True: Starting fresh training, ignoring any existing checkpoints
+2025-11-23 14:09:32,421 - __main__ - INFO - Loading tokenizer from Qwen/Qwen2.5-1.5B-Instruct
+2025-11-23 14:09:33,793 - __main__ - INFO - Tokenizer loaded. Vocab size: 151665
+2025-11-23 14:09:33,793 - __main__ - INFO - Loading model from Qwen/Qwen2.5-1.5B-Instruct
+2025-11-23 14:09:34,039 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,040 - __main__ - WARNING - CUDA not available. Training on CPU only (will be much slower).
+2025-11-23 14:09:34,040 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,040 - __main__ - WARNING - Loading model without quantization - this may cause OOM on RTX 2080 Ti!
+2025-11-23 14:09:34,049 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,049 - __main__ - WARNING - CUDA not available. Training on CPU only (will be much slower).
+2025-11-23 14:09:34,049 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,049 - __main__ - WARNING - Loading model without quantization - this may cause OOM on RTX 2080 Ti!
+2025-11-23 14:09:34,072 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,077 - __main__ - WARNING - CUDA not available. Training on CPU only (will be much slower).
+2025-11-23 14:09:34,077 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,077 - __main__ - WARNING - Loading model without quantization - this may cause OOM on RTX 2080 Ti!
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+    main()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+    main()
+    main()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+    trainer.train()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 715, in train
+    trainer.train()
+    trainer.train()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 715, in train
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 715, in train
+    self.setup_model()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 253, in setup_model
+    self.setup_model()
+    self.setup_model()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 253, in setup_model
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 253, in setup_model
+    torch.cuda.set_device(local_rank)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 567, in set_device
+    torch.cuda.set_device(local_rank)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 567, in set_device
+    torch.cuda.set_device(local_rank)
+    torch._C._cuda_setDevice(device)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 567, in set_device
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 410, in _lazy_init
+    torch._C._cuda_setDevice(device)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 410, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+    torch._C._cuda_setDevice(device)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 410, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.    
+torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+2025-11-23 14:09:34,722 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,723 - __main__ - WARNING - CUDA not available. Training on CPU only (will be much slower).
+2025-11-23 14:09:34,723 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,723 - __main__ - WARNING - Loading model without quantization - this may cause OOM on RTX 2080 Ti!
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+    main()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+    trainer.train()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 715, in train
+    self.setup_model()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 253, in setup_model
+    torch.cuda.set_device(local_rank)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 567, in set_device
+    torch._C._cuda_setDevice(device)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 410, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+2025-11-23 14:09:34,728 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,729 - __main__ - WARNING - CUDA not available. Training on CPU only (will be much slower).
+2025-11-23 14:09:34,729 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,729 - __main__ - WARNING - Loading model without quantization - this may cause OOM on RTX 2080 Ti!
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+    main()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+    trainer.train()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 715, in train
+    self.setup_model()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 253, in setup_model
+    torch.cuda.set_device(local_rank)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 567, in set_device
+    torch._C._cuda_setDevice(device)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 410, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+2025-11-23 14:09:34,737 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,738 - __main__ - WARNING - CUDA not available. Training on CPU only (will be much slower).
+2025-11-23 14:09:34,738 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,738 - __main__ - WARNING - Loading model without quantization - this may cause OOM on RTX 2080 Ti!
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+    main()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+    trainer.train()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 715, in train
+    self.setup_model()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 253, in setup_model
+    torch.cuda.set_device(local_rank)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 567, in set_device
+    torch._C._cuda_setDevice(device)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 410, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+2025-11-23 14:09:34,804 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,810 - __main__ - WARNING - CUDA not available. Training on CPU only (will be much slower).
+2025-11-23 14:09:34,810 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,810 - __main__ - WARNING - Loading model without quantization - this may cause OOM on RTX 2080 Ti!
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+    main()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+    trainer.train()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 715, in train
+    self.setup_model()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 253, in setup_model
+    torch.cuda.set_device(local_rank)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 567, in set_device
+    torch._C._cuda_setDevice(device)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 410, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+2025-11-23 14:09:34,817 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,818 - __main__ - WARNING - CUDA not available. Training on CPU only (will be much slower).
+2025-11-23 14:09:34,818 - __main__ - WARNING - ============================================================
+2025-11-23 14:09:34,818 - __main__ - WARNING - Loading model without quantization - this may cause OOM on RTX 2080 Ti!
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 957, in <module>
+    main()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 953, in main
+    trainer.train()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 715, in train
+    self.setup_model()
+  File "/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py", line 253, in setup_model
+    torch.cuda.set_device(local_rank)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 567, in set_device
+    torch._C._cuda_setDevice(device)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py", line 410, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+E1123 14:09:38.687000 740297 torch/distributed/elastic/multiprocessing/api.py:882] failed (exitcode: 1) local_rank: 0 (pid: 740383) of binary: /research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/python
+Traceback (most recent call last):
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/bin/accelerate", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/accelerate_cli.py", line 50, in main
+    args.func(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 1226, in launch_command
+    multi_gpu_launcher(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 853, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/run.py", line 927, in run
+    elastic_launch(
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 156, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/yyyu2/FYP-LLM/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 293, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/research/d7/fyp25/yyyu2/FYP-LLM//scripts/training/train_qwen_counsel_multi_gpu.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2025-11-23_14:09:38
+  host      : gpu38
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 740384)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2025-11-23_14:09:38
+  host      : gpu38
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 740385)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2025-11-23_14:09:38
+  host      : gpu38
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 740386)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[4]:
+  time      : 2025-11-23_14:09:38
+  host      : gpu38
+  rank      : 4 (local_rank: 4)
+  exitcode  : 1 (pid: 740387)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[5]:
+  time      : 2025-11-23_14:09:38
+  host      : gpu38
+  rank      : 5 (local_rank: 5)
+  exitcode  : 1 (pid: 740388)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[6]:
+  time      : 2025-11-23_14:09:38
+  host      : gpu38
+  rank      : 6 (local_rank: 6)
+  exitcode  : 1 (pid: 740389)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[7]:
+  time      : 2025-11-23_14:09:38
+  host      : gpu38
+  rank      : 7 (local_rank: 7)
+  exitcode  : 1 (pid: 740390)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-11-23_14:09:38
+  host      : gpu38
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 740383)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
