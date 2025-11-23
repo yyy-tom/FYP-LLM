@@ -12,6 +12,7 @@ This script evaluates:
 import argparse
 import json
 import re
+import os
 import torch
 import numpy as np
 from pathlib import Path
@@ -21,6 +22,13 @@ from collections import defaultdict
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import load_from_disk
 from peft import PeftModel
+
+# Set CUDA environment variables BEFORE any CUDA operations
+# This helps avoid "CUDA unknown error" issues
+if 'CUDA_VISIBLE_DEVICES' in os.environ:
+    # Ensure CUDA_VISIBLE_DEVICES is set before PyTorch initializes CUDA
+    # Don't modify it after this point
+    pass
 
 try:
     from rouge_score import rouge_scorer
@@ -43,30 +51,44 @@ except ImportError:
     print("Warning: nltk not installed. Install with: pip install nltk")
 
 
-def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-Instruct", device: str = "cuda"):
+def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-Instruct", device: str = "cuda", use_multi_gpu: bool = False):
     """Load model - base model only or fine-tuned with LoRA."""
     # Detect available device
     if device == "cuda" and not torch.cuda.is_available():
         print("⚠️  CUDA not available, falling back to CPU")
         device = "cpu"
+        use_multi_gpu = False
     
     print(f"Loading base model: {base_model_name}")
     print(f"Using device: {device}")
+    if use_multi_gpu:
+        print(f"Multi-GPU mode: Using {torch.cuda.device_count()} GPUs")
+    
     tokenizer = AutoTokenizer.from_pretrained(base_model_name)
     
     # Use appropriate dtype based on device
     dtype = torch.float16 if device == "cuda" else torch.float32
     
-    base_model = AutoModelForCausalLM.from_pretrained(
-        base_model_name,
-        torch_dtype=dtype,
-        device_map="auto" if device == "cuda" else None,
-        trust_remote_code=True
-    )
-    
-    # Move to CPU if needed
-    if device == "cpu":
-        base_model = base_model.to("cpu")
+    # For multi-GPU, don't use device_map="auto" as we'll use DataParallel
+    if use_multi_gpu:
+        base_model = AutoModelForCausalLM.from_pretrained(
+            base_model_name,
+            torch_dtype=dtype,
+            device_map=None,  # Will use DataParallel instead
+            trust_remote_code=True
+        )
+        # Move to first GPU, DataParallel will handle distribution
+        base_model = base_model.to("cuda:0")
+    else:
+        base_model = AutoModelForCausalLM.from_pretrained(
+            base_model_name,
+            torch_dtype=dtype,
+            device_map="auto" if device == "cuda" else None,
+            trust_remote_code=True
+        )
+        # Move to CPU if needed
+        if device == "cpu":
+            base_model = base_model.to("cpu")
     
     # Check if LoRA weights exist
     if model_path and Path(model_path).exists() and any(Path(model_path).iterdir()):
@@ -78,6 +100,18 @@ def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-I
         else:
             print("Evaluating base model only (no fine-tuned weights)")
         model = base_model
+    
+    # Wrap with DataParallel for multi-GPU (only if CUDA is actually available)
+    if use_multi_gpu and device == "cuda" and torch.cuda.is_available() and torch.cuda.device_count() > 1:
+        print(f"Wrapping model with DataParallel across {torch.cuda.device_count()} GPUs")
+        model = torch.nn.DataParallel(model)
+    elif use_multi_gpu:
+        print("⚠️  Multi-GPU requested but CUDA not available - not using DataParallel")
+    
+    # Safety check: If model is wrapped with DataParallel but we're on CPU, unwrap it
+    if isinstance(model, torch.nn.DataParallel) and device == "cpu":
+        print("⚠️  Model was wrapped with DataParallel but on CPU - unwrapping")
+        model = model.module
     
     model.eval()
     return model, tokenizer
@@ -111,21 +145,32 @@ def generate_response(
     if device == "cuda" and not torch.cuda.is_available():
         device = "cpu"
     
-    # Get device from model if using device_map="auto"
-    if hasattr(model, 'device'):
-        device = str(model.device).split(':')[0] if ':' in str(model.device) else str(model.device)
-    elif next(model.parameters()).device.type == 'cpu':
-        device = "cpu"
+    # Handle DataParallel wrapper - need to access .module for generation
+    if isinstance(model, torch.nn.DataParallel):
+        # DataParallel wraps the model, need to access underlying model
+        actual_model = model.module
+        device = "cuda"  # DataParallel always uses cuda
+        # For DataParallel, inputs go to cuda:0
+        input_device = "cuda:0"
+    else:
+        actual_model = model
+        # Get device from model if using device_map="auto"
+        if hasattr(model, 'device'):
+            device = str(model.device).split(':')[0] if ':' in str(model.device) else str(model.device)
+        elif next(model.parameters()).device.type == 'cpu':
+            device = "cpu"
+        input_device = device
     
     # Format prompt
     example = {"input": input_text}
     prompt = format_prompt(example, tokenizer)
     
     inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=512)
-    inputs = {k: v.to(device) for k, v in inputs.items()}
+    inputs = {k: v.to(input_device) for k, v in inputs.items()}
     
     with torch.no_grad():
-        outputs = model.generate(
+        # Use actual_model for generation (handles DataParallel case)
+        outputs = actual_model.generate(
             **inputs,
             max_new_tokens=max_new_tokens,
             temperature=temperature,
@@ -155,11 +200,16 @@ def generate_response(
 
 def calculate_perplexity(model, tokenizer, test_dataset, device: str = "cuda", max_samples: int = 100) -> float:
     """Calculate perplexity on test set."""
-    # Get actual device from model
+    # Get actual device from model (handle DataParallel)
     if device == "cuda" and not torch.cuda.is_available():
         device = "cpu"
-    actual_device = next(model.parameters()).device
-    device = str(actual_device).split(':')[0] if ':' in str(actual_device) else str(actual_device)
+    
+    if isinstance(model, torch.nn.DataParallel):
+        actual_device = next(model.module.parameters()).device
+        device = "cuda"  # DataParallel always uses cuda
+    else:
+        actual_device = next(model.parameters()).device
+        device = str(actual_device).split(':')[0] if ':' in str(actual_device) else str(actual_device)
     
     print(f"Calculating perplexity on {min(max_samples, len(test_dataset))} samples...")
     model.eval()
@@ -181,10 +231,16 @@ def calculate_perplexity(model, tokenizer, test_dataset, device: str = "cuda", m
                 truncation=True, 
                 max_length=1024
             )
-            inputs = {k: v.to(device) for k, v in inputs.items()}
+            # For DataParallel, inputs go to cuda:0
+            if isinstance(model, torch.nn.DataParallel):
+                inputs = {k: v.to("cuda:0") for k, v in inputs.items()}
+            else:
+                inputs = {k: v.to(device) for k, v in inputs.items()}
             
             with torch.no_grad():
-                outputs = model(**inputs, labels=inputs["input_ids"])
+                # Handle DataParallel - use model.module if wrapped
+                actual_model = model.module if isinstance(model, torch.nn.DataParallel) else model
+                outputs = actual_model(**inputs, labels=inputs["input_ids"])
                 loss = outputs.loss
                 total_loss += loss.item() * inputs["input_ids"].numel()
                 total_tokens += inputs["input_ids"].numel()
@@ -341,7 +397,8 @@ def run_evaluation(
     test_dataset_path: str = None,
     output_file: str = "evaluation_results.json",
     max_samples: int = 100,
-    device: str = "cuda"
+    device: str = "cuda",
+    use_multi_gpu: bool = False
 ):
     """Run complete evaluation pipeline."""
     
@@ -359,12 +416,15 @@ def run_evaluation(
     
     # Load model
     print("\n[1/5] Loading model...")
-    model, tokenizer = load_model(model_path, base_model_name, device)
+    model, tokenizer = load_model(model_path, base_model_name, device, use_multi_gpu)
     model_type = "Fine-tuned" if model_path and Path(model_path).exists() and any(Path(model_path).iterdir()) else "Base"
     print(f"✓ {model_type} model loaded")
     
-    # Get actual device from model
-    actual_device = next(model.parameters()).device
+    # Get actual device from model (handle DataParallel wrapper)
+    if isinstance(model, torch.nn.DataParallel):
+        actual_device = next(model.module.parameters()).device
+    else:
+        actual_device = next(model.parameters()).device
     device = str(actual_device).split(':')[0] if ':' in str(actual_device) else str(actual_device)
     print(f"✓ Model on device: {device}")
     
@@ -534,13 +594,68 @@ def main():
         default="auto",
         help="Device to use (auto, cuda, or cpu). 'auto' will use CUDA if available, else CPU."
     )
+    parser.add_argument(
+        "--multi_gpu",
+        action="store_true",
+        help="Use multiple GPUs for parallel evaluation (DataParallel)"
+    )
     
     args = parser.parse_args()
     
     # Auto-detect device if requested
+    # Try to initialize CUDA properly by checking device count first
+    cuda_available = False
+    cuda_device_count = 0
+    
+    # Try multiple strategies to initialize CUDA
+    try:
+        # Strategy 1: Simple check
+        if torch.cuda.is_available():
+            cuda_device_count = torch.cuda.device_count()
+            if cuda_device_count > 0:
+                # Strategy 2: Try to access a device to ensure it's really available
+                try:
+                    device_name = torch.cuda.get_device_name(0)
+                    cuda_available = True
+                    print(f"✓ CUDA initialized successfully: {cuda_device_count} GPU(s)")
+                    print(f"  First GPU: {device_name}")
+                except Exception as e:
+                    print(f"⚠️  CUDA device access failed: {e}")
+                    cuda_available = False
+    except RuntimeError as e:
+        # This is the "CUDA unknown error" case
+        error_msg = str(e)
+        if "CUDA" in error_msg or "unknown error" in error_msg.lower():
+            print(f"⚠️  CUDA initialization error detected")
+            print(f"   Error: {error_msg}")
+            print("   This often happens when CUDA_VISIBLE_DEVICES is set incorrectly")
+            print("   Falling back to CPU evaluation")
+        else:
+            print(f"⚠️  CUDA error: {e}")
+        cuda_available = False
+    except Exception as e:
+        print(f"⚠️  CUDA initialization warning: {e}")
+        print("⚠️  Falling back to CPU evaluation")
+        cuda_available = False
+    
     if args.device == "auto":
-        args.device = "cuda" if torch.cuda.is_available() else "cpu"
+        args.device = "cuda" if cuda_available else "cpu"
         print(f"Auto-detected device: {args.device}")
+        if cuda_available:
+            print(f"CUDA devices available: {cuda_device_count}")
+    
+    # Enable multi-GPU if requested and CUDA is available
+    # IMPORTANT: Don't use DataParallel if CUDA is not available (even if flag is set)
+    use_multi_gpu = args.multi_gpu and cuda_available and cuda_device_count > 1
+    if use_multi_gpu:
+        print(f"Multi-GPU evaluation enabled: {cuda_device_count} GPUs")
+    elif args.multi_gpu:
+        # Force disable DataParallel if CUDA not available or insufficient GPUs
+        use_multi_gpu = False
+        if not cuda_available:
+            print("⚠️  Multi-GPU requested but CUDA not available - using CPU (DataParallel disabled)")
+        elif cuda_device_count <= 1:
+            print(f"⚠️  Multi-GPU requested but only {cuda_device_count} GPU(s) available - DataParallel disabled")
     
     run_evaluation(
         args.model_path,
@@ -548,7 +663,8 @@ def main():
         args.test_dataset,
         args.output,
         args.max_samples,
-        args.device
+        args.device,
+        use_multi_gpu
     )
 
 
