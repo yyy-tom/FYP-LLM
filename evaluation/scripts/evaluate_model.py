@@ -288,19 +288,44 @@ def generate_response(
             repetition_penalty=1.1
         )
     
-    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    full_response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    
     # Extract only the generated part
-    response = response[len(prompt):].strip()
+    # Try to find where the prompt ends and the response begins
+    if prompt in full_response:
+        response = full_response[len(prompt):].strip()
+    else:
+        # If prompt not found, try to extract after common markers
+        # This handles cases where tokenization changes the prompt slightly
+        prompt_tokens = tokenizer.encode(prompt, add_special_tokens=False)
+        prompt_len = len(prompt_tokens)
+        response_tokens = outputs[0][prompt_len:]
+        response = tokenizer.decode(response_tokens, skip_special_tokens=True).strip()
+    
+    # If still empty, try removing the prompt by finding assistant markers
+    if not response or len(response) < 5:
+        # Look for assistant/counselor markers
+        assistant_markers = ["Counselor:", "Assistant:", "Response:", "Answer:"]
+        for marker in assistant_markers:
+            if marker in full_response:
+                parts = full_response.split(marker, 1)
+                if len(parts) > 1:
+                    response = parts[1].strip()
+                    break
     
     # Clean up response
     stop_patterns = [
         "\n\nUser:", "\n\nHuman:", "\n\nQuestion:",
-        "[End]", "\n\nBased on", "\n\nThis response"
+        "[End]", "\n\nBased on", "\n\nThis response",
+        "<|endoftext|>", "<|im_end|>", "</s>"
     ]
     for pattern in stop_patterns:
         if pattern in response:
             response = response.split(pattern)[0].strip()
             break
+    
+    # Final cleanup - remove any remaining prompt artifacts
+    response = response.replace(prompt, "").strip()
     
     return response
 
@@ -609,19 +634,59 @@ def run_evaluation(
             break
         
         try:
-            user_input = example.get("input", example.get("instruction", ""))
-            reference = example.get("output", "")
+            # Try multiple field names for input (some datasets use different names)
+            user_input = (
+                example.get("input", "") or 
+                example.get("instruction", "") or 
+                example.get("question", "") or
+                example.get("user_input", "") or
+                ""
+            )
+            
+            # Try multiple field names for reference/expected output
+            reference = (
+                example.get("output", "") or
+                example.get("response", "") or
+                example.get("reference", "") or
+                example.get("expected_output", "") or
+                ""
+            )
+            
+            # If input is empty but reference exists, it might be that the dataset format is swapped
+            # Some datasets have the user question in "output" and response in "input"
+            if not user_input and reference:
+                # Check if reference looks like a question (ends with ? or is short)
+                if "?" in reference[:100] or len(reference.split()) < 20:
+                    # Swap them - reference is actually the input
+                    user_input = reference
+                    reference = example.get("input", "") or example.get("instruction", "")
+            
+            # Skip if no input (can't generate response)
+            if not user_input:
+                if i < 5:  # Only warn for first few samples
+                    print(f"  Warning: Sample {i} has empty input. Skipping...")
+                continue
             
             # Generate response from fine-tuned model
-            generated = generate_response(model, tokenizer, user_input, device)
+            try:
+                generated = generate_response(model, tokenizer, user_input, device)
+                if not generated and i < 5:  # Debug first few empty responses
+                    print(f"  Debug: Sample {i} - Fine-tuned model generated empty response")
+                    print(f"    Input: {user_input[:100]}...")
+            except Exception as e:
+                print(f"  Error generating fine-tuned response for sample {i}: {e}")
+                generated = ""
             
             # Generate response from base model if comparison requested
             base_generated = None
             if compare_with_base and base_model is not None:
                 try:
                     base_generated = generate_response(base_model, base_tokenizer, user_input, device)
+                    if not base_generated and i < 5:  # Debug first few empty responses
+                        print(f"  Debug: Sample {i} - Base model generated empty response")
                 except Exception as e:
                     print(f"  Warning: Failed to generate base model response for sample {i}: {e}")
+                    base_generated = ""
             
             # BLEU
             if BLEU_AVAILABLE and reference:
@@ -671,8 +736,8 @@ def run_evaluation(
                     response_data['base_generated'] = base_generated
                 results['responses'].append(response_data)
             
-            # Store comparison examples
-            if compare_with_base and base_generated and i < num_comparison_examples:
+            # Store comparison examples (include even if base_generated is empty for debugging)
+            if compare_with_base and i < num_comparison_examples:
                 base_quality = evaluate_counseling_quality(base_generated)
                 base_safety_issues, base_safety = evaluate_safety(base_generated)
                 comparison = {
