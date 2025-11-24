@@ -168,6 +168,11 @@ def view_comparisons(json_path: str, max_examples: int = 10):
                     if len(question) > 500:
                         question = ""
         
+        # Show dataset source if available
+        dataset_source = comp.get('dataset_source', '')
+        if dataset_source:
+            print(f"\n📂 Dataset Source: {dataset_source}")
+        
         print(f"\n📝 Full Input/Prompt:")
         print(format_prompt(input_text))
         

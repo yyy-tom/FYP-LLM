@@ -571,6 +571,61 @@ def run_evaluation(
         test_data = test_data.get("validation", test_data.get("test", list(test_data.values())[0]))
     print(f"✓ Loaded {len(test_data)} test samples")
     
+    # Function to extract dataset source from sample
+    def get_dataset_source(example: Dict, dataset_path: str) -> str:
+        """Extract or infer the source dataset name from the example."""
+        # Try to get from explicit source field
+        source = (
+            example.get("source", "") or
+            example.get("dataset_source", "") or
+            example.get("dataset_name", "") or
+            example.get("origin", "") or
+            ""
+        )
+        
+        if source:
+            return source
+        
+        # Try to infer from question_id format
+        question_id = example.get("question_id", "")
+        if question_id:
+            # Common patterns: "counselchat_123", "kaggle_456", etc.
+            if "_" in str(question_id):
+                parts = str(question_id).split("_")
+                if len(parts) > 1:
+                    potential_source = parts[0].lower()
+                    # Map common prefixes to dataset names
+                    source_map = {
+                        "counselchat": "counselchat",
+                        "kaggle": "kaggle_mental_health",
+                        "mentalchat": "mentalchat16k",
+                        "amod": "amod",
+                        "esconv": "esconv",
+                        "psydial": "psydial"
+                    }
+                    if potential_source in source_map:
+                        return source_map[potential_source]
+        
+        # Try to infer from topic field if it contains dataset info
+        topic = example.get("topic", "")
+        if topic and isinstance(topic, str):
+            topic_lower = topic.lower()
+            if "counselchat" in topic_lower:
+                return "counselchat"
+            elif "kaggle" in topic_lower:
+                return "kaggle_mental_health"
+            elif "mentalchat" in topic_lower:
+                return "mentalchat16k"
+        
+        # Infer from dataset path if it's a combined dataset
+        if "all_mental_health_combined" in dataset_path:
+            # For combined datasets, we can't easily infer, so mark as "combined"
+            return "combined"
+        
+        # Extract dataset name from path as fallback
+        dataset_name = Path(dataset_path).name
+        return dataset_name if dataset_name else "unknown"
+    
     results = {
         'model_type': 'fine-tuned' if (model_path and Path(model_path).exists() and any(Path(model_path).iterdir())) else 'base',
         'model_path': model_path if model_path else None,
@@ -629,11 +684,23 @@ def run_evaluation(
     response_lengths = []
     coherence_scores = []
     
+    # Track metrics by dataset source
+    dataset_metrics = defaultdict(lambda: {
+        'bleu': [],
+        'rouge1': [],
+        'rouge2': [],
+        'rougeL': [],
+        'count': 0
+    })
+    
     for i, example in enumerate(test_data):
         if i >= max_samples:
             break
         
         try:
+            # Extract dataset source
+            dataset_source = get_dataset_source(example, test_dataset_path)
+            
             # Try multiple field names for input (some datasets use different names)
             user_input = (
                 example.get("input", "") or 
@@ -692,12 +759,17 @@ def run_evaluation(
             if BLEU_AVAILABLE and reference:
                 bleu = calculate_bleu(reference, generated)
                 bleu_scores.append(bleu)
+                dataset_metrics[dataset_source]['bleu'].append(bleu)
             
             # ROUGE
             if ROUGE_AVAILABLE and reference:
                 rouge = calculate_rouge(reference, generated, rouge_scorer_obj)
                 for key in rouge_scores:
                     rouge_scores[key].append(rouge[key])
+                    dataset_metrics[dataset_source][key].append(rouge[key])
+            
+            # Track count per dataset
+            dataset_metrics[dataset_source]['count'] += 1
             
             # Domain quality
             quality = evaluate_counseling_quality(generated)
@@ -722,6 +794,7 @@ def run_evaluation(
             if save_responses:
                 response_data = {
                     'sample_id': i,
+                    'dataset_source': dataset_source,
                     'input': user_input,
                     'reference': reference,
                     'generated': generated,
@@ -742,6 +815,7 @@ def run_evaluation(
                 base_safety_issues, base_safety = evaluate_safety(base_generated)
                 comparison = {
                     'sample_id': i,
+                    'dataset_source': dataset_source,
                     'input': user_input,
                     'reference': reference,
                     'base_response': base_generated,
@@ -799,6 +873,27 @@ def run_evaluation(
     print(f"\n✓ Response Properties:")
     print(f"    Average length: {results['metrics']['response_properties']['avg_length']:.1f} words")
     print(f"    Average coherence: {results['metrics']['response_properties']['avg_coherence']:.4f}")
+    
+    # Dataset-specific metrics
+    if dataset_metrics:
+        print(f"\n✓ Metrics by Dataset Source:")
+        results['metrics']['by_dataset'] = {}
+        for source, metrics in sorted(dataset_metrics.items()):
+            if metrics['count'] > 0:
+                source_metrics = {
+                    'count': metrics['count'],
+                    'bleu': np.mean(metrics['bleu']) if metrics['bleu'] else None,
+                    'rouge1': np.mean(metrics['rouge1']) if metrics['rouge1'] else None,
+                    'rouge2': np.mean(metrics['rouge2']) if metrics['rouge2'] else None,
+                    'rougeL': np.mean(metrics['rougeL']) if metrics['rougeL'] else None
+                }
+                results['metrics']['by_dataset'][source] = source_metrics
+                print(f"    {source}:")
+                print(f"      Samples: {metrics['count']}")
+                if source_metrics['bleu'] is not None:
+                    print(f"      BLEU: {source_metrics['bleu']:.4f}")
+                if source_metrics['rouge1'] is not None:
+                    print(f"      ROUGE-1: {source_metrics['rouge1']:.4f}")
     
     # Save results
     print(f"\n[5/5] Saving results to {output_file}...")
