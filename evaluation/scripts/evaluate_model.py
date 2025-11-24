@@ -224,18 +224,49 @@ def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-I
     return model, tokenizer
 
 
-def format_prompt(example: Dict, tokenizer) -> str:
-    """Format example into prompt (adjust based on your training format)."""
+def format_prompt(example: Dict, tokenizer, conversation_history: List[Dict] = None) -> str:
+    """Format example into prompt (adjust based on your training format).
+    
+    Args:
+        example: Current example dict
+        tokenizer: Tokenizer to use
+        conversation_history: List of previous turns in format [{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}]
+    """
     # Try to use chat template if available
     if hasattr(tokenizer, 'apply_chat_template') and tokenizer.chat_template:
-        messages = [
-            {"role": "user", "content": example.get("input", example.get("instruction", ""))}
-        ]
+        messages = []
+        
+        # Add conversation history if available
+        if conversation_history:
+            messages.extend(conversation_history)
+        
+        # Add current user message
+        user_input = example.get("input", example.get("instruction", ""))
+        if user_input:
+            messages.append({"role": "user", "content": user_input})
+        
         return tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     else:
-        # Fallback format
+        # Fallback format with conversation history
+        prompt_parts = []
+        
+        # Add conversation history
+        if conversation_history:
+            for turn in conversation_history:
+                role = turn.get("role", "")
+                content = turn.get("content", "")
+                if role == "user":
+                    prompt_parts.append(f"User: {content}")
+                elif role == "assistant":
+                    prompt_parts.append(f"Counselor: {content}")
+        
+        # Add current user input
         user_input = example.get("input", example.get("instruction", ""))
-        return f"User: {user_input}\nCounselor:"
+        if user_input:
+            prompt_parts.append(f"User: {user_input}")
+        
+        prompt_parts.append("Counselor:")
+        return "\n".join(prompt_parts)
 
 
 def generate_response(
@@ -245,7 +276,8 @@ def generate_response(
     device: str = "cuda",
     max_new_tokens: int = 256,
     temperature: float = 0.7,
-    top_p: float = 0.9
+    top_p: float = 0.9,
+    conversation_history: List[Dict] = None
 ) -> str:
     """Generate response from model."""
     # Detect device from model if not specified
@@ -268,9 +300,9 @@ def generate_response(
             device = "cpu"
         input_device = device
     
-    # Format prompt
+    # Format prompt with conversation history if available
     example = {"input": input_text}
-    prompt = format_prompt(example, tokenizer)
+    prompt = format_prompt(example, tokenizer, conversation_history=conversation_history)
     
     inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=512)
     inputs = {k: v.to(input_device) for k, v in inputs.items()}
@@ -523,6 +555,137 @@ def evaluate_safety(response: str) -> Tuple[Dict[str, int], float]:
     return safety_issues, is_safe
 
 
+def evaluate_conversation(
+    model,
+    tokenizer,
+    conversation_turns: List[Dict],
+    device: str = "cuda",
+    base_model=None,
+    base_tokenizer=None
+) -> Dict:
+    """Evaluate a complete conversation with multiple turns.
+    
+    Args:
+        model: Fine-tuned model
+        tokenizer: Tokenizer for fine-tuned model
+        conversation_turns: List of conversation turns, each with 'user' and 'assistant' (reference) content
+        device: Device to use
+        base_model: Optional base model for comparison
+        base_tokenizer: Optional base model tokenizer
+    
+    Returns:
+        Dictionary with conversation evaluation results
+    """
+    conversation_history = []
+    generated_turns = []
+    base_generated_turns = []
+    
+    for turn_idx, turn in enumerate(conversation_turns):
+        user_message = turn.get('user', turn.get('input', ''))
+        reference_response = turn.get('assistant', turn.get('output', turn.get('reference', '')))
+        
+        if not user_message:
+            continue
+        
+        # Generate response with conversation history
+        try:
+            generated = generate_response(
+                model, tokenizer, user_message, device,
+                conversation_history=conversation_history.copy()
+            )
+        except Exception as e:
+            print(f"  Error generating response for turn {turn_idx}: {e}")
+            generated = ""
+        
+        # Generate base model response if available
+        base_generated = None
+        if base_model and base_tokenizer:
+            try:
+                base_generated = generate_response(
+                    base_model, base_tokenizer, user_message, device,
+                    conversation_history=conversation_history.copy()
+                )
+            except Exception as e:
+                print(f"  Error generating base response for turn {turn_idx}: {e}")
+                base_generated = ""
+        
+        # Update conversation history
+        conversation_history.append({"role": "user", "content": user_message})
+        conversation_history.append({"role": "assistant", "content": generated})
+        
+        generated_turns.append({
+            'turn': turn_idx,
+            'user': user_message,
+            'reference': reference_response,
+            'generated': generated,
+            'base_generated': base_generated
+        })
+        if base_generated:
+            base_generated_turns.append(base_generated)
+    
+    return {
+        'conversation_turns': generated_turns,
+        'conversation_history': conversation_history
+    }
+
+
+def group_conversations_by_id(dataset) -> Dict[str, List[Dict]]:
+    """Group dataset examples by conversation/dialogue ID.
+    
+    Handles multiple formats:
+    - PsyDial/ESConv: "2113_turn_15" -> dialogue_id = "2113"
+    - Other formats: "dialogue_123_turn_0" -> dialogue_id = "dialogue_123"
+    - Simple IDs: "257" -> dialogue_id = "257" (single turn, but grouped for consistency)
+    """
+    conversations = defaultdict(list)
+    
+    for i, example in enumerate(dataset):
+        # Try to find conversation ID
+        conv_id = (
+            example.get("conversation_id", "") or
+            example.get("dialogue_id", "") or
+            example.get("dialog_id", "") or
+            example.get("id", "")
+        )
+        
+        # If no explicit ID, try to infer from question_id
+        if not conv_id:
+            question_id = str(example.get("question_id", ""))
+            
+            # Pattern 1: "_turn_" pattern (PsyDial, ESConv)
+            # Examples: "2113_turn_15" -> "2113", "818_turn_8680" -> "818"
+            if "_turn_" in question_id:
+                # Split by "_turn_" and take the first part as dialogue ID
+                conv_id = question_id.split("_turn_")[0]
+            # Pattern 2: Other underscore patterns
+            elif "_" in question_id:
+                parts = question_id.split("_")
+                # If it looks like "prefix_turn_number", extract prefix
+                # Otherwise, use everything except last part
+                if len(parts) >= 3 and parts[-2] == "turn":
+                    conv_id = "_".join(parts[:-2])
+                elif len(parts) > 1:
+                    # Try to detect if last part is numeric (turn number)
+                    try:
+                        int(parts[-1])
+                        # Last part is numeric, use everything before it
+                        conv_id = "_".join(parts[:-1])
+                    except ValueError:
+                        # Last part is not numeric, use everything except last
+                        conv_id = "_".join(parts[:-1])
+            else:
+                # Simple ID without underscores - use as is
+                conv_id = question_id if question_id else f"single_turn_{i}"
+        
+        # Ensure we have a valid ID
+        if not conv_id:
+            conv_id = f"single_turn_{i}"
+        
+        conversations[conv_id].append(example)
+    
+    return conversations
+
+
 def run_evaluation(
     model_path: str = None,
     base_model_name: str = "Qwen/Qwen2.5-7B-Instruct",
@@ -534,7 +697,10 @@ def run_evaluation(
     compare_with_base: bool = False,
     save_responses: bool = False,
     num_comparison_examples: int = 10,
-    local_files_only: bool = False
+    local_files_only: bool = False,
+    conversational_mode: bool = False,
+    max_conversation_turns: int = 5,
+    min_conversation_turns: int = 2
 ):
     """Run complete evaluation pipeline."""
     
@@ -570,6 +736,37 @@ def run_evaluation(
     if isinstance(test_data, dict):
         test_data = test_data.get("validation", test_data.get("test", list(test_data.values())[0]))
     print(f"✓ Loaded {len(test_data)} test samples")
+    
+    # Group into conversations if conversational mode is enabled
+    if conversational_mode:
+        print(f"\n📝 Conversational Mode: Grouping examples into conversations...")
+        conversations = group_conversations_by_id(test_data)
+        print(f"✓ Found {len(conversations)} conversation groups")
+        
+        # Show some statistics
+        turn_counts = [len(v) for v in conversations.values()]
+        if turn_counts:
+            print(f"  Turn count stats: min={min(turn_counts)}, max={max(turn_counts)}, avg={sum(turn_counts)/len(turn_counts):.1f}")
+            multi_turn_count = sum(1 for count in turn_counts if count >= min_conversation_turns)
+            print(f"  {multi_turn_count} conversations have {min_conversation_turns}+ turns")
+        
+        # Filter to conversations with at least min_conversation_turns
+        multi_turn_conversations = {k: v for k, v in conversations.items() if len(v) >= min_conversation_turns}
+        print(f"✓ {len(multi_turn_conversations)} conversations have at least {min_conversation_turns} turns")
+        
+        # Show sample conversation IDs for debugging
+        if multi_turn_conversations:
+            sample_ids = list(multi_turn_conversations.keys())[:5]
+            print(f"  Sample conversation IDs: {sample_ids}")
+        
+        if len(multi_turn_conversations) == 0:
+            print(f"⚠️  No conversations with at least {min_conversation_turns} turns found.")
+            print(f"   This might be because:")
+            print(f"   1. The dataset doesn't contain multi-turn conversations")
+            print(f"   2. The question_id format doesn't match expected patterns (e.g., 'dialogue_id_turn_X')")
+            print(f"   3. Try using a dataset with multi-turn conversations (e.g., psydial_processed, esconv_processed)")
+            print(f"   Falling back to single-turn mode.")
+            conversational_mode = False
     
     # Function to extract dataset source from sample
     def get_dataset_source(example: Dict, dataset_path: str) -> str:
@@ -631,9 +828,11 @@ def run_evaluation(
         'model_path': model_path if model_path else None,
         'base_model': base_model_name,
         'test_samples': min(max_samples, len(test_data)),
+        'evaluation_mode': 'conversational' if conversational_mode else 'single-turn',
         'metrics': {},
         'comparisons': [] if compare_with_base else None,
-        'responses': [] if save_responses else None
+        'responses': [] if save_responses else None,
+        'conversations': [] if conversational_mode else None
     }
     
     # Load base model for comparison if requested
@@ -693,150 +892,254 @@ def run_evaluation(
         'count': 0
     })
     
-    for i, example in enumerate(test_data):
-        if i >= max_samples:
-            break
+    # Conversational evaluation mode
+    if conversational_mode and 'conversations' in locals() and multi_turn_conversations:
+        print(f"\n[4/5] Evaluating conversations (multi-turn mode)...")
+        conversation_results = []
+        conv_count = 0
         
-        try:
-            # Extract dataset source
-            dataset_source = get_dataset_source(example, test_dataset_path)
+        for conv_id, conv_examples in list(multi_turn_conversations.items())[:max_samples]:
+            if conv_count >= max_samples:
+                break
             
-            # Try multiple field names for input (some datasets use different names)
-            user_input = (
+            # Limit conversation turns
+            conv_examples = conv_examples[:max_conversation_turns]
+            
+            # Extract conversation turns
+            conversation_turns = []
+            for ex in conv_examples:
+                user_input = (
+                    ex.get("input", "") or 
+                    ex.get("instruction", "") or 
+                    ""
+                )
+                # Extract just the question part if it's in a prompt format
+                if "Question:" in user_input:
+                    question_start = user_input.find("Question:")
+                    if question_start != -1:
+                        question = user_input[question_start + len("Question:"):].strip()
+                        # Remove trailing prompt instructions
+                        for marker in ["Please provide", "Response:"]:
+                            if marker in question:
+                                question = question.split(marker)[0].strip()
+                        user_input = question
+                
+                reference = ex.get("output", "") or ex.get("reference", "")
+                if user_input:
+                    conversation_turns.append({
+                        'user': user_input,
+                        'assistant': reference
+                    })
+            
+            # Skip if conversation doesn't meet minimum turn requirement
+            if len(conversation_turns) < min_conversation_turns:
+                continue
+            
+            # Evaluate conversation
+            try:
+                conv_result = evaluate_conversation(
+                    model, tokenizer, conversation_turns, device,
+                    base_model, base_tokenizer
+                )
+                
+                # Calculate metrics for each turn
+                turn_metrics = []
+                for turn_data in conv_result['conversation_turns']:
+                    ref = turn_data.get('reference', '')
+                    gen = turn_data.get('generated', '')
+                    base_gen = turn_data.get('base_generated', '')
+                    
+                    if ref:
+                        turn_metric = {
+                            'turn': turn_data['turn'],
+                            'user': turn_data['user'],
+                            'reference': ref,
+                            'generated': gen,
+                            'base_generated': base_gen,
+                            'bleu': calculate_bleu(ref, gen) if BLEU_AVAILABLE and ref else None,
+                            'rouge': calculate_rouge(ref, gen, rouge_scorer_obj) if (ROUGE_AVAILABLE and ref and 'rouge_scorer_obj' in locals()) else None,
+                            'base_bleu': calculate_bleu(ref, base_gen) if (BLEU_AVAILABLE and ref and base_gen) else None,
+                            'base_rouge': calculate_rouge(ref, base_gen, rouge_scorer_obj) if (ROUGE_AVAILABLE and ref and base_gen and 'rouge_scorer_obj' in locals()) else None,
+                        }
+                        turn_metrics.append(turn_metric)
+                        
+                        # Add to overall metrics
+                        if turn_metric['bleu'] is not None:
+                            bleu_scores.append(turn_metric['bleu'])
+                            dataset_source = get_dataset_source(conv_examples[0], test_dataset_path)
+                            dataset_metrics[dataset_source]['bleu'].append(turn_metric['bleu'])
+                        
+                        if turn_metric['rouge']:
+                            for key in rouge_scores:
+                                rouge_scores[key].append(turn_metric['rouge'][key])
+                                dataset_source = get_dataset_source(conv_examples[0], test_dataset_path)
+                                dataset_metrics[dataset_source][key].append(turn_metric['rouge'][key])
+                
+                conversation_results.append({
+                    'conversation_id': conv_id,
+                    'dataset_source': get_dataset_source(conv_examples[0], test_dataset_path),
+                    'num_turns': len(conversation_turns),
+                    'turns': turn_metrics
+                })
+                
+                conv_count += 1
+                
+                if conv_count % 5 == 0:
+                    print(f"  Processed {conv_count} conversations...")
+                    
+            except Exception as e:
+                print(f"  Error evaluating conversation {conv_id}: {e}")
+                continue
+        
+        results['conversations'] = conversation_results
+        print(f"✓ Evaluated {len(conversation_results)} conversations")
+    else:
+        # Single-turn evaluation mode (original behavior)
+        print(f"\n[4/5] Calculating BLEU and ROUGE scores...")
+        for i, example in enumerate(test_data):
+            if i >= max_samples:
+                break
+            
+            try:
+                # Extract dataset source
+                dataset_source = get_dataset_source(example, test_dataset_path)
+                
+                # Try multiple field names for input (some datasets use different names)
+                user_input = (
                 example.get("input", "") or 
                 example.get("instruction", "") or 
                 example.get("question", "") or
                 example.get("user_input", "") or
                 ""
-            )
-            
-            # Try multiple field names for reference/expected output
-            reference = (
+                )
+                
+                # Try multiple field names for reference/expected output
+                reference = (
                 example.get("output", "") or
                 example.get("response", "") or
                 example.get("reference", "") or
                 example.get("expected_output", "") or
                 ""
-            )
-            
-            # If input is empty but reference exists, it might be that the dataset format is swapped
-            # Some datasets have the user question in "output" and response in "input"
-            if not user_input and reference:
-                # Check if reference looks like a question (ends with ? or is short)
-                if "?" in reference[:100] or len(reference.split()) < 20:
-                    # Swap them - reference is actually the input
-                    user_input = reference
-                    reference = example.get("input", "") or example.get("instruction", "")
-            
-            # Skip if no input (can't generate response)
-            if not user_input:
-                if i < 5:  # Only warn for first few samples
-                    print(f"  Warning: Sample {i} has empty input. Skipping...")
+                )
+                
+                # If input is empty but reference exists, it might be that the dataset format is swapped
+                # Some datasets have the user question in "output" and response in "input"
+                if not user_input and reference:
+                    # Check if reference looks like a question (ends with ? or is short)
+                    if "?" in reference[:100] or len(reference.split()) < 20:
+                        # Swap them - reference is actually the input
+                        user_input = reference
+                        reference = example.get("input", "") or example.get("instruction", "")
+                
+                # Skip if no input (can't generate response)
+                if not user_input:
+                    if i < 5:  # Only warn for first few samples
+                        print(f"  Warning: Sample {i} has empty input. Skipping...")
+                    continue
+                
+                # Generate response from fine-tuned model
+                try:
+                    generated = generate_response(model, tokenizer, user_input, device)
+                    if not generated and i < 5:  # Debug first few empty responses
+                        print(f"  Debug: Sample {i} - Fine-tuned model generated empty response")
+                        print(f"    Input: {user_input[:100]}...")
+                except Exception as e:
+                    print(f"  Error generating fine-tuned response for sample {i}: {e}")
+                    generated = ""
+                
+                # Generate response from base model if comparison requested
+                base_generated = None
+                if compare_with_base and base_model is not None:
+                    try:
+                        base_generated = generate_response(base_model, base_tokenizer, user_input, device)
+                        if not base_generated and i < 5:  # Debug first few empty responses
+                            print(f"  Debug: Sample {i} - Base model generated empty response")
+                    except Exception as e:
+                        print(f"  Warning: Failed to generate base model response for sample {i}: {e}")
+                        base_generated = ""
+                
+                # BLEU
+                if BLEU_AVAILABLE and reference:
+                    bleu = calculate_bleu(reference, generated)
+                    bleu_scores.append(bleu)
+                    dataset_metrics[dataset_source]['bleu'].append(bleu)
+                
+                # ROUGE
+                if ROUGE_AVAILABLE and reference:
+                    rouge = calculate_rouge(reference, generated, rouge_scorer_obj)
+                    for key in rouge_scores:
+                        rouge_scores[key].append(rouge[key])
+                        dataset_metrics[dataset_source][key].append(rouge[key])
+                
+                # Track count per dataset
+                dataset_metrics[dataset_source]['count'] += 1
+                
+                # Domain quality
+                quality = evaluate_counseling_quality(generated)
+                for key, value in quality.items():
+                    domain_scores[key].append(value)
+                
+                # Safety
+                _, is_safe = evaluate_safety(generated)
+                safety_scores.append(is_safe)
+                
+                # Response properties
+                words = generated.split()
+                response_lengths.append(len(words))
+                
+                # Coherence (simple: check for repetition)
+                sentences = generated.split('. ')
+                unique_sentences = len(set(s.lower() for s in sentences))
+                coherence = unique_sentences / max(len(sentences), 1)
+                coherence_scores.append(coherence)
+                
+                # Store response and comparison if requested
+                if save_responses:
+                    response_data = {
+                        'sample_id': i,
+                        'dataset_source': dataset_source,
+                        'input': user_input,
+                        'reference': reference,
+                        'generated': generated,
+                        'bleu': calculate_bleu(reference, generated) if BLEU_AVAILABLE and reference else None,
+                        'rouge': calculate_rouge(reference, generated, rouge_scorer_obj) if (ROUGE_AVAILABLE and reference and 'rouge_scorer_obj' in locals()) else None,
+                        'domain_quality': quality,
+                        'safety': is_safe,
+                        'length': len(words),
+                        'coherence': coherence
+                    }
+                    if base_generated:
+                        response_data['base_generated'] = base_generated
+                    results['responses'].append(response_data)
+                
+                # Store comparison examples (include even if base_generated is empty for debugging)
+                if compare_with_base and i < num_comparison_examples:
+                    base_quality = evaluate_counseling_quality(base_generated)
+                    base_safety_issues, base_safety = evaluate_safety(base_generated)
+                    comparison = {
+                        'sample_id': i,
+                        'dataset_source': dataset_source,
+                        'input': user_input,
+                        'reference': reference,
+                        'base_response': base_generated,
+                        'finetuned_response': generated,
+                        'base_bleu': calculate_bleu(reference, base_generated) if BLEU_AVAILABLE and reference else None,
+                        'finetuned_bleu': calculate_bleu(reference, generated) if BLEU_AVAILABLE and reference else None,
+                        'base_rouge': calculate_rouge(reference, base_generated, rouge_scorer_obj) if (ROUGE_AVAILABLE and reference and 'rouge_scorer_obj' in locals()) else None,
+                        'finetuned_rouge': calculate_rouge(reference, generated, rouge_scorer_obj) if (ROUGE_AVAILABLE and reference and 'rouge_scorer_obj' in locals()) else None,
+                        'base_domain_quality': base_quality,
+                        'finetuned_domain_quality': quality,
+                        'base_safety': base_safety,
+                        'finetuned_safety': is_safe
+                    }
+                    results['comparisons'].append(comparison)
+                    
+            except Exception as e:
+                print(f"Error processing sample {i}: {e}")
                 continue
             
-            # Generate response from fine-tuned model
-            try:
-                generated = generate_response(model, tokenizer, user_input, device)
-                if not generated and i < 5:  # Debug first few empty responses
-                    print(f"  Debug: Sample {i} - Fine-tuned model generated empty response")
-                    print(f"    Input: {user_input[:100]}...")
-            except Exception as e:
-                print(f"  Error generating fine-tuned response for sample {i}: {e}")
-                generated = ""
-            
-            # Generate response from base model if comparison requested
-            base_generated = None
-            if compare_with_base and base_model is not None:
-                try:
-                    base_generated = generate_response(base_model, base_tokenizer, user_input, device)
-                    if not base_generated and i < 5:  # Debug first few empty responses
-                        print(f"  Debug: Sample {i} - Base model generated empty response")
-                except Exception as e:
-                    print(f"  Warning: Failed to generate base model response for sample {i}: {e}")
-                    base_generated = ""
-            
-            # BLEU
-            if BLEU_AVAILABLE and reference:
-                bleu = calculate_bleu(reference, generated)
-                bleu_scores.append(bleu)
-                dataset_metrics[dataset_source]['bleu'].append(bleu)
-            
-            # ROUGE
-            if ROUGE_AVAILABLE and reference:
-                rouge = calculate_rouge(reference, generated, rouge_scorer_obj)
-                for key in rouge_scores:
-                    rouge_scores[key].append(rouge[key])
-                    dataset_metrics[dataset_source][key].append(rouge[key])
-            
-            # Track count per dataset
-            dataset_metrics[dataset_source]['count'] += 1
-            
-            # Domain quality
-            quality = evaluate_counseling_quality(generated)
-            for key, value in quality.items():
-                domain_scores[key].append(value)
-            
-            # Safety
-            _, is_safe = evaluate_safety(generated)
-            safety_scores.append(is_safe)
-            
-            # Response properties
-            words = generated.split()
-            response_lengths.append(len(words))
-            
-            # Coherence (simple: check for repetition)
-            sentences = generated.split('. ')
-            unique_sentences = len(set(s.lower() for s in sentences))
-            coherence = unique_sentences / max(len(sentences), 1)
-            coherence_scores.append(coherence)
-            
-            # Store response and comparison if requested
-            if save_responses:
-                response_data = {
-                    'sample_id': i,
-                    'dataset_source': dataset_source,
-                    'input': user_input,
-                    'reference': reference,
-                    'generated': generated,
-                    'bleu': calculate_bleu(reference, generated) if BLEU_AVAILABLE and reference else None,
-                    'rouge': calculate_rouge(reference, generated, rouge_scorer_obj) if (ROUGE_AVAILABLE and reference and 'rouge_scorer_obj' in locals()) else None,
-                    'domain_quality': quality,
-                    'safety': is_safe,
-                    'length': len(words),
-                    'coherence': coherence
-                }
-                if base_generated:
-                    response_data['base_generated'] = base_generated
-                results['responses'].append(response_data)
-            
-            # Store comparison examples (include even if base_generated is empty for debugging)
-            if compare_with_base and i < num_comparison_examples:
-                base_quality = evaluate_counseling_quality(base_generated)
-                base_safety_issues, base_safety = evaluate_safety(base_generated)
-                comparison = {
-                    'sample_id': i,
-                    'dataset_source': dataset_source,
-                    'input': user_input,
-                    'reference': reference,
-                    'base_response': base_generated,
-                    'finetuned_response': generated,
-                    'base_bleu': calculate_bleu(reference, base_generated) if BLEU_AVAILABLE and reference else None,
-                    'finetuned_bleu': calculate_bleu(reference, generated) if BLEU_AVAILABLE and reference else None,
-                    'base_rouge': calculate_rouge(reference, base_generated, rouge_scorer_obj) if (ROUGE_AVAILABLE and reference and 'rouge_scorer_obj' in locals()) else None,
-                    'finetuned_rouge': calculate_rouge(reference, generated, rouge_scorer_obj) if (ROUGE_AVAILABLE and reference and 'rouge_scorer_obj' in locals()) else None,
-                    'base_domain_quality': base_quality,
-                    'finetuned_domain_quality': quality,
-                    'base_safety': base_safety,
-                    'finetuned_safety': is_safe
-                }
-                results['comparisons'].append(comparison)
-            
-        except Exception as e:
-            print(f"Error processing sample {i}: {e}")
-            continue
-        
-        if (i + 1) % 10 == 0:
-            print(f"  Processed {i + 1}/{max_samples} samples...")
+            if (i + 1) % 10 == 0:
+                print(f"  Processed {i + 1}/{max_samples} samples...")
     
     # Aggregate results
     if bleu_scores:
@@ -982,6 +1285,23 @@ def main():
         action="store_true",
         help="Only use local cached files, don't download models (useful when disk quota is exceeded)"
     )
+    parser.add_argument(
+        "--conversational_mode",
+        action="store_true",
+        help="Evaluate with complete conversations (multi-turn) instead of single question-response pairs"
+    )
+    parser.add_argument(
+        "--max_conversation_turns",
+        type=int,
+        default=5,
+        help="Maximum number of turns per conversation to evaluate (default: 5). Limits context length and computation cost."
+    )
+    parser.add_argument(
+        "--min_conversation_turns",
+        type=int,
+        default=2,
+        help="Minimum number of turns required for a conversation to be evaluated (default: 2). Filters out single-turn examples."
+    )
     
     args = parser.parse_args()
     
@@ -1051,7 +1371,10 @@ def main():
         args.compare_with_base,
         args.save_responses,
         args.num_comparison_examples,
-        args.local_files_only
+        args.local_files_only,
+        args.conversational_mode,
+        args.max_conversation_turns,
+        args.min_conversation_turns
     )
 
 
