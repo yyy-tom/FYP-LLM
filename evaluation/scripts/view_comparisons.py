@@ -5,7 +5,120 @@ Simple script to view model comparison results from evaluation JSON.
 
 import json
 import sys
+import textwrap
+import re
 from pathlib import Path
+
+
+def format_text(text: str, width: int = 80, indent: str = "   ") -> str:
+    """Format text with proper wrapping, preserving word boundaries."""
+    if not text:
+        return ""
+    
+    # Use textwrap with proper settings to avoid breaking words
+    wrapped_lines = textwrap.wrap(
+        text,
+        width=width - len(indent),
+        initial_indent=indent,
+        subsequent_indent=indent,
+        break_long_words=False,
+        break_on_hyphens=False,
+        expand_tabs=True
+    )
+    
+    return '\n'.join(wrapped_lines) if wrapped_lines else indent + text
+
+
+def format_prompt(input_text: str) -> str:
+    """Format prompt text, preserving structure like Context: and Question:"""
+    if not input_text:
+        return "   (Empty - check dataset format)"
+    
+    # Normalize whitespace first - replace multiple spaces with single space
+    text = re.sub(r' +', ' ', input_text)
+    
+    # Ensure markers are on their own lines for better readability
+    # Match any whitespace (including newlines) before the marker
+    text = re.sub(r'(\s+)(Context:)', r'\n\n\2', text)
+    text = re.sub(r'(\s+)(Question:)', r'\n\n\2', text)
+    text = re.sub(r'(\s+)(Please provide)', r'\n\n\2', text)
+    text = re.sub(r'(\s+)(Response:)', r'\n\n\2', text)
+    
+    # Clean up any triple+ newlines
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    
+    # Split by sections (double newlines)
+    sections = [s.strip() for s in text.split('\n\n') if s.strip()]
+    
+    result_lines = []
+    for section in sections:
+        section = section.strip()
+        if not section:
+            continue
+            
+        # Check if section starts with a marker
+        marker_match = re.match(r'^(Context:|Question:|Please provide|Response:)', section)
+        if marker_match:
+            # Split marker from content
+            marker = marker_match.group(1)
+            content = section[len(marker):].strip()
+            
+            # Format the marker line
+            if marker.endswith(':'):
+                # For markers with colons, put marker and first part of content on same line if short
+                if content and len(marker + ' ' + content.split('\n')[0]) <= 77:
+                    first_line = content.split('\n')[0]
+                    result_lines.append(f"   {marker} {first_line}")
+                    # If there's more content, wrap it
+                    remaining = '\n'.join(content.split('\n')[1:]).strip()
+                    if remaining:
+                        wrapped = textwrap.wrap(
+                            remaining,
+                            width=77,
+                            initial_indent="   ",
+                            subsequent_indent="   ",
+                            break_long_words=False,
+                            break_on_hyphens=False
+                        )
+                        result_lines.extend(wrapped)
+                else:
+                    result_lines.append(f"   {marker}")
+                    if content:
+                        wrapped = textwrap.wrap(
+                            content,
+                            width=77,
+                            initial_indent="   ",
+                            subsequent_indent="   ",
+                            break_long_words=False,
+                            break_on_hyphens=False
+                        )
+                        result_lines.extend(wrapped)
+            else:
+                # For "Please provide", keep it on its own line
+                result_lines.append(f"   {marker}")
+                if content:
+                    wrapped = textwrap.wrap(
+                        content,
+                        width=77,
+                        initial_indent="   ",
+                        subsequent_indent="   ",
+                        break_long_words=False,
+                        break_on_hyphens=False
+                    )
+                    result_lines.extend(wrapped)
+        else:
+            # Regular text section, wrap normally
+            wrapped = textwrap.wrap(
+                section,
+                width=77,
+                initial_indent="   ",
+                subsequent_indent="   ",
+                break_long_words=False,
+                break_on_hyphens=False
+            )
+            result_lines.extend(wrapped)
+    
+    return '\n'.join(result_lines) if result_lines else "   (Empty)"
 
 
 def view_comparisons(json_path: str, max_examples: int = 10):
@@ -34,31 +147,53 @@ def view_comparisons(json_path: str, max_examples: int = 10):
         print(f"Example {comp.get('sample_id', i)}")
         print(f"{'='*80}")
         
-        print(f"\n📝 Input:")
         input_text = comp.get('input', '')
+        
+        # Extract the question from the input if it contains a prompt template
+        question = ""
         if input_text:
-            print(f"   {input_text[:200]}{'...' if len(input_text) > 200 else ''}")
-        else:
-            print("   (Empty - check dataset format)")
+            # Try to extract the question part
+            if "Question:" in input_text:
+                # Extract everything after "Question:"
+                question_start = input_text.find("Question:")
+                if question_start != -1:
+                    question = input_text[question_start + len("Question:"):].strip()
+                    # Remove any trailing prompt instructions
+                    if "Please provide" in question or "Response:" in question:
+                        for marker in ["Please provide", "Response:", "\n\nResponse:"]:
+                            if marker in question:
+                                question = question.split(marker)[0].strip()
+                    # If question is still very long, it might include the full prompt
+                    # In that case, just show the input as-is
+                    if len(question) > 500:
+                        question = ""
+        
+        print(f"\n📝 Full Input/Prompt:")
+        print(format_prompt(input_text))
+        
+        # Show extracted question separately if found
+        if question and question != input_text and len(question) < len(input_text):
+            print(f"\n❓ Question (Extracted):")
+            print(format_text(question, width=80, indent="   "))
         
         print(f"\n📋 Reference (Expected Response):")
         reference = comp.get('reference', '')
         if reference:
-            print(f"   {reference[:300]}{'...' if len(reference) > 300 else ''}")
+            print(format_text(reference, width=80, indent="   "))
         else:
             print("   (Empty)")
         
         print(f"\n🤖 Base Model Response:")
         base_resp = comp.get('base_response', '')
         if base_resp:
-            print(f"   {base_resp[:300]}{'...' if len(base_resp) > 300 else ''}")
+            print(format_text(base_resp, width=80, indent="   "))
         else:
             print("   (Empty)")
         
         print(f"\n✨ Fine-tuned Model Response:")
         ft_resp = comp.get('finetuned_response', '')
         if ft_resp:
-            print(f"   {ft_resp[:300]}{'...' if len(ft_resp) > 300 else ''}")
+            print(format_text(ft_resp, width=80, indent="   "))
         else:
             print("   (Empty)")
         
