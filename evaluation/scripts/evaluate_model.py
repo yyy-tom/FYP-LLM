@@ -51,7 +51,7 @@ except ImportError:
     print("Warning: nltk not installed. Install with: pip install nltk")
 
 
-def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-Instruct", device: str = "cuda", use_multi_gpu: bool = False):
+def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-Instruct", device: str = "cuda", use_multi_gpu: bool = False, local_files_only: bool = False):
     """Load model - base model only or fine-tuned with LoRA."""
     # Detect available device
     if device == "cuda" and not torch.cuda.is_available():
@@ -60,35 +60,100 @@ def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-I
         use_multi_gpu = False
     
     print(f"Loading base model: {base_model_name}")
+    if local_files_only:
+        print("⚠️  Using local files only (no download) - model must be cached")
     print(f"Using device: {device}")
     if use_multi_gpu:
         print(f"Multi-GPU mode: Using {torch.cuda.device_count()} GPUs")
     
-    tokenizer = AutoTokenizer.from_pretrained(base_model_name)
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(
+            base_model_name,
+            local_files_only=local_files_only,
+            trust_remote_code=True
+        )
+    except Exception as e:
+        if "Disk quota exceeded" in str(e) or "quota" in str(e).lower():
+            print(f"⚠️  Disk quota error loading tokenizer. Trying local files only...")
+            try:
+                tokenizer = AutoTokenizer.from_pretrained(
+                    base_model_name,
+                    local_files_only=True,
+                    trust_remote_code=True
+                )
+            except Exception as e2:
+                raise OSError(f"Failed to load tokenizer. Model may not be cached. Error: {e2}")
+        else:
+            raise
     
     # Use appropriate dtype based on device
     dtype = torch.float16 if device == "cuda" else torch.float32
     
     # For multi-GPU, don't use device_map="auto" as we'll use DataParallel
-    if use_multi_gpu:
-        base_model = AutoModelForCausalLM.from_pretrained(
-            base_model_name,
-            torch_dtype=dtype,
-            device_map=None,  # Will use DataParallel instead
-            trust_remote_code=True
-        )
-        # Move to first GPU, DataParallel will handle distribution
-        base_model = base_model.to("cuda:0")
-    else:
-        base_model = AutoModelForCausalLM.from_pretrained(
-            base_model_name,
-            torch_dtype=dtype,
-            device_map="auto" if device == "cuda" else None,
-            trust_remote_code=True
-        )
-        # Move to CPU if needed
-        if device == "cpu":
-            base_model = base_model.to("cpu")
+    try:
+        if use_multi_gpu:
+            base_model = AutoModelForCausalLM.from_pretrained(
+                base_model_name,
+                torch_dtype=dtype,
+                device_map=None,  # Will use DataParallel instead
+                local_files_only=local_files_only,
+                trust_remote_code=True
+            )
+            # Move to first GPU, DataParallel will handle distribution
+            base_model = base_model.to("cuda:0")
+        else:
+            base_model = AutoModelForCausalLM.from_pretrained(
+                base_model_name,
+                torch_dtype=dtype,
+                device_map="auto" if device == "cuda" else None,
+                local_files_only=local_files_only,
+                trust_remote_code=True
+            )
+            # Move to CPU if needed
+            if device == "cpu":
+                base_model = base_model.to("cpu")
+    except Exception as e:
+        if "Disk quota exceeded" in str(e) or "quota" in str(e).lower():
+            print(f"⚠️  Disk quota error. Trying to load from local cache only...")
+            if not local_files_only:
+                try:
+                    if use_multi_gpu:
+                        base_model = AutoModelForCausalLM.from_pretrained(
+                            base_model_name,
+                            torch_dtype=dtype,
+                            device_map=None,
+                            local_files_only=True,
+                            trust_remote_code=True
+                        )
+                        base_model = base_model.to("cuda:0")
+                    else:
+                        base_model = AutoModelForCausalLM.from_pretrained(
+                            base_model_name,
+                            torch_dtype=dtype,
+                            device_map="auto" if device == "cuda" else None,
+                            local_files_only=True,
+                            trust_remote_code=True
+                        )
+                        if device == "cpu":
+                            base_model = base_model.to("cpu")
+                    print("✓ Loaded model from local cache")
+                except Exception as e2:
+                    raise OSError(
+                        f"Failed to load model. Disk quota exceeded and model not found in cache.\n"
+                        f"Please either:\n"
+                        f"  1. Free up disk space\n"
+                        f"  2. Ensure the model is already cached at: {base_model_name}\n"
+                        f"  3. Use --local_files_only flag if model is cached\n"
+                        f"Original error: {e2}"
+                    )
+            else:
+                raise OSError(
+                    f"Failed to load model from local cache. Model may not be cached.\n"
+                    f"Please download the model first or free up disk space.\n"
+                    f"Error: {e}"
+                )
+        else:
+            raise
     
     # Check if LoRA weights exist
     if model_path and Path(model_path).exists() and any(Path(model_path).iterdir()):
@@ -401,7 +466,8 @@ def run_evaluation(
     use_multi_gpu: bool = False,
     compare_with_base: bool = False,
     save_responses: bool = False,
-    num_comparison_examples: int = 10
+    num_comparison_examples: int = 10,
+    local_files_only: bool = False
 ):
     """Run complete evaluation pipeline."""
     
@@ -419,7 +485,7 @@ def run_evaluation(
     
     # Load model
     print("\n[1/5] Loading model...")
-    model, tokenizer = load_model(model_path, base_model_name, device, use_multi_gpu)
+    model, tokenizer = load_model(model_path, base_model_name, device, use_multi_gpu, local_files_only)
     model_type = "Fine-tuned" if model_path and Path(model_path).exists() and any(Path(model_path).iterdir()) else "Base"
     print(f"✓ {model_type} model loaded")
     
@@ -454,11 +520,24 @@ def run_evaluation(
     if compare_with_base and model_path:
         print("\n[0/5] Loading base model for comparison...")
         try:
-            base_model, base_tokenizer = load_model(None, base_model_name, device, False)
+            # Try loading with local files only first to avoid disk quota issues
+            base_model, base_tokenizer = load_model(None, base_model_name, device, False, local_files_only=local_files_only)
             print("✓ Base model loaded for comparison")
-        except Exception as e:
-            print(f"⚠️  Failed to load base model for comparison: {e}")
-            compare_with_base = False
+        except (OSError, RuntimeError) as e:
+            error_msg = str(e)
+            if "quota" in error_msg.lower() or "Disk quota" in error_msg:
+                print(f"⚠️  Disk quota error loading base model. Trying local cache only...")
+                try:
+                    base_model, base_tokenizer = load_model(None, base_model_name, device, False, local_files_only=True)
+                    print("✓ Base model loaded from local cache for comparison")
+                except Exception as e2:
+                    print(f"⚠️  Failed to load base model from cache: {e2}")
+                    print("⚠️  Comparison disabled. Continuing with fine-tuned model only.")
+                    compare_with_base = False
+            else:
+                print(f"⚠️  Failed to load base model for comparison: {e}")
+                print("⚠️  Comparison disabled. Continuing with fine-tuned model only.")
+                compare_with_base = False
     
     # 1. Perplexity
     print(f"\n[3/5] Calculating perplexity...")
@@ -696,6 +775,11 @@ def main():
         default=10,
         help="Number of examples to save for comparison (default: 10)"
     )
+    parser.add_argument(
+        "--local_files_only",
+        action="store_true",
+        help="Only use local cached files, don't download models (useful when disk quota is exceeded)"
+    )
     
     args = parser.parse_args()
     
@@ -764,7 +848,8 @@ def main():
         use_multi_gpu,
         args.compare_with_base,
         args.save_responses,
-        args.num_comparison_examples
+        args.num_comparison_examples,
+        args.local_files_only
     )
 
 
