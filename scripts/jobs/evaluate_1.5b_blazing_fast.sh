@@ -55,15 +55,41 @@ echo "  Output: $OUTPUT_FILE"
 echo "  Max Samples: $MAX_SAMPLES"
 echo ""
 
-# Set cache directories
-export HF_HOME="$BASE_DIR/.cache/huggingface"
-export TRANSFORMERS_CACHE="$BASE_DIR/.cache/huggingface/transformers"
-export HF_DATASETS_CACHE="$BASE_DIR/.cache/huggingface/datasets"
-export HF_HUB_CACHE="$BASE_DIR/.cache/huggingface/hub"
-export XET_CACHE="$BASE_DIR/.cache/huggingface/xet"
-export UV_CACHE_DIR="$BASE_DIR/.cache/uv"
+# Set cache directories to use large disk space
+# Use /research/d7/fyp25/yyyu2 for large disk space
+LARGE_DISK_PATH="/research/d7/fyp25/yyyu2"
+if [ -d "$LARGE_DISK_PATH" ]; then
+    CACHE_BASE="$LARGE_DISK_PATH/.cache/huggingface"
+    export HF_HOME="$CACHE_BASE"
+    export TRANSFORMERS_CACHE="$CACHE_BASE/transformers"
+    export HF_DATASETS_CACHE="$CACHE_BASE/datasets"
+    export HF_HUB_CACHE="$CACHE_BASE/hub"
+    export XET_CACHE="$CACHE_BASE/xet"
+    
+    # CRITICAL: Set TMPDIR to large disk to avoid quota issues during download
+    # HuggingFace uses temp directories during download, which can hit quota limits
+    TMP_DIR="$LARGE_DISK_PATH/.cache/tmp"
+    export TMPDIR="$TMP_DIR"
+    export TMP="$TMP_DIR"
+    export TEMP="$TMP_DIR"
+    
+    echo "✓ Using large disk cache: $CACHE_BASE"
+    echo "✓ Temporary files directory: $TMP_DIR"
+    
+    mkdir -p "$HF_HOME" "$TRANSFORMERS_CACHE" "$HF_DATASETS_CACHE" "$HF_HUB_CACHE" "$XET_CACHE" "$TMP_DIR"
+else
+    # Fallback to BASE_DIR if large disk not available
+    export HF_HOME="$BASE_DIR/.cache/huggingface"
+    export TRANSFORMERS_CACHE="$BASE_DIR/.cache/huggingface/transformers"
+    export HF_DATASETS_CACHE="$BASE_DIR/.cache/huggingface/datasets"
+    export HF_HUB_CACHE="$BASE_DIR/.cache/huggingface/hub"
+    export XET_CACHE="$BASE_DIR/.cache/huggingface/xet"
+    echo "⚠️  Large disk not found, using BASE_DIR cache"
+    mkdir -p "$HF_HOME" "$TRANSFORMERS_CACHE" "$HF_DATASETS_CACHE" "$HF_HUB_CACHE" "$XET_CACHE"
+fi
 
-mkdir -p "$HF_HOME" "$TRANSFORMERS_CACHE" "$HF_DATASETS_CACHE" "$HF_HUB_CACHE" "$XET_CACHE" "$UV_CACHE_DIR"
+export UV_CACHE_DIR="$BASE_DIR/.cache/uv"
+mkdir -p "$UV_CACHE_DIR"
 mkdir -p "$BASE_DIR/logs"
 mkdir -p "$(dirname "$OUTPUT_FILE")"
 

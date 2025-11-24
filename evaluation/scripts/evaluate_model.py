@@ -23,6 +23,39 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import load_from_disk
 from peft import PeftModel
 
+# Set HuggingFace cache directory to use large disk space
+# This should be set before any model loading
+LARGE_DISK_PATH = "/research/d7/fyp25/yyyu2"
+if os.path.exists(LARGE_DISK_PATH):
+    # Set HuggingFace cache directories to use the large disk
+    cache_base = f"{LARGE_DISK_PATH}/.cache/huggingface"
+    os.environ['HF_HOME'] = cache_base
+    os.environ['TRANSFORMERS_CACHE'] = f"{cache_base}/transformers"
+    os.environ['HF_DATASETS_CACHE'] = f"{cache_base}/datasets"
+    os.environ['HF_HUB_CACHE'] = f"{cache_base}/hub"
+    os.environ['XET_CACHE'] = f"{cache_base}/xet"
+    
+    # CRITICAL: Set TMPDIR to large disk to avoid quota issues during download
+    # HuggingFace uses temp directories during download, which can hit quota limits
+    tmp_dir = f"{LARGE_DISK_PATH}/.cache/tmp"
+    os.environ['TMPDIR'] = tmp_dir
+    os.environ['TMP'] = tmp_dir
+    os.environ['TEMP'] = tmp_dir
+    
+    # Create cache directories if they don't exist
+    for cache_dir in [
+        os.environ['HF_HOME'],
+        os.environ['TRANSFORMERS_CACHE'],
+        os.environ['HF_DATASETS_CACHE'],
+        os.environ['HF_HUB_CACHE'],
+        os.environ['XET_CACHE'],
+        tmp_dir
+    ]:
+        Path(cache_dir).mkdir(parents=True, exist_ok=True)
+    
+    print(f"✓ Using large disk cache: {cache_base}")
+    print(f"✓ Temporary files directory: {tmp_dir}")
+
 # Set CUDA environment variables BEFORE any CUDA operations
 # This helps avoid "CUDA unknown error" issues
 if 'CUDA_VISIBLE_DEVICES' in os.environ:
@@ -66,10 +99,14 @@ def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-I
     if use_multi_gpu:
         print(f"Multi-GPU mode: Using {torch.cuda.device_count()} GPUs")
     
+    # Get cache directory from environment
+    cache_dir = os.environ.get('HF_HUB_CACHE', os.environ.get('HF_HOME', None))
+    
     try:
         tokenizer = AutoTokenizer.from_pretrained(
             base_model_name,
             local_files_only=local_files_only,
+            cache_dir=cache_dir,
             trust_remote_code=True
         )
     except Exception as e:
@@ -79,6 +116,7 @@ def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-I
                 tokenizer = AutoTokenizer.from_pretrained(
                     base_model_name,
                     local_files_only=True,
+                    cache_dir=cache_dir,
                     trust_remote_code=True
                 )
             except Exception as e2:
@@ -97,6 +135,7 @@ def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-I
                 torch_dtype=dtype,
                 device_map=None,  # Will use DataParallel instead
                 local_files_only=local_files_only,
+                cache_dir=cache_dir,
                 trust_remote_code=True
             )
             # Move to first GPU, DataParallel will handle distribution
@@ -107,6 +146,7 @@ def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-I
                 torch_dtype=dtype,
                 device_map="auto" if device == "cuda" else None,
                 local_files_only=local_files_only,
+                cache_dir=cache_dir,
                 trust_remote_code=True
             )
             # Move to CPU if needed
@@ -123,6 +163,7 @@ def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-I
                             torch_dtype=dtype,
                             device_map=None,
                             local_files_only=True,
+                            cache_dir=cache_dir,
                             trust_remote_code=True
                         )
                         base_model = base_model.to("cuda:0")
@@ -132,6 +173,7 @@ def load_model(model_path: str = None, base_model_name: str = "Qwen/Qwen2.5-7B-I
                             torch_dtype=dtype,
                             device_map="auto" if device == "cuda" else None,
                             local_files_only=True,
+                            cache_dir=cache_dir,
                             trust_remote_code=True
                         )
                         if device == "cpu":
