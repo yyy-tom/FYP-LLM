@@ -32,24 +32,67 @@ def load_model_and_tokenizer(model_path: str, base_model: str = "Qwen/Qwen2.5-0.
     return model, tokenizer
 
 
-def generate_response(model, tokenizer, question: str, max_length: int = 512):
-    """Generate a counseling response for the given question."""
+def generate_response(model, tokenizer, question: str, max_length: int = 512, conversation_history: list = None):
+    """Generate a counseling response for the given question.
     
-    # Create the prompt
-    prompt = f"""You are a compassionate and professional mental health counselor. Please provide helpful, empathetic, and evidence-based advice for the following question.
-
-Question: {question}
-
-Please provide a thoughtful and supportive response that:
-1. Acknowledges the person's feelings
-2. Offers practical advice
-3. Suggests professional resources if appropriate
-4. Maintains a warm, non-judgmental tone
-
-Response:"""
+    Args:
+        model: The language model
+        tokenizer: The tokenizer
+        question: Current user question
+        max_length: Maximum response length
+        conversation_history: List of previous conversation turns in format 
+                             [{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}]
+    """
+    
+    # Use chat template if available (better for multi-turn conversations)
+    if hasattr(tokenizer, 'apply_chat_template') and tokenizer.chat_template:
+        messages = []
+        
+        # Add conversation history if available
+        if conversation_history:
+            messages.extend(conversation_history)
+        
+        # Add system message and current user question
+        messages.append({"role": "user", "content": question})
+        
+        prompt = tokenizer.apply_chat_template(
+            messages, 
+            tokenize=False, 
+            add_generation_prompt=True
+        )
+    else:
+        # Fallback: Build prompt with conversation history manually
+        prompt_parts = [
+            "You are a compassionate and professional mental health counselor. Please provide helpful, empathetic, and evidence-based advice."
+        ]
+        
+        # Add conversation history if available
+        if conversation_history:
+            prompt_parts.append("\n\nPrevious conversation:")
+            for turn in conversation_history:
+                role = turn.get("role", "")
+                content = turn.get("content", "")
+                if role == "user":
+                    prompt_parts.append(f"User: {content}")
+                elif role == "assistant":
+                    prompt_parts.append(f"Counselor: {content}")
+        
+        # Add current question
+        prompt_parts.append(f"\n\nQuestion: {question}")
+        prompt_parts.append("\nPlease provide a thoughtful and supportive response that:")
+        prompt_parts.append("1. Acknowledges the person's feelings")
+        prompt_parts.append("2. Offers practical advice")
+        prompt_parts.append("3. Suggests professional resources if appropriate")
+        prompt_parts.append("4. Maintains a warm, non-judgmental tone")
+        prompt_parts.append("\nResponse:")
+        
+        prompt = "\n".join(prompt_parts)
+    
+    # Use larger max_length for multi-turn conversations to preserve history
+    max_input_length = 2048 if conversation_history else 1024
     
     # Tokenize
-    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=1024)
+    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=max_input_length)
     
     # Generate
     with torch.no_grad():
@@ -124,19 +167,32 @@ def main():
     model, tokenizer = load_model_and_tokenizer(args.model_path, args.base_model)
     
     if args.interactive:
-        print("Interactive mode. Type 'quit' to exit.")
+        print("Interactive mode. Type 'quit' to exit, 'clear' to clear conversation history.")
         print("=" * 50)
+        
+        # Maintain conversation history across turns
+        conversation_history = []
         
         while True:
             question = input("\nYour question: ").strip()
             if question.lower() in ['quit', 'exit', 'q']:
                 break
             
+            # Clear conversation history
+            if question.lower() in ['clear', 'reset']:
+                conversation_history = []
+                print("Conversation history cleared.")
+                continue
+            
             if question:
                 print("\nGenerating response...")
-                response = generate_response(model, tokenizer, question)
+                response = generate_response(model, tokenizer, question, conversation_history=conversation_history)
                 print(f"\nCounselor: {response}")
                 print("-" * 50)
+                
+                # Update conversation history
+                conversation_history.append({"role": "user", "content": question})
+                conversation_history.append({"role": "assistant", "content": response})
     
     elif args.question:
         print(f"Question: {args.question}")
