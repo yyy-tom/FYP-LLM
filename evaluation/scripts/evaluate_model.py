@@ -738,8 +738,12 @@ def run_evaluation(
     print(f"✓ Loaded {len(test_data)} test samples")
     
     # Group into conversations if conversational mode is enabled
+    multi_turn_conversations = {}
     if conversational_mode:
-        print(f"\n📝 Conversational Mode: Grouping examples into conversations...")
+        print(f"\n{'='*60}")
+        print(f"📝 CONVERSATIONAL MODE ENABLED")
+        print(f"{'='*60}")
+        print(f"Grouping examples into conversations...")
         conversations = group_conversations_by_id(test_data)
         print(f"✓ Found {len(conversations)} conversation groups")
         
@@ -758,15 +762,25 @@ def run_evaluation(
         if multi_turn_conversations:
             sample_ids = list(multi_turn_conversations.keys())[:5]
             print(f"  Sample conversation IDs: {sample_ids}")
+            # Show a sample conversation structure
+            sample_conv_id = sample_ids[0]
+            sample_conv = multi_turn_conversations[sample_conv_id]
+            print(f"\n  Example conversation '{sample_conv_id}' structure:")
+            for i, ex in enumerate(sample_conv[:min(3, len(sample_conv))]):
+                qid = ex.get('question_id', 'N/A')
+                print(f"    Turn {i}: question_id={qid}")
         
         if len(multi_turn_conversations) == 0:
-            print(f"⚠️  No conversations with at least {min_conversation_turns} turns found.")
+            print(f"\n⚠️  WARNING: No conversations with at least {min_conversation_turns} turns found.")
             print(f"   This might be because:")
             print(f"   1. The dataset doesn't contain multi-turn conversations")
             print(f"   2. The question_id format doesn't match expected patterns (e.g., 'dialogue_id_turn_X')")
             print(f"   3. Try using a dataset with multi-turn conversations (e.g., psydial_processed, esconv_processed)")
-            print(f"   Falling back to single-turn mode.")
+            print(f"\n   Falling back to single-turn mode.")
             conversational_mode = False
+            print(f"{'='*60}\n")
+    else:
+        print(f"\n📝 Single-turn evaluation mode (conversational_mode=False)")
     
     # Function to extract dataset source from sample
     def get_dataset_source(example: Dict, dataset_path: str) -> str:
@@ -827,8 +841,15 @@ def run_evaluation(
         'model_type': 'fine-tuned' if (model_path and Path(model_path).exists() and any(Path(model_path).iterdir())) else 'base',
         'model_path': model_path if model_path else None,
         'base_model': base_model_name,
+        'test_dataset_path': test_dataset_path,
         'test_samples': min(max_samples, len(test_data)),
         'evaluation_mode': 'conversational' if conversational_mode else 'single-turn',
+        'conversational_settings': {
+            'enabled': conversational_mode,
+            'min_turns': min_conversation_turns if conversational_mode else None,
+            'max_turns': max_conversation_turns if conversational_mode else None,
+            'conversations_found': len(multi_turn_conversations) if conversational_mode else None
+        } if conversational_mode else None,
         'metrics': {},
         'comparisons': [] if compare_with_base else None,
         'responses': [] if save_responses else None,
@@ -893,8 +914,12 @@ def run_evaluation(
     })
     
     # Conversational evaluation mode
-    if conversational_mode and 'conversations' in locals() and multi_turn_conversations:
-        print(f"\n[4/5] Evaluating conversations (multi-turn mode)...")
+    if conversational_mode and multi_turn_conversations:
+        print(f"\n{'='*60}")
+        print(f"[4/5] EVALUATING CONVERSATIONS (MULTI-TURN MODE)")
+        print(f"{'='*60}")
+        print(f"Processing {len(multi_turn_conversations)} multi-turn conversations...")
+        print(f"Each conversation will maintain context across {max_conversation_turns} turns")
         conversation_results = []
         conv_count = 0
         
@@ -982,6 +1007,27 @@ def run_evaluation(
                     'turns': turn_metrics
                 })
                 
+                # Also add to comparisons if requested (for first few conversations)
+                if compare_with_base and conv_count < num_comparison_examples:
+                    # Add each turn as a comparison entry with conversation context
+                    for turn_metric in turn_metrics:
+                        comparison = {
+                            'sample_id': f"{conv_id}_turn_{turn_metric['turn']}",
+                            'conversation_id': conv_id,
+                            'turn_number': turn_metric['turn'],
+                            'dataset_source': get_dataset_source(conv_examples[0], test_dataset_path),
+                            'input': turn_metric['user'],
+                            'reference': turn_metric['reference'],
+                            'base_response': turn_metric.get('base_generated', ''),
+                            'finetuned_response': turn_metric['generated'],
+                            'base_bleu': turn_metric.get('base_bleu'),
+                            'finetuned_bleu': turn_metric.get('bleu'),
+                            'base_rouge': turn_metric.get('base_rouge'),
+                            'finetuned_rouge': turn_metric.get('rouge'),
+                            'evaluation_mode': 'conversational'  # Mark as conversational
+                        }
+                        results['comparisons'].append(comparison)
+                
                 conv_count += 1
                 
                 if conv_count % 5 == 0:
@@ -992,7 +1038,16 @@ def run_evaluation(
                 continue
         
         results['conversations'] = conversation_results
-        print(f"✓ Evaluated {len(conversation_results)} conversations")
+        print(f"\n{'='*60}")
+        print(f"✓ CONVERSATIONAL EVALUATION COMPLETE")
+        print(f"{'='*60}")
+        print(f"Evaluated {len(conversation_results)} multi-turn conversations")
+        if conversation_results:
+            total_turns = sum(c['num_turns'] for c in conversation_results)
+            avg_turns = total_turns / len(conversation_results)
+            print(f"Total turns evaluated: {total_turns}")
+            print(f"Average turns per conversation: {avg_turns:.1f}")
+        print(f"{'='*60}\n")
     else:
         # Single-turn evaluation mode (original behavior)
         print(f"\n[4/5] Calculating BLEU and ROUGE scores...")
@@ -1130,7 +1185,8 @@ def run_evaluation(
                         'base_domain_quality': base_quality,
                         'finetuned_domain_quality': quality,
                         'base_safety': base_safety,
-                        'finetuned_safety': is_safe
+                        'finetuned_safety': is_safe,
+                        'evaluation_mode': 'single-turn'  # Mark as single-turn
                     }
                     results['comparisons'].append(comparison)
                     

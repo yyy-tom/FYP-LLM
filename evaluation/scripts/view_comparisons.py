@@ -138,7 +138,38 @@ def view_comparisons(json_path: str, max_examples: int = 10):
     print("=" * 80)
     print(f"Base Model: {data.get('base_model', 'Unknown')}")
     print(f"Fine-tuned Model: {data.get('model_path', 'Unknown')}")
-    print(f"Total Comparisons: {len(comparisons)}")
+    print(f"Test Dataset: {data.get('test_dataset_path', 'Unknown')}")
+    
+    # Show evaluation mode
+    eval_mode = data.get('evaluation_mode', 'single-turn')
+    print(f"Evaluation Mode: {eval_mode.upper()}")
+    
+    # Show conversational mode info if available
+    conv_settings = data.get('conversational_settings')
+    if conv_settings:
+        print(f"\n💬 Conversational Evaluation Settings:")
+        print(f"   Enabled: {conv_settings.get('enabled', False)}")
+        if conv_settings.get('enabled'):
+            print(f"   Min Turns: {conv_settings.get('min_turns', 'N/A')}")
+            print(f"   Max Turns: {conv_settings.get('max_turns', 'N/A')}")
+            print(f"   Conversations Found: {conv_settings.get('conversations_found', 'N/A')}")
+    
+    # Check if conversations data exists
+    conversations = data.get('conversations', [])
+    if conversations:
+        print(f"\n💬 Multi-turn Conversations: {len(conversations)} conversations evaluated")
+        total_turns = sum(c.get('num_turns', 0) for c in conversations)
+        print(f"   Total turns across all conversations: {total_turns}")
+        print(f"   ⚠️  NOTE: Comparisons shown below are from single-turn mode.")
+        print(f"   To view multi-turn conversations, check the 'conversations' field in the JSON.")
+    else:
+        if eval_mode == 'conversational':
+            print(f"\n⚠️  WARNING: Evaluation mode is 'conversational' but no conversations found in results.")
+            print(f"   This suggests conversational mode was enabled but no multi-turn conversations were detected.")
+        else:
+            print(f"\n📝 Single-turn evaluation mode (no conversation history)")
+    
+    print(f"\nTotal Comparisons: {len(comparisons)}")
     print("=" * 80)
     print()
     
@@ -172,6 +203,21 @@ def view_comparisons(json_path: str, max_examples: int = 10):
         dataset_source = comp.get('dataset_source', '')
         if dataset_source:
             print(f"\n📂 Dataset Source: {dataset_source}")
+        
+        # Show if this is from a conversation (check if there's turn info)
+        turn_number = comp.get('turn_number', None)
+        conversation_id = comp.get('conversation_id', None)
+        eval_mode_comp = comp.get('evaluation_mode', 'single-turn')
+        
+        if turn_number is not None or conversation_id:
+            print(f"\n💬 Conversation Info:")
+            if conversation_id:
+                print(f"   Conversation ID: {conversation_id}")
+            if turn_number is not None:
+                print(f"   Turn Number: {turn_number} (this is turn {turn_number + 1} in the conversation)")
+            print(f"   Mode: {eval_mode_comp.upper()}")
+        elif eval_mode_comp == 'conversational':
+            print(f"\n💬 Mode: CONVERSATIONAL (but no turn info - may be from conversation summary)")
         
         print(f"\n📝 Full Input/Prompt:")
         print(format_prompt(input_text))
