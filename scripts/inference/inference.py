@@ -101,7 +101,13 @@ Please provide a thoughtful and supportive response that:
 Response:"""
     
     # Tokenize and move tensors to the model device
-    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=1024)
+    inputs = tokenizer(
+        prompt,
+        return_tensors="pt",
+        truncation=True,
+        max_length=1024,
+        truncation_side="left"
+    )
     inputs = {k: v.to(model.device) for k, v in inputs.items()}
     
     # Generate
