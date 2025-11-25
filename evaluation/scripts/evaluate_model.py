@@ -18,7 +18,6 @@ import numpy as np
 from pathlib import Path
 from typing import Dict, List, Tuple
 from collections import defaultdict
-from datetime import datetime
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import load_from_disk
@@ -302,10 +301,39 @@ def generate_response(
         input_device = device
     
     # Format prompt with conversation history if available
-    example = {"input": input_text}
-    prompt = format_prompt(example, tokenizer, conversation_history=conversation_history)
+    # For multi-turn conversations, we need to preserve recent history
+    # Truncate older history if needed to fit within model's context window
+    max_input_length = 2048  # Increased from 512 to preserve conversation history
+    truncated_history = conversation_history
     
-    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=512)
+    if conversation_history:
+        # Try to fit as much history as possible
+        # Build prompt with all history first to check length
+        example = {"input": input_text}
+        test_prompt = format_prompt(example, tokenizer, conversation_history=conversation_history)
+        test_tokens = tokenizer.encode(test_prompt, add_special_tokens=False)
+        
+        # If prompt is too long, truncate older history (keep recent turns)
+        if len(test_tokens) > max_input_length:
+            # Keep removing oldest turns until we fit
+            truncated_history = conversation_history.copy()
+            while len(truncated_history) > 0:
+                test_prompt = format_prompt(example, tokenizer, conversation_history=truncated_history)
+                test_tokens = tokenizer.encode(test_prompt, add_special_tokens=False)
+                if len(test_tokens) <= max_input_length:
+                    break
+                # Remove oldest turn (first user-assistant pair)
+                if len(truncated_history) >= 2:
+                    truncated_history = truncated_history[2:]  # Remove oldest user + assistant pair
+                else:
+                    truncated_history = []  # If only one message, remove it
+            if truncated_history != conversation_history:
+                print(f"  Warning: Truncated conversation history from {len(conversation_history)} to {len(truncated_history)} messages to fit context window")
+    
+    example = {"input": input_text}
+    prompt = format_prompt(example, tokenizer, conversation_history=truncated_history)
+    
+    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=max_input_length)
     inputs = {k: v.to(input_device) for k, v in inputs.items()}
     
     with torch.no_grad():
@@ -838,11 +866,7 @@ def run_evaluation(
         dataset_name = Path(dataset_path).name
         return dataset_name if dataset_name else "unknown"
     
-    # Get timestamp for this evaluation run
-    evaluation_timestamp = datetime.now().isoformat()
-    
     results = {
-        'evaluation_timestamp': evaluation_timestamp,
         'model_type': 'fine-tuned' if (model_path and Path(model_path).exists() and any(Path(model_path).iterdir())) else 'base',
         'model_path': model_path if model_path else None,
         'base_model': base_model_name,
@@ -1259,55 +1283,11 @@ def run_evaluation(
                 if source_metrics['rouge1'] is not None:
                     print(f"      ROUGE-1: {source_metrics['rouge1']:.4f}")
     
-    # Save results with unique filename (timestamp-based)
-    print(f"\n[5/5] Saving results...")
-    
-    # Generate unique filename if output_file doesn't already have a timestamp
-    output_path = Path(output_file)
-    output_dir = output_path.parent
-    output_stem = output_path.stem
-    output_suffix = output_path.suffix
-    
-    # Check if filename already contains a timestamp pattern (YYYYMMDD_HHMMSS)
-    timestamp_pattern = r'\d{8}_\d{6}'
-    if not re.search(timestamp_pattern, output_stem):
-        # Add timestamp to make filename unique
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        unique_filename = f"{output_stem}_{timestamp}{output_suffix}"
-    else:
-        # Already has timestamp, use as-is
-        unique_filename = output_path.name
-    
-    # Ensure output directory exists
-    output_dir.mkdir(parents=True, exist_ok=True)
-    
-    # Full path to unique file
-    unique_output_file = output_dir / unique_filename
-    
-    print(f"  Saving to: {unique_output_file}")
-    with open(unique_output_file, 'w') as f:
+    # Save results
+    print(f"\n[5/5] Saving results to {output_file}...")
+    with open(output_file, 'w') as f:
         json.dump(results, f, indent=2)
-    
-    # Also create a symlink or copy to the base filename for easy access to latest
-    latest_file = output_dir / f"{output_stem}_latest{output_suffix}"
-    try:
-        # Remove old symlink if it exists
-        if latest_file.exists() or latest_file.is_symlink():
-            latest_file.unlink()
-        # Create symlink to latest file
-        latest_file.symlink_to(unique_filename)
-        print(f"  Latest results also available at: {latest_file}")
-    except (OSError, NotImplementedError):
-        # Symlinks not supported (e.g., Windows), just copy the file
-        try:
-            import shutil
-            shutil.copy2(unique_output_file, latest_file)
-            print(f"  Latest results also copied to: {latest_file}")
-        except Exception as e:
-            print(f"  Note: Could not create latest symlink/copy: {e}")
-    
-    print(f"✓ Evaluation complete!")
-    print(f"✓ Results saved to: {unique_output_file}")
+    print("✓ Evaluation complete!")
     
     # Print comparison summary if available
     if compare_with_base and results['comparisons']:

@@ -84,8 +84,9 @@ Please provide a thoughtful and supportive response that:
 
 Response:"""
     
-    # Tokenize
+    # Tokenize and move tensors to the model device
     inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=1024)
+    inputs = {k: v.to(model.device) for k, v in inputs.items()}
     
     # Generate
     with torch.no_grad():
@@ -100,7 +101,6 @@ Response:"""
             pad_token_id=tokenizer.eos_token_id,
             eos_token_id=tokenizer.eos_token_id,
             no_repeat_ngram_size=3,
-            early_stopping=True,
         )
     
     # Decode response
