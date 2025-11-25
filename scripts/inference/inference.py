@@ -68,11 +68,27 @@ def load_model_and_tokenizer(model_path: str, base_model: str = "Qwen/Qwen2.5-0.
     return model, tokenizer
 
 
-def generate_response(model, tokenizer, question: str, max_length: int = 512):
+def generate_response(
+    model,
+    tokenizer,
+    question: str,
+    history: list[tuple[str, str]] | None = None,
+    max_length: int = 512,
+):
     """Generate a counseling response for the given question."""
     
+    history_block = ""
+    if history:
+        history_lines = []
+        for user_turn, counselor_turn in history:
+            history_lines.append(f"User: {user_turn}")
+            history_lines.append(f"Counselor: {counselor_turn}")
+        history_block = "\n".join(history_lines).strip()
+        if history_block:
+            history_block += "\n\n"
+
     # Create the prompt
-    prompt = f"""You are a compassionate and professional mental health counselor. Please provide helpful, empathetic, and evidence-based advice for the following question.
+    prompt = f"""{history_block}You are a compassionate and professional mental health counselor. Please provide helpful, empathetic, and evidence-based advice for the following question.
 
 Question: {question}
 
@@ -162,6 +178,8 @@ def main():
     if args.interactive:
         print("Interactive mode. Type 'quit' to exit.")
         print("=" * 50)
+        conversation_history: list[tuple[str, str]] = []
+        history_limit = 6
         
         while True:
             question = input("\nYour question: ").strip()
@@ -170,9 +188,14 @@ def main():
             
             if question:
                 print("\nGenerating response...")
-                response = generate_response(model, tokenizer, question)
+                response = generate_response(
+                    model, tokenizer, question, conversation_history
+                )
                 print(f"\nCounselor: {response}")
                 print("-" * 50)
+                conversation_history.append((question, response))
+                if len(conversation_history) > history_limit:
+                    conversation_history.pop(0)
     
     elif args.question:
         print(f"Question: {args.question}")
