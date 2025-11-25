@@ -333,7 +333,13 @@ def generate_response(
     example = {"input": input_text}
     prompt = format_prompt(example, tokenizer, conversation_history=truncated_history)
     
-    inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=max_input_length)
+    inputs = tokenizer(
+        prompt,
+        return_tensors="pt",
+        truncation=True,
+        max_length=max_input_length,
+        truncation_side="left"
+    )
     inputs = {k: v.to(input_device) for k, v in inputs.items()}
     
     with torch.no_grad():
