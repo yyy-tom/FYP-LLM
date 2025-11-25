@@ -3,6 +3,42 @@
 Inference script for the fine-tuned Qwen2.5 model on Counsel Chat dataset.
 """
 
+import os
+from pathlib import Path
+
+_LARGE_DISK_PATH = Path(os.environ.get("HF_LARGE_DISK_PATH", "/research/d7/fyp25/yyyu2"))
+
+
+def _configure_large_disk_cache() -> None:
+    """Relocate HuggingFace cache directories onto a large disk (if available)."""
+    if not _LARGE_DISK_PATH.exists():
+        return
+
+    cache_base = _LARGE_DISK_PATH / ".cache" / "huggingface"
+    tmp_dir = _LARGE_DISK_PATH / ".cache" / "tmp"
+    env_dirs = {
+        "HF_HOME": cache_base,
+        "TRANSFORMERS_CACHE": cache_base / "transformers",
+        "HF_DATASETS_CACHE": cache_base / "datasets",
+        "HF_HUB_CACHE": cache_base / "hub",
+        "XET_CACHE": cache_base / "xet",
+        "TMPDIR": tmp_dir,
+        "TMP": tmp_dir,
+        "TEMP": tmp_dir,
+    }
+
+    for directory in env_dirs.values():
+        directory.mkdir(parents=True, exist_ok=True)
+
+    for env_var, directory in env_dirs.items():
+        os.environ[env_var] = str(directory)
+
+    print(f"✓ Using large disk cache: {cache_base}")
+    print(f"✓ Temporary files directory: {tmp_dir}")
+
+
+_configure_large_disk_cache()
+
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import PeftModel
